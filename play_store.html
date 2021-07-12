@@ -8,12 +8,339 @@
         <meta charset="utf-8">
 
         <style>
-           
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            /* 헤더 */
+            .header-logo {
+                display: flex;
+                width: 100%;
+                height: 35px;   
+                background-color: black;
+            }
+
+            .header-logo-img {
+                margin-left: auto;
+                height: 100%;
+            }
+
+            .header-logo-img img {
+                width: 85px;
+                vertical-align: -webkit-baseline-middle;
+            }
+
+            .menu-list li {
+                list-style: none;
+                display: flex;
+                float: left;
+            }
+
+            .home-logo {
+                font-size: 25px;
+                color: rgb(4, 113, 214);
+                text-decoration: none;
+                margin-top: 5px;
+            }
+
+            .header-menu-right {
+                margin-left: auto;
+                display: flex;
+            }
+
+            .header-login-box {
+                display: flex;
+                align-items: center;
+                margin-right: 20px;
+            }
+            
+            .header-login-box a {
+                background-color: rgb(54, 54, 54);
+                color: #fff;
+                border-radius: 20px;
+                font-size: 16px;
+                text-decoration: none;
+                padding: 4px 17px;
+            }
+
+            .header-menu-area {
+                display: flex;
+                padding: 0 20px;
+                height: 40px;
+            }
+
+            .menu-list-container {
+                margin-left: 35px;
+                margin-top: 7px;
+            }
+
+            .menu-list li {
+                margin-right: 45px;
+                font-size: 15px;
+                color: gray;   
+            }
+
+            .menu-list li .fas {
+                font-size: 11px;
+                margin-top: 7px;
+            }
+
+            .menu-name {
+                margin-right: 5px;
+            }
+
+            .search-box {
+                margin: auto;
+                display: flex;
+                align-items: center;
+                width: 110px;
+                height: 34px;
+                padding: 0px 15px 0 5px;
+                border: 1px solid rgb(230, 230, 230);
+                color: rgb(54, 54, 54);
+                
+            }
+
+            .search-box:hover {
+                border: 1px solid rgb(68, 68, 68);
+            }
+
+            .search-box .fas {
+                margin-left: auto;
+            }
+
+            /* 카테고리 메뉴 */
+            .store-category-menu-container {
+                display: flex;
+                height: 65px;
+            }
+
+            .logo-img-area {
+                display: flex;
+                align-items: center;
+                width: 170px;
+                margin-left: 20px;
+            }
+
+            .logo-img-area img {
+                width: 100%;
+            }
+
+            .logo-img-area a {
+                display: flex;
+                align-items: center;
+            }
+
+            .category-list-area {
+                margin: 0 auto;
+            }
+
+            .category-list-area ul li {
+                list-style: none;
+                float: left;
+                font-size: 15px;
+            }
+
+            .category-list-area ul li a {
+                text-decoration: none;
+                
+            }
+
+            .category-list-name {
+                height: 65px;
+                line-height: 65px;
+                padding: 0 15px;
+                color: rgb(54, 54, 54);
+                /* border-bottom: 3px solid rgb(4, 113, 214); */
+            }
+
+
+            .category-list-name:hover, .menu-list li:hover {
+                color: rgb(4, 113, 214);
+            }
+
+            /* 배너 */
+            .main-banner-container {
+                margin: 80px 0;
+                
+                position: relative;
+            }
+
+            .banner-img-area {
+                height: 670px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .banner-img-area::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 88%, rgba(255, 255, 255, 1) 100%);
+                opacity: 0.99;
+            }
+
+            .banner-info-container {
+                width: 100%;
+                height: 150px;
+                background-color: rgba(255, 255, 255, 0.90);
+                position: absolute;
+                bottom: -75px;
+                box-shadow: 0 30px 30px 0px rgb(238, 238, 238);
+            }
+
+            .banner-info-area {
+                width: 1400px;
+                height: 150px;
+                margin: 0 auto;
+                display: flex;
+                padding: 30px 5px;
+            }
+
+            .banner-info-game-area {
+                display: flex;
+                flex-direction: column;
+                cursor: default;
+            }
+
+            .banner-info-game-name {
+                font-size: 35px;
+            }
+
+            .banner-info-game-desc {
+                margin-top: auto;
+                font-size: 16px;
+
+            }
+
+            .banner-info-more {
+                margin-left: auto;
+                display: flex;
+                align-items: center;
+            }
+
+            .banner-info-more a {
+                text-decoration: none;
+            }
+
+            .more-btn {
+                color: #fff;
+                padding: 14px 16px;
+                background-color: rgb(4, 113, 214);
+                border-radius: 25px;
+                font-weight: bold;
+            }
+
+            .more-btn:hover {
+                background-color: rgb(0, 96, 185);
+            }
+
+            .sdf {
+                height: 200px;
+            }
+            
+            
         </style>
     </head>
 
     <body>
-        
+        <header>
+            <div class="header-logo">
+                <div class="header-logo-img">
+                    <img src="img/sony_banner.jpg" alt="">
+                </div>
+            </div>
+
+            <div class="header-menu">
+                <div class="header-menu-area">
+                    <a href="" class="home-logo fab fa-playstation"></a>
+                    <div class="menu-list-container">
+                        <ul class="menu-list">
+                            <li>
+                                <div class="menu-name">게임</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </li>
+                            <li>
+                                <div class="menu-name">하드웨어</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </li>
+                            <li>
+                                <div class="menu-name">서비스</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </li>
+                            <li>
+                                <div class="menu-name">뉴스</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </li>
+                            <li>
+                                <div class="menu-name">구입</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </li>
+                            <li>
+                                <div class="menu-name">고객지원</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="header-menu-right">
+                        <div class="header-login-box">
+                            <a href="">로그인</a>
+                        </div>
+                        <div class="search-box">
+                            <div class="search-box-text">검색</div>
+                            <div class="fas fa-search"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="store-category-menu-container">
+                <div class="logo-img-area">
+                    <a href="">
+                        <img src="img/playstation_store_logo.jpg" alt="">
+                    </a>
+                </div>
+                <div class="category-list-area">
+                    <ul>
+                        <li><a href=""><div class="category-list-name">최신 콘텐츠</div></a></li>
+                        <li><a href=""><div class="category-list-name">카테고리</div></a></li>
+                        <li><a href=""><div class="category-list-name">프로모션</div></a></li>
+                        <li><a href=""><div class="category-list-name">PS5</div></a></li>
+                        <li><a href=""><div class="category-list-name">구독 서비스</div></a></li>
+                        <li><a href=""><div class="category-list-name">둘러보기</div></a></li>
+                    </ul>
+                </div>
+                <div class="logo-img-area"></div>
+            </div>
+        </header>
+
+        <div class="main-banner-container">
+            <div class="banner-img-area">
+                <img src="img/main_banner_godOfWar.png" alt="">
+            </div>
+            <div class="banner-info-container">
+                <div class="banner-info-area">
+                    <div class="banner-info-game-area">
+                        <div class="banner-info-game-name">God of War</div>
+                        <div class="banner-info-game-desc">God of War 16주년을 기념하고 PlayStation 역사를 되돌아보는 특별 컬렉션.</div>
+                    </div>
+                    <div class="banner-info-more">
+                        <a href="">
+                            <div class="more-btn">더 알아보기</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sdf"></div>
+
 
     </body>
     

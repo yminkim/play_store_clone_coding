@@ -50,20 +50,20 @@
                 position: relative;
             }
 
-            .lili:checked~.new-content{
+            /* .lili:checked~.new-content{
                 top: 40px;
                 background-color: rgb(54, 54, 54);
                 transition: 0.3s;
-            }
+            } */
 
             
-            .new-content {
+            /* .new-content {
                 position: absolute;
                 top: -540px;
                 width: 100vmax;
                 height: 500px;
                 background-color: rgb(4, 113, 214);
-             }
+             } */
 
            
 
@@ -271,20 +271,261 @@
 
             .more-btn {
                 color: #fff;
+                padding: 16px 2px;
+                background-color: rgb(4, 113, 214);
+                border-radius: 30px;
+                font-weight: bold;
+                border: 2px solid #fff;
+                background-clip: content-box;
+            }
+
+            .more-btn span {
                 padding: 14px 16px;
                 background-color: rgb(4, 113, 214);
                 border-radius: 25px;
-                font-weight: bold;
             }
 
-            .more-btn:hover {
+            .more-btn span:hover {
                 background-color: rgb(0, 96, 185);
             }
 
-            .sdf {
-                height: 2000px;
+            .more-btn:hover {
+                border: 2px solid rgb(0, 96, 185);
+            }
+
+            .h100 {
+                height: 60px;
             }
             
+            /* 메인 */
+            
+
+            .main-post-top {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+            .main-post a img {
+                width: 100%;
+            }
+
+            .main-post {
+                margin-top: 40px;
+                width: 444px;
+                height: 444px;
+                padding: 2px;
+                border: 2px solid #fff;
+            }
+
+            .main-post:hover {
+                border: 2px solid rgb(4, 113, 214);
+            }
+
+            .hide-op {
+                display: none;
+            }
+
+            .main-show-btn {
+                color: rgb(0, 96, 185);
+                font-size: 16px;
+                font-weight: bold;
+                padding: 15px;
+                margin: 0 auto;
+                border-radius: 25px;
+                cursor: pointer;
+            }
+
+            .show-btn-area {
+                width: 100%;
+                display: flex;
+            }
+
+            .main-show-btn:hover {
+                background-color: rgb(216, 216, 216);
+            }
+
+            /* 스크롤 포스트 */
+            .scroll-menu-container-s {
+                width: 1450px;
+                margin: 0 auto;
+                position: relative;
+                margin-bottom: 100px;
+            }
+
+            .scroll-menu-container {
+                width: 1400px;
+                overflow: hidden;
+                position: relative;
+                margin-left: 25px;
+            }
+           
+            .scroll-top-area {
+                display: flex;
+                margin-bottom: 30px;
+            }
+
+            .scroll-all-view {
+                margin-left: auto;
+                display: flex; 
+                align-items: center;
+                font-size: 15px;
+            }
+
+            .scroll-all-view a {
+                text-decoration: none;
+                color: rgb(4, 113, 214);
+                font-weight: bold;
+            }
+
+            .scroll-topic {
+                font-size: 35px;
+                color: rgb(54, 54, 54);
+            }
+
+            .sc-item-container {
+                 width: 200px;
+                display: flex;
+                flex-direction: column;
+                margin-right: 40px;
+            }
+
+            .sc-item-container a {
+                text-decoration: none;
+                color: black;
+            }
+
+            .sc-item-img-area {
+                width: 200px;
+                height: 200px;
+                padding: 2px;
+                border: 2px solid rgba(0, 96, 185, 0);
+                overflow: hidden;
+                position: relative;
+            }
+
+            .blue-border {
+                border: 2px solid rgb(0, 96, 185);
+            }
+
+       
+
+            .sc-item-img-area img {
+                width: 100%;
+            }
+
+            .sc-item-info-area {
+                display: flex;
+                flex-direction: column;
+                padding: 10px 4px;
+                height: 125px;
+            }
+
+            
+
+            .sc-item-title {
+                font-size: 14px;
+                display: -webkit-box;
+                word-wrap: break-word;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .sc-item-price {
+                font-size: 15px;
+                color: rgb(37, 37, 37);
+            }
+
+            .sale-box {
+                margin-top: 5px;
+                font-size: 14px;
+                display: flex;
+                color: #fff;
+            }
+
+            .sale-box div {
+                background-color: rgb(54, 54, 54);
+                padding: 1px 2px;
+            }
+
+            .platform-area {
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                display: flex;
+            }
+           
+            .ps-icon {
+                color: #fff;
+                border: 1px solid #fff;
+                background-color: rgba(0, 0, 0, 0.637);
+                font-size: 10px;
+                text-align: center;
+                padding: 1px 4px;
+                display: flex;
+                align-items: center;
+                letter-spacing: 1px;
+                font-weight: bold;
+                margin-right: 4px;
+            }
+
+            .scroll-body-area {
+                transform: translateX(0px);
+                display: flex;
+                transition: 0.5s;
+            }
+
+            .sc-all-post-area {
+                width: 200px;
+                height: 200px;
+                padding: 2px;
+                border: 2px solid rgba(128, 128, 128, 0);
+
+            }
+
+            .sc-all-post-area:hover {
+                border: 2px solid rgb(0, 96, 185);
+            }
+
+            .sc-all-post-text {
+                border: 1px solid rgb(194, 194, 194);
+                border-radius: 10px;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                line-height: 194px;
+               
+            }
+
+            .move-btn {
+                width: 50px;
+                height: 50px;
+                border-radius: 25px;
+                background-color: rgb(4, 113, 214);
+                position: absolute;
+                z-index: 2;
+                cursor: pointer;
+                color: #fff;
+                text-align: center;
+                font-size: 25px;
+                line-height: 50px;
+                top: 155px;
+            }
+
+            .move-btn-r {
+                
+                right: 0px
+            }
+
+            .display_hidden {
+                display: none;
+            }
+            
+            .price-boxes {
+                display: flex;
+            }
             
         </style>
     </head>
@@ -303,12 +544,8 @@
                     <div class="menu-list-container">
                         <ul class="menu-list">
                             <li>
-                                <input type="checkbox" class="lili" id="lili">
-                                <label for="lili">
-                                    <div class="menu-name">게임</div>
-                                    <div class="fas fa-chevron-down"></div>
-                                </label>
-                                <div class="new-content"></div>
+                                <div class="menu-name">게임</div>
+                                <div class="fas fa-chevron-down"></div>
                             </li>
                             <li>
                                 <div class="menu-name">하드웨어</div>
@@ -389,14 +626,584 @@
                     </div>
                     <div class="banner-info-more">
                         <a href="">
-                            <div class="more-btn">더 알아보기</div>
+                            <div class="more-btn"><span>더 알아보기</span></div>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="sdf"></div>
+        <div class="h100"></div>
+
+        <main>
+            <div class="main-post-container">
+                <div class="main-post-top">
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/main-1.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/main-2.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/main-3.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/main-4.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/main-5.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/main-6.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/main-7.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/main-8.png" alt="">
+                        </a>
+                    </div>
+                    
+                    <div class="main-post hide-op">
+                        <a href="">
+                            <img src="img/main-9.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post hide-op">
+                        <a href="">
+                            <img src="img/main-10.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post hide-op">
+                        <a href="">
+                            <img src="img/main-11.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post hide-op">
+                        <a href="">
+                            <img src="img/main-12.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="show-btn-area">
+                    <div class="main-show-btn">더 보기</div>
+                </div>
+
+            </div>
+            <div class="h100"></div>
+
+            <!-- 첫 번째 스크롤 박스 -->
+            <div class="scroll-menu-container-s">
+                <div class="move-btn-l move-btn fas fa-chevron-left display_hidden"></div>
+                <div class="move-btn-r move-btn fas fa-chevron-right"></div>
+                <div class="scroll-menu-container">
+                    <div class="scroll-top-area">
+                        <div class="scroll-topic">PlayStation Best</div>
+                        <div class="scroll-all-view">
+                            <a href="">모두 보기</a>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-body-area">
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-dishored.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">dishonored (영어)</div>
+                                    <div class="sc-item-price">14,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-dishored2.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">dishonored2</div>
+                                    <div class="sc-item-price">34,800원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">무료게임</div>
+                                    <div class="sale-box">
+                                        <div>-100%</div>
+                                    </div>
+                                    <div class="price-boxes">
+                                        <div class="sc-item-price">무료</div>
+                                        <div class="won">0원</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sale-box">
+                                        <div>-50%</div>
+                                    </div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 마지막 - 모두보기 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-all-post-area">
+                                    <div class="sc-all-post-text">모두 보기</div>
+                                </div>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- 두 번째 스크롤 박스 -->
+            <div class="scroll-menu-container-s">
+                <div class="move-btn-l move-btn fas fa-chevron-left display_hidden"></div>
+                <div class="move-btn-r move-btn fas fa-chevron-right"></div>
+                <div class="scroll-menu-container">
+                    <div class="scroll-top-area">
+                        <div class="scroll-topic">기본 무료 플레이</div>
+                        <div class="scroll-all-view">
+                            <a href="">모두 보기</a>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-body-area">
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-dishored.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">dishonored (영어)</div>
+                                    <div class="sc-item-price">구매할 수 없음</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-dishored2.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">dishonored2</div>
+                                    <div class="sc-item-price">무료</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                       
+
+                        <!-- 포스트 마지막 - 모두보기 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-all-post-area">
+                                    <div class="sc-all-post-text">모두 보기</div>
+                                </div>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 세 번째 스크롤 박스 -->
+            <div class="scroll-menu-container-s">
+                <div class="move-btn-l move-btn fas fa-chevron-left display_hidden"></div>
+                <div class="move-btn-r move-btn fas fa-chevron-right"></div>
+                <div class="scroll-menu-container">
+                    <div class="scroll-top-area">
+                        <div class="scroll-topic">New PlayStation Game</div>
+                        <div class="scroll-all-view">
+                            <a href="">모두 보기</a>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-body-area">
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-dishored.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">dishonored (영어)</div>
+                                    <div class="sc-item-price">14,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-dishored2.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">dishonored2</div>
+                                    <div class="sc-item-price">34,800원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="img/sc-test.png" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
+                                </div>
+                                <div class="sc-item-info-area">
+                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
+                                    <div class="sc-item-price">00,000원</div>
+                                </div>
+                            </a>
+                        </div>
+
+                       
+
+                        <!-- 포스트 마지막 - 모두보기 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-all-post-area">
+                                    <div class="sc-all-post-text">모두 보기</div>
+                                </div>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            
+        </main>
 
 
         <!-- 짜스 -->
@@ -420,9 +1227,37 @@
                 }
             });
 
+
+            // 추천 배너 더 보기 기능
+            $('.main-show-btn').click(function(){
+                $('.main-show-btn').addClass('hide-op');
+                $('.main-post').removeClass('hide-op');
+
+            });
             //header-menu
 
+
+            // 포스트 hover 시 테두리
+            $('.sc-item-container').hover(function(){
+                $(this).children('a').children('.sc-item-img-area').addClass('blue-border');
+            }, function(){
+                $(this).children('a').children('.sc-item-img-area').removeClass('blue-border');
+            });
+           
             
+            //스크롤 박스 버튼 동작
+            $('.move-btn-r').click(function(){
+                $(this).parent('.scroll-menu-container-s').children('.scroll-menu-container').children('.scroll-body-area').css('transform', 'translateX(-1440px)');
+                $(this).parent('.scroll-menu-container-s').children('.move-btn-l').removeClass('display_hidden');
+                $(this).parent('.scroll-menu-container-s').children('.move-btn-r').addClass('display_hidden');
+            });
+
+            $('.move-btn-l').click(function(){
+                $(this).parent('.scroll-menu-container-s').children('.scroll-menu-container').children('.scroll-body-area').css('transform', 'translateX(0px)');
+                $(this).parent('.scroll-menu-container-s').children('.move-btn-r').removeClass('display_hidden');
+                $(this).parent('.scroll-menu-container-s').children('.move-btn-l').addClass('display_hidden');
+            });
+
             
         </script>
 

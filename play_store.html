@@ -45,6 +45,28 @@
                 margin-top: 5px;
             }
 
+            .header-menu {
+                background-color: #fff;
+                position: relative;
+            }
+
+            .lili:checked~.new-content{
+                top: 40px;
+                background-color: rgb(54, 54, 54);
+                transition: 0.3s;
+            }
+
+            
+            .new-content {
+                position: absolute;
+                top: -540px;
+                width: 100vmax;
+                height: 500px;
+                background-color: rgb(4, 113, 214);
+             }
+
+           
+
             .header-menu-right {
                 margin-left: auto;
                 display: flex;
@@ -74,7 +96,11 @@
             .menu-list-container {
                 margin-left: 35px;
                 margin-top: 7px;
+                position: relative;
             }
+
+
+            
 
             .menu-list li {
                 margin-right: 45px;
@@ -113,9 +139,13 @@
 
             /* 카테고리 메뉴 */
             .store-category-menu-container {
+                z-index: 23;
+                width: 100%;
+                background-color: #fff;
                 display: flex;
                 height: 65px;
             }
+
 
             .logo-img-area {
                 display: flex;
@@ -153,11 +183,21 @@
                 line-height: 65px;
                 padding: 0 15px;
                 color: rgb(54, 54, 54);
-                /* border-bottom: 3px solid rgb(4, 113, 214); */
+                font-weight: 400;
             }
 
 
             .category-list-name:hover, .menu-list li:hover {
+                color: rgb(4, 113, 214);
+            }
+
+            .fixed-top-menu {
+                position: fixed;
+                top: 0;;
+            }
+
+            .category-category {
+                border-bottom: 4px solid rgb(4, 113, 214);
                 color: rgb(4, 113, 214);
             }
 
@@ -215,7 +255,8 @@
             .banner-info-game-desc {
                 margin-top: auto;
                 font-size: 16px;
-
+                height: 44px;
+                line-height: 44px;
             }
 
             .banner-info-more {
@@ -241,7 +282,7 @@
             }
 
             .sdf {
-                height: 200px;
+                height: 2000px;
             }
             
             
@@ -262,8 +303,12 @@
                     <div class="menu-list-container">
                         <ul class="menu-list">
                             <li>
-                                <div class="menu-name">게임</div>
-                                <div class="fas fa-chevron-down"></div>
+                                <input type="checkbox" class="lili" id="lili">
+                                <label for="lili">
+                                    <div class="menu-name">게임</div>
+                                    <div class="fas fa-chevron-down"></div>
+                                </label>
+                                <div class="new-content"></div>
                             </li>
                             <li>
                                 <div class="menu-name">하드웨어</div>
@@ -286,6 +331,11 @@
                                 <div class="fas fa-chevron-down"></div>
                             </li>
                         </ul>
+
+                        
+
+
+
                     </div>
                     <div class="header-menu-right">
                         <div class="header-login-box">
@@ -297,6 +347,9 @@
                         </div>
                     </div>
                 </div>
+
+
+             
             </div>
 
 
@@ -309,7 +362,7 @@
                 <div class="category-list-area">
                     <ul>
                         <li><a href=""><div class="category-list-name">최신 콘텐츠</div></a></li>
-                        <li><a href=""><div class="category-list-name">카테고리</div></a></li>
+                        <li><a href=""><div class="category-list-name category-category">카테고리</div></a></li>
                         <li><a href=""><div class="category-list-name">프로모션</div></a></li>
                         <li><a href=""><div class="category-list-name">PS5</div></a></li>
                         <li><a href=""><div class="category-list-name">구독 서비스</div></a></li>
@@ -317,8 +370,12 @@
                     </ul>
                 </div>
                 <div class="logo-img-area"></div>
+
+                
             </div>
         </header>
+
+
 
         <div class="main-banner-container">
             <div class="banner-img-area">
@@ -341,6 +398,33 @@
 
         <div class="sdf"></div>
 
+
+        <!-- 짜스 -->
+        <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+        <script>
+
+            // 스크롤 시 카테고리 메뉴 고정
+            let value;
+            let setS = $('.store-category-menu-container').offset();
+            $(window).scroll(function(){
+                value = $(document).scrollTop();
+                if(value > setS.top) {
+                    $('.store-category-menu-container').addClass('fixed-top-menu');
+            
+
+                } else {
+                    $('.store-category-menu-container').removeClass('fixed-top-menu');
+                }
+            });
+
+            //header-menu
+
+            
+            
+        </script>
 
     </body>
     

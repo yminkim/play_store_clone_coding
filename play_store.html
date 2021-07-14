@@ -37,6 +37,7 @@
                 list-style: none;
                 display: flex;
                 float: left;
+                cursor: pointer;
             }
 
             .home-logo {
@@ -425,6 +426,7 @@
 
             .sc-item-img-area img {
                 width: 100%;
+                height: 100%;
             }
 
             .sc-item-info-area {
@@ -474,6 +476,7 @@
             }
            
             .ps-icon {
+                line-height: 13px;
                 color: #fff;
                 border: 1px solid #fff;
                 background-color: rgba(0, 0, 0, 0.637);
@@ -569,18 +572,117 @@
             /* footer */
             .footer-container {
                 height: 585px;
-                background-color: rgb(0, 96, 185);
+                background-color: rgb(0, 81, 156);
                 padding: 65px 0;
+                color: #fff;
             }
 
             .footer-area {
                 width: 1370px;
                 height: 100%;
                 margin: 0 auto;
-                background-color: rgb(54, 54, 54);
             }
             
+            .footer-area {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .footer-top-area, .region-area {
+                display: flex;
+            }
+
+            .footer-top-area {
+                margin-bottom: 90px;
+            }
+
+            .footer-top-area .fab {
+                font-size: 54px;
+                margin-left: 15px;
+            }
+
+            .region-area {
+                margin-left: 95px;
+                align-items: center;
+            }
+
+            .region-area .fas {
+                font-size: 23px;
+                margin-right: 20px;
+            }
+
+            .region-korea {
+                font-size:  16px;
+            }
+
+            .side-menu {
+                display: flex;
+            }
             
+            .side-menu ul li {
+                list-style: none;
+                margin-bottom: 10px;
+            }
+
+            .side-menu ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 18px;
+            }
+
+            .sd {
+                margin-right: 300px;
+            }
+
+            .last-footer {
+                margin-top: auto;
+                text-align: center;
+            }
+
+            .last-footer a {
+                text-decoration: none;
+                color: #fff;
+                font-size:  16px;
+            }
+
+            .sd ul li a:hover, .last-footer a:hover {
+                color: rgb(199, 199, 199);
+            }
+
+            .mn-back {
+                display: flex;
+                position: absolute;
+                z-index: 5;
+                width: 100%;
+                height: 220px;
+                background-color: #fff;
+                box-shadow: 0 10px 10px 0px rgb(51, 51, 51);
+            }
+
+            .mn-top {
+                width: 100%;
+                height: 160px;
+                border-bottom: 1px solid rgb(207, 207, 207);
+            }
+
+            .mn-body-area {
+                padding: 20px 0;
+                text-align: center;
+                display: flex;
+            }
+
+            .mnp {
+                width: 200px;
+                height: 120px;
+                border-radius: 10px;
+                background-color: yellowgreen;
+                
+            }
+
+            .mnp-container {
+                margin: 0 10px;
+            }
+
         </style>
     </head>
 
@@ -639,7 +741,40 @@
                     </div>
                 </div>
 
+                <div class="mn-back header-menu-game">
+                    <div class="mn-top">
+                        <div class="mn-body-area">
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <img src="img/mnp-ps5.png" alt="">
+                                        <div>PS5</div>
+                                    </div>
+                                </a>
+                            </div>
 
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <img src="img/mnp-ps5.png" alt="">
+                                        <div>PS5</div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <img src="img/mnp-ps5.png" alt="">
+                                        <div>PS5</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mn-bottom"></div>
+                </div>
+                
              
             </div>
 
@@ -1388,7 +1523,49 @@
 
         <footer class="footer-container">
             <div class="footer-area">
+                <div class="footer-top-area">
+                    <div class="fab fa-playstation"></div>
+                    <div class="region-area">
+                        <div class="fas fa-globe"></div>
+                        <div class="region-korea">국가 / 지역: 한국</div>
+                    </div>
+                </div>
 
+                <div class="side-menu">
+                    <div class="sd sd-menu-1">
+                        <ul>
+                            <li><a href="">고객지원</a></li>
+                            <li><a href="">개인정보처리방침</a></li>
+                            <li><a href="">웹사이트 이용약관</a></li>
+                            <li><a href="">사이트맵</a></li>
+                            <li><a href="">PlayStation Studios</a></li>
+                            <li><a href="">법률 정보</a></li>
+                            <li><a href="">SIE에 대하여</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sd sd-menu-2">
+                        <ul>
+                            <li><a href="">PSN 이용약관</a></li>
+                            <li><a href="">PS Store 취소 방침</a></li>
+                            <li><a href="">건강상 유의사항</a></li>
+                            <li><a href="">등급 관련 정보</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sd sd-menu-3">
+                        <ul>
+                            <li><a href="">Facebook</a></li>
+                            <li><a href="">Twitter</a></li>
+                            <li><a href="">YouTube</a></li>
+                            <li><a href="">Instagram</a></li>
+                            <li><a href="">Android 앱</a></li>
+                            <li><a href="">iOS 앱</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="last-footer"><a href="">© 2021 Sony Interactive Entertainment Inc. 모든 권리 보유.</a></div>
             </div>
         </footer>
 
@@ -1400,19 +1577,33 @@
         crossorigin="anonymous"></script>
         <script>
 
-            // 스크롤 시 카테고리 메뉴 고정
+            // 스크롤 시 카테고리 메뉴 고정  header-menu  store-category-menu-container
             let value;
             let setS = $('.store-category-menu-container').offset();
             $(window).scroll(function(){
                 value = $(document).scrollTop();
                 if(value > setS.top) {
+                    //$('.header-menu').removeClass('fixed-top-menu');
                     $('.store-category-menu-container').addClass('fixed-top-menu');
-            
-
                 } else {
                     $('.store-category-menu-container').removeClass('fixed-top-menu');
                 }
+
+
+                // if(value > setS.top) {
+                //     $('.store-category-menu-container').addClass('fixed-top-menu');
+                    
+                // }
+
+                // if(올라가면) {
+                //     $('.header-menu').addClass('fixed-top-menu');
+                // } else {
+                //     $('.header-menu').removeClass('fixed-top-menu');
+                // }
             });
+            
+
+
 
 
             // 추천 배너 더 보기 기능

@@ -331,10 +331,22 @@
                 color: rgb(0, 96, 185);
                 font-size: 16px;
                 font-weight: bold;
-                padding: 15px;
                 margin: 0 auto;
                 border-radius: 25px;
                 cursor: pointer;
+                width: 100px;
+                height: 50px;
+                text-align: center;
+                line-height: 42px;
+                padding: 2px;
+                border: 2px solid  rgba(209, 209, 209, 0);
+                margin-top: 10px;
+            }
+
+            .main-show-btn:hover {
+                background-color: rgb(209, 209, 209);
+                border: 2px solid  rgb(209, 209, 209);
+                background-clip: content-box;
             }
 
             .show-btn-area {
@@ -351,7 +363,7 @@
                 width: 1450px;
                 margin: 0 auto;
                 position: relative;
-                margin-bottom: 100px;
+                margin-bottom: 55px;
             }
 
             .scroll-menu-container {
@@ -432,23 +444,26 @@
                 -webkit-line-clamp: 2;
                 text-overflow: ellipsis;
                 overflow: hidden;
+                margin-bottom: 5px;
             }
 
             .sc-item-price {
-                font-size: 15px;
                 color: rgb(37, 37, 37);
+                margin-right: 10px;
+
             }
 
             .sale-box {
-                margin-top: 5px;
                 font-size: 14px;
                 display: flex;
                 color: #fff;
+                margin-bottom: 5px;
             }
 
             .sale-box div {
+                
                 background-color: rgb(54, 54, 54);
-                padding: 1px 2px;
+                padding: 1px 4px;
             }
 
             .platform-area {
@@ -526,7 +541,45 @@
             
             .price-boxes {
                 display: flex;
+                align-items: center;
+                font-size: 16px;
             }
+
+            .won {
+                color: rgb(173, 173, 173);
+                text-decoration: line-through;
+            }
+
+
+            /* 장르별 검색 */
+            .post-topic-title {
+                text-align: center;
+                font-size: 35px;
+                color: rgb(54, 54, 54);
+            }
+            
+            .more-find {
+                margin-top: 100px;
+            }
+
+            .more-find-c {
+                margin-bottom: 100px;
+            }
+
+            /* footer */
+            .footer-container {
+                height: 585px;
+                background-color: rgb(0, 96, 185);
+                padding: 65px 0;
+            }
+
+            .footer-area {
+                width: 1370px;
+                height: 100%;
+                margin: 0 auto;
+                background-color: rgb(54, 54, 54);
+            }
+            
             
         </style>
     </head>
@@ -781,7 +834,7 @@
                                     </div>
                                     <div class="price-boxes">
                                         <div class="sc-item-price">무료</div>
-                                        <div class="won">0원</div>
+                                        <div class="won">12,800원</div>
                                     </div>
                                 </div>
                             </a>
@@ -1202,9 +1255,142 @@
             </div>
 
 
+            <!-- 장르별 검색 -->
+            <div class="post-topic-title">장르별 검색</div>
+
+            <div class="main-post-container">
+                <div class="main-post-top">
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/genre-1.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/genre-2.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/genre-3.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/genre-4.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/genre-5.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/genre-6.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/genre-7.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/genre-8.png" alt="">
+                        </a>
+                    </div>
+                    
+                    <div class="main-post hide-op">
+                        <a href="">
+                            <img src="img/genre-9.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post hide-op">
+                        <a href="">
+                            <img src="img/genre-10.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post hide-op">
+                        <a href="">
+                            <img src="img/genre-11.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post hide-op">
+                        <a href="">
+                            <img src="img/genre-12.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="show-btn-area">
+                    <div class="main-show-btn">더 보기</div>
+                </div>
+
+            </div>
+
+
+            <!-- 장르별 검색 -->
+            <div class="post-topic-title more-find">더 알아보기</div>
+
+            <div class="main-post-container more-find-c">
+                <div class="main-post-top">
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/more-1.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/more-2.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/more-3.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/more-4.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/more-5.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="main-post">
+                        <a href="">
+                            <img src="img/more-6.png" alt="">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
 
             
         </main>
+
+        <footer class="footer-container">
+            <div class="footer-area">
+
+            </div>
+        </footer>
 
 
         <!-- 짜스 -->
@@ -1231,8 +1417,10 @@
 
             // 추천 배너 더 보기 기능
             $('.main-show-btn').click(function(){
-                $('.main-show-btn').addClass('hide-op');
-                $('.main-post').removeClass('hide-op');
+                $(this).addClass('hide-op');
+                //$('.main-post').removeClass('hide-op');
+
+                $(this).parent('.show-btn-area').parent('.main-post-container').children('.main-post-top').children('.main-post').removeClass('hide-op');
 
             });
             //header-menu

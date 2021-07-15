@@ -650,7 +650,9 @@
             }
 
             .mn-back {
+                transform: translateY(-300px);
                 display: flex;
+                flex-direction: column;
                 position: absolute;
                 z-index: 5;
                 width: 100%;
@@ -669,20 +671,131 @@
                 padding: 20px 0;
                 text-align: center;
                 display: flex;
+                justify-content: center;
             }
 
             .mnp {
                 width: 200px;
                 height: 120px;
                 border-radius: 10px;
-                background-color: yellowgreen;
                 
+            }
+
+            .mnp:hover {
+                box-shadow: 0 0 5px 0 rgb(94, 94, 94);
+            }
+
+            .mnp-img-area {
+                height: 80px;  
+                line-height: 80px; 
+            }
+
+            .mnp-img-area img {
+                vertical-align: bottom;
             }
 
             .mnp-container {
                 margin: 0 10px;
+               
             }
 
+            .mnp-container a {
+                text-decoration: none;
+            }
+
+            .mn-name {
+                color: rgb(51, 51, 51);
+                font-size: 15px;
+                font-weight: bold;
+            }
+
+            .mn-bottom {
+                width: 100%;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+
+            .circle {
+                width: 10px;
+                height: 10px;
+                border-radius: 15px;
+                background-color: rgb(0, 106, 206);
+            }
+
+            .mnb-container ul li {
+                margin: 0 20px;
+                list-style: none;
+            }
+
+            .mnb-container ul li a {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+            }
+
+            .mnb-container ul li {
+                float: left;
+            }
+            
+            .mnb-name {
+                font-size: 15px;
+            }
+
+            .circle-area {
+                margin-right: 10px;
+                margin-top: 2px;
+            }
+
+            .mnb-name {
+                color: rgb(51, 51, 51);
+            }
+
+            .mnb-name:hover {
+                color: rgb(0, 106, 206);
+            }
+
+
+
+
+            .search-box-container {
+                position: absolute;
+                top: 15px;
+                right: 10px;
+                display: flex;
+                height: 65px;
+            }
+            
+            .search-input-box {
+                display: flex;
+            }
+
+            .search-input-box input {
+                width: 380px;
+                height: 65px;
+            }
+
+            .search-box-container select {
+                width: 210px;
+                font-size: 17px;
+                font-weight: bold;
+                padding: 20px;
+            }
+
+            .search-icon-box {
+                width: 65px;
+                height: 65px;
+                background-color: rgb(0, 96, 185);
+            }
+
+            .drop-menu option {
+                width: 210px;
+                height: 65px;
+                font-size: 17px;
+                font-weight: bold;
+            }
         </style>
     </head>
 
@@ -739,40 +852,131 @@
                             <div class="fas fa-search"></div>
                         </div>
                     </div>
+
+                    <div class="search-box-clicked">
+                        <div></div>
+                        <div class="search-box-container">
+                            <select name="" id="drop-menu">
+                                <option value="">사이트</option>
+                                <option value="">PlayStation.com</option>
+                                <option value="">PlayStation Store</option>
+                            </select>
+                            <div class="search-input-box">
+                                <input type="text">
+                                <div class="search-icon-box">p</div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="mn-back header-menu-game">
                     <div class="mn-top">
                         <div class="mn-body-area">
+                            <!-- 메뉴 -->
                             <div class="mnp-container">
                                 <a href="">
                                     <div class="mnp">
-                                        <img src="img/mnp-ps5.png" alt="">
-                                        <div>PS5</div>
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-ps5.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS5</div>
                                     </div>
                                 </a>
                             </div>
 
+                            <!-- 메뉴 -->
                             <div class="mnp-container">
                                 <a href="">
                                     <div class="mnp">
-                                        <img src="img/mnp-ps5.png" alt="">
-                                        <div>PS5</div>
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-ps4.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS4</div>
                                     </div>
                                 </a>
                             </div>
 
+                            <!-- 메뉴 -->
                             <div class="mnp-container">
                                 <a href="">
                                     <div class="mnp">
-                                        <img src="img/mnp-ps5.png" alt="">
-                                        <div>PS5</div>
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-ps4pro.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS4 Pro</div>
                                     </div>
                                 </a>
+                            </div>
+
+                            <!-- 메뉴 -->
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-vr.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS VR</div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                    <div class="mn-bottom">
+                        <div class="mnb-body-area">
+                            <div class="mnb-container">
+                                <ul>
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name"><strong>DualSense</strong> 무선 컨트롤러</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name"><strong>PULSE 3D</strong> 무선 헤드셋</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name"><strong>PS5</strong> 액세서리</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name"><strong>DUALSHOCK 4</strong> 무선 컨트롤러</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name"><strong>PS4</strong> 액세서리</div>
+                                        </a>
+                                    </li>
+                                </ul>
+
                             </div>
                         </div>
                     </div>
-                    <div class="mn-bottom"></div>
                 </div>
                 
              

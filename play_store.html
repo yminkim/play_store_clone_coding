@@ -48,6 +48,8 @@
             }
 
             .header-menu {
+                z-index: 13;
+                width: 100%;
                 background-color: #fff;
                 position: relative;
             }
@@ -650,7 +652,7 @@
             }
 
             .mn-back {
-                transform: translateY(-300px);
+                transform: translateY(-500px);
                 display: flex;
                 flex-direction: column;
                 position: absolute;
@@ -761,11 +763,12 @@
 
 
             .search-box-container {
-                position: absolute;
-                top: 15px;
+                position: fixed;
+                top: 50px;
                 right: 10px;
                 display: flex;
                 height: 65px;
+                z-index: 651;
             }
             
             .search-input-box {
@@ -775,23 +778,105 @@
             .search-input-box input {
                 width: 380px;
                 height: 65px;
+                border: none;
+                padding: 0 27px 0 18px;
+                cursor: pointer;
+                font-size: 16px;
+                color: rgb(70, 70, 70);
+            }
+            .search-input-box input:focus {
+                outline:none;
+                outline: 2px solid rgba(0, 132, 255, 0.5);
             }
 
+            
+
             .dd-main {
+                display: flex;
                 width: 210px;
                 height: 65px;
-                font-size: 17px;
                 font-weight: bold;
                 padding: 20px;
-                background-color: aqua;
+                background-color: #fff;
                 text-align: center;
+                color: rgb(43, 43, 43);
+                cursor: pointer;
             }
 
             .search-icon-box {
                 width: 65px;
                 height: 65px;
                 background-color: rgb(0, 96, 185);
+                text-align: center;
+                line-height: 65px;
+                color: #fff;
+                font-size: 17px;
+                cursor: pointer;
             }
+
+            .x-icon {
+                position: absolute;
+                right: 80px;
+                font-size: 15px;
+                top: 26px;
+                color: rgb(0, 96, 185);
+            }
+
+            .dropdown {
+                
+            }
+
+
+            .search-site-name {
+                font-size: 18px;
+            }
+
+            .dd-main .fas {
+                margin-left: auto;
+                font-size: 15px;
+                line-height: 30px;
+            }
+
+            .drop-list-menu {
+                position: absolute;
+                top: 0px;
+            }
+
+            .dimmed {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.808);
+                z-index: 24;
+                opacity: 1;
+            }
+
+            .hide-op2 {
+                visibility: hidden;
+                transition: all 0.3s;
+                opacity: 0;
+            }
+
+            
+
+            .search-box-clicked {
+                transition: all 0.3s
+            }
+
+            .ssn-1 {
+                color: gray;
+            }
+
+            .ssn-hover:hover {
+                color: rgb(0, 96, 185);
+            }
+
+        
+/* 
+            font-size: 15px;
+    line-height: 30px; */
  
         </style>
     </head>
@@ -850,21 +935,35 @@
                         </div>
                     </div>
 
-                    <div class="search-box-clicked">
-                        <div></div>
-                        <div class="search-box-container">
-                            <!-- <select name="" id="drop-menu">
-                                <option value="">사이트</option>
-                                <option value="">PlayStation.com</option>
-                                <option value="">PlayStation Store</option>
-                            </select> -->
-                            <div class="dropdown">
-                                <div class="dd-main">asdfsdfsf</div>
-                            </div>
-                            
-                            <div class="search-input-box">
-                                <input type="text">
-                                <div class="search-icon-box">p</div>
+                    <div class="search-box-clicked hide-op2">
+                        <div class="dimmed"></div>
+                        <div class="search-box-container2">
+                            <div class="search-box-container">
+                                <div class="dropdown">
+                                    <div class="dd-main list-main ssn-hover">
+                                        <div class="search-site-name">PlayStation Store</div>
+                                        <div class="fas fa-chevron-down"></div>
+                                    </div>
+
+                                    <div class="drop-list-menu hide-op">
+                                        <div class="dd-main">
+                                            <div class="search-site-name ssn-1">사이트</div>
+                                            <div class="fas fa-chevron-down"></div>
+                                        </div>
+                                        <div class="dd-main ssn-hover">
+                                            <div class="search-site-name">PlayStation.com</div>
+                                        </div>
+                                        <div class="dd-main ssn-hover">
+                                            <div class="search-site-name">PlayStation Store</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="search-input-box">
+                                    <input type="text" placeholder="검색">
+                                    <div class="x-icon fas fa-times"></div>
+                                    <div class="search-icon-box fas fa-search"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1784,11 +1883,20 @@
 
             // 스크롤 시 카테고리 메뉴 고정  header-menu  store-category-menu-container
             let value;
+            let targetS;
             let setS = $('.store-category-menu-container').offset();
             $(window).scroll(function(){
                 value = $(document).scrollTop();
+                if(value > targetS) {  
+                    $('.header-menu').removeClass('fixed-top-menu');
+                } else {
+                    $('.header-menu').addClass('fixed-top-menu');
+                }
+
+                targetS = $(document).scrollTop();
+
+
                 if(value > setS.top) {
-                    //$('.header-menu').removeClass('fixed-top-menu');
                     $('.store-category-menu-container').addClass('fixed-top-menu');
                 } else {
                     $('.store-category-menu-container').removeClass('fixed-top-menu');
@@ -1842,6 +1950,36 @@
                 $(this).parent('.scroll-menu-container-s').children('.move-btn-r').removeClass('display_hidden');
                 $(this).parent('.scroll-menu-container-s').children('.move-btn-l').addClass('display_hidden');
             });
+
+
+            //드롭 다운
+            $('.list-main').click(function(){
+                $('.drop-list-menu').removeClass('hide-op');
+            });
+
+            //리스트 올리기
+            
+
+            //딤 지우기
+            $('.dimmed').click(function(){
+                $('.search-box-clicked').addClass('hide-op2');
+                $('.drop-list-menu').addClass('hide-op');
+                $('.search-input-box input').val('');
+            });
+
+            // search
+            $('.search-box').click(function(){
+                $('.search-box-clicked').removeClass('hide-op2');
+                $('.search-input-box input').focus();
+            });
+
+            //x-icon 텍스트 지우기
+            $('.x-icon').click(function(){
+                $('.search-input-box input').val('');
+                $('.search-input-box input').focus();
+            });
+
+            
 
             
         </script>

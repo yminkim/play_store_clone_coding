@@ -79,16 +79,30 @@
             .header-login-box {
                 display: flex;
                 align-items: center;
+                text-align: center;
                 margin-right: 20px;
             }
             
             .header-login-box a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 background-color: rgb(54, 54, 54);
                 color: #fff;
                 border-radius: 20px;
                 font-size: 16px;
                 text-decoration: none;
-                padding: 4px 17px;
+                padding: 1px;
+                border: 1px solid rgba(141, 141, 141, 0);
+                background-clip: content-box;
+                width: 75px;
+                height: 28px;
+
+            }
+
+            .header-login-box a:hover {
+                border: 1px solid rgb(141, 141, 141);
+                background-clip: rgb(141, 141, 141);
             }
 
             .header-menu-area {
@@ -652,7 +666,7 @@
             }
 
             .mn-back {
-                transform: translateY(-500px);
+                transform: translateY(-200px);
                 display: flex;
                 flex-direction: column;
                 position: absolute;
@@ -874,9 +888,7 @@
             }
 
         
-/* 
-            font-size: 15px;
-    line-height: 30px; */
+
  
         </style>
     </head>

@@ -157,7 +157,7 @@
 
             /* 카테고리 메뉴 */
             .store-category-menu-container {
-                z-index: 23;
+                z-index: 3;
                 width: 100%;
                 background-color: #fff;
                 display: flex;
@@ -209,9 +209,20 @@
                 color: rgb(4, 113, 214);
             }
 
-            .fixed-top-menu {
-                position: fixed;
-                top: 0;;
+            .fixed-top-menu-m40 {
+                position: sticky;
+                top: -40px;
+            }
+
+            .fixed-top-menu-0 {
+                position: sticky;
+                top: 0px;
+            }
+
+            .fixed-top-menu-p40 {
+                position: sticky;
+                top: 40px;
+                transition: all 0.5s;
             }
 
             .category-category {
@@ -666,7 +677,7 @@
             }
 
             .mn-back {
-                transform: translateY(-200px);
+                transform: translateY(-500px);
                 display: flex;
                 flex-direction: column;
                 position: absolute;
@@ -836,9 +847,7 @@
                 color: rgb(0, 96, 185);
             }
 
-            .dropdown {
-                
-            }
+            
 
 
             .search-site-name {
@@ -885,6 +894,7 @@
 
             .ssn-hover:hover {
                 color: rgb(0, 96, 185);
+                
             }
 
         
@@ -894,13 +904,13 @@
     </head>
 
     <body>
-        <header>
+     
             <div class="header-logo">
                 <div class="header-logo-img">
                     <img src="img/sony_banner.jpg" alt="">
                 </div>
             </div>
-
+           
             <div class="header-menu">
                 <div class="header-menu-area">
                     <a href="" class="home-logo fab fa-playstation"></a>
@@ -1115,7 +1125,6 @@
 
                 
             </div>
-        </header>
 
 
 
@@ -1894,37 +1903,36 @@
         <script>
 
             // 스크롤 시 카테고리 메뉴 고정  header-menu  store-category-menu-container
-            let value;
-            let targetS;
+            let value; // 스크롤 즉시 위치 기록 
+            let targetS; // 마지막 스크롤 위치 기록
             let setS = $('.store-category-menu-container').offset();
             $(window).scroll(function(){
                 value = $(document).scrollTop();
-                if(value > targetS) {  
-                    $('.header-menu').removeClass('fixed-top-menu');
-                } else {
-                    $('.header-menu').addClass('fixed-top-menu');
-                }
-
-                targetS = $(document).scrollTop();
-
 
                 if(value > setS.top) {
-                    $('.store-category-menu-container').addClass('fixed-top-menu');
+                    $('.store-category-menu-container').addClass('fixed-top-menu-0');
                 } else {
-                    $('.store-category-menu-container').removeClass('fixed-top-menu');
+                    $('.store-category-menu-container').removeClass('fixed-top-menu-0');
                 }
 
 
-                // if(value > setS.top) {
-                //     $('.store-category-menu-container').addClass('fixed-top-menu');
-                    
-                // }
 
-                // if(올라가면) {
-                //     $('.header-menu').addClass('fixed-top-menu');
-                // } else {
-                //     $('.header-menu').removeClass('fixed-top-menu');
-                // }
+                if(value > targetS) {    // 현재 스크롤 > 마지막 스크롤 = 스크롤을 올렸을 때
+                    $('.header-menu').addClass('fixed-top-menu-m40');   
+                    $('.header-menu').removeClass('fixed-top-menu-0');  
+                    $('.store-category-menu-container').addClass('fixed-top-menu-0');
+                    $('.store-category-menu-container').removeClass('fixed-top-menu-p40'); 
+                } else {
+                    $('.header-menu').removeClass('fixed-top-menu-m40');
+                    $('.header-menu').addClass('fixed-top-menu-0');
+                    $('.store-category-menu-container').removeClass('fixed-top-menu-0');
+                    $('.store-category-menu-container').addClass('fixed-top-menu-p40');
+                }
+
+                targetS = $(document).scrollTop(); // 마지막 스크롤 위치 저장
+
+                
+
             });
             
 

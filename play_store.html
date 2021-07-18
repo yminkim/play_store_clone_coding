@@ -684,24 +684,29 @@
             }
 
             .mn-back {
-                
                 display: flex;
                 flex-direction: column;
                 position: absolute;
-                z-index: -1;
+                top: 40px;
                 width: 100%;
-                height: 220px;
                 background-color: #fff;
                 box-shadow: 0 10px 10px 0px rgb(51, 51, 51);
+                z-index: 1;
+                overflow: hidden;
             }
 
             .mn-back-position-un {
-                transform: translateY(-320px);
+                height: 0px;
                 transition: all 0.5s;
             }
 
             .mn-back-position-on {
-                transform: translateY(0px);
+                height: 220px;
+                transition: all 0.5s;
+            }
+
+            .mn-back-position-on2 {
+                height: 160px;
                 transition: all 0.5s;
             }
 
@@ -889,6 +894,7 @@
                 height: 100%;
                 background-color: rgba(0, 0, 0, 0.808);
                 opacity: 1;
+                z-index: 2;
             }
 
             .hide-op2 {
@@ -915,7 +921,7 @@
                 width: 100%;
                 height: 100%;
                 background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 98%, rgb(216 216 216) 100%); */
-                box-shadow: inset 0 0px 10px -7px gray;
+                box-shadow: inset 0 0px 10px -7px black;
             }
 
             .ssn-hover:hover {
@@ -969,27 +975,27 @@
                     <div class="menu-list-container">
                         <ul class="menu-list">
                             <li>
-                                <div class="menu-name">게임</div>
+                                <div class="menu-name" data-value="1">게임</div>
                                 <div class="fas fa-chevron-down"></div>
                             </li>
                             <li>
-                                <div class="menu-name mn-hw">하드웨어</div>
+                                <div class="menu-name mn-hw" data-value="2">하드웨어</div>
                                 <div class="fas fa-chevron-down"></div>
                             </li>
                             <li>
-                                <div class="menu-name">서비스</div>
+                                <div class="menu-name" data-value="3">서비스</div>
                                 <div class="fas fa-chevron-down"></div>
                             </li>
                             <li>
-                                <div class="menu-name">뉴스</div>
+                                <div class="menu-name" data-value="4">뉴스</div>
                                 <div class="fas fa-chevron-down"></div>
                             </li>
                             <li>
-                                <div class="menu-name">구입</div>
+                                <div class="menu-name" data-value="5">구입</div>
                                 <div class="fas fa-chevron-down"></div>
                             </li>
                             <li>
-                                <div class="menu-name">고객지원</div>
+                                <div class="menu-name" data-value="6">고객지원</div>
                                 <div class="fas fa-chevron-down"></div>
                             </li>
                         </ul>
@@ -1044,7 +1050,131 @@
 
                 </div>
                 
-                <div class="mn-back header-menu-game mn-back-position-un">
+                <!-- 게임 -->
+                <div class="mn-back header-menu-game mn-back-position-un mn-back-1">
+                    <div class="mn-top">
+                        <div class="mn-body-area">
+                            <!-- 메뉴 -->
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-ps5.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS5</div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- 메뉴 -->
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-ps4.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS4</div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- 메뉴 -->
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-vr.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS VR</div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- 메뉴 -->
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-psplus.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS Plus</div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- 메뉴 -->
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-buygame.png" alt="">
+                                        </div>
+                                        <div class="mn-name">게임 구매</div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                    <div class="mn-bottom">
+                        <div class="mnb-body-area">
+                            <div class="mnb-container">
+                                <ul>
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name">Indies</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name"><strong>PlayStation</strong> 이번 달 소식</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name"><strong>PlayStation Hits</strong></div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name">프로모션</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name">토너먼트</div>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 하드웨어 -->
+                <div class="mn-back header-menu-game mn-back-position-un mn-back-2">
                     <div class="mn-top">
                         <div class="mn-body-area">
                             <!-- 메뉴 -->
@@ -1151,6 +1281,199 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+
+                <!-- 서비스 -->
+                <div class="mn-back header-menu-game mn-back-position-un mn-back-3">
+                    <div class="mn-top">
+                        <div class="mn-body-area">
+                            <!-- 메뉴 -->
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-psplus.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS Plus</div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="mn-bottom">
+                        <div class="mnb-body-area">
+                            <div class="mnb-container">
+                                <ul>
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name"><strong>PS5</strong> 엔터테이먼트</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name"><strong>PS4</strong> 엔터테이먼트</div>
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 뉴스 -->
+                <div class="mn-back header-menu-game mn-back-position-un mn-back-4">
+                    <div class="mn-top">
+                        <div class="mn-body-area">
+                            <!-- 메뉴 -->
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-psblog.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS Blog</div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="mn-bottom">
+                        <div class="mnb-body-area">
+                            <div class="mnb-container">
+                                <ul>
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name">보도자료</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name">공식 <strong>PSN</strong> 계정</div>
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 구입 -->
+                <div class="mn-back header-menu-game mn-back-position-un mn-back-5">
+                    <div class="mn-top">
+                        <div class="mn-body-area">
+                            <!-- 메뉴 -->
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-psblog.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS Store</div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="mn-bottom">
+                        <div class="mnb-body-area">
+                            <div class="mnb-container">
+                                <ul>
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name"><strong>PS Store</strong>란?</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name">계제 방법 안내</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name">프로모션</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name">구독 서비스</div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="">
+                                            <div class="circle-area">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="mnb-name">판매점 안내</div>
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 고객지원 -->
+                <div class="mn-back header-menu-game mn-back-position-un mn-back-6">
+                    <div class="mn-top">
+                        <div class="mn-body-area">
+                            <!-- 메뉴 -->
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-psblog.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PS Blog</div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
                 </div>
                 
              
@@ -1998,9 +2321,7 @@
 
                 $(this).parent('.show-btn-area').parent('.main-post-container').children('.main-post-top').children('.main-post').removeClass('hide-op');
 
-            });
-            //header-menu
-
+            });  
 
             // 포스트 hover 시 테두리
             $('.sc-item-container').hover(function(){
@@ -2029,7 +2350,22 @@
                 $('.drop-list-menu').removeClass('hide-op'); 
             });
 
-            //리스트 올리기
+            //드롭다운 메뉴 선택
+            $('.dd-menu').click(function(){
+                $('.drop-list-menu').addClass('hide-op');  //클릭 시 리스트 하이드
+
+                let menu_name = $(this).children('.search-site-name').text();
+                if(menu_name != "사이트") {
+                    $('.list-main .search-site-name').text(menu_name);
+                    $('.dd-menu').removeClass('dd-clicked-effect');
+                    $(this).addClass('dd-clicked-effect');
+                    $('.dd-menu').addClass('ssn-hover');
+                    $('.n-ssn-hover').removeClass('ssn-hover');
+                    $(this).removeClass('ssn-hover');
+                    $('.search-input-box input').attr('placeholder', menu_name+" 검색");
+                }
+                  
+            });
             
 
             //딤 지우기
@@ -2062,35 +2398,51 @@
             
             //하드웨어 클릭 시 슬라이드 메뉴
             let clickedVal = 0;
-            $('.mn-hw').click(function(){
-                if(clickedVal == 0) {
-                    $('.mn-back').removeClass('mn-back-position-un');
-                    $('.mn-back').addClass('mn-back-position-on');
+            $('.menu-list li').click(function(){
+                let number = $(this).children('.menu-name').data('value'); // 게임~고객지원 각 1~6번
+                
+
+                if(clickedVal == 0) {  // 메뉴가 닫혀있을 때
+                    //기존거 닫아주는 코드 있으면 될듯
+                    // 6번은 하단 메뉴가 없어서 따로 파줌
+                    
+                    $('.mn-back-'+ number).removeClass('mn-back-position-un');
+                    if(number == 6) {
+                        $('.mn-back-'+ number).addClass('mn-back-position-on2');
+                    } else {
+                        $('.mn-back-'+ number).addClass('mn-back-position-on');
+                    }
                     clickedVal = 1;
-                } else {
-                    $('.mn-back').addClass('mn-back-position-un');
-                    $('.mn-back').removeClass('mn-back-position-on');
+                    temp = number;
+
+                } else if(clickedVal == 1 && temp == number) {    // 메뉴가 열려있을 때
+
+                    if(number == 6) {
+                        $('.mn-back-'+ number).removeClass('mn-back-position-on2');
+                    } else {
+                        $('.mn-back-'+ number).removeClass('mn-back-position-on');
+                    }
+
+                    $('.mn-back-'+ number).addClass('mn-back-position-un');
+                    //$('.mn-back-'+ number).removeClass('mn-back-position-on');
                     clickedVal = 0;
+                } else {
+                    $('.mn-back').removeClass('mn-back-position-on2');
+                    $('.mn-back').removeClass('mn-back-position-on');
+                    $('.mn-back').addClass('mn-back-position-un');
+
+                    if(number == 6) {
+                        $('.mn-back-'+ number).addClass('mn-back-position-on2');
+                    } else {
+                        $('.mn-back-'+ number).addClass('mn-back-position-on');
+                    }
+                    temp = number;
+                    clickedVal = 1;
                 }
                 
             });
 
-            //드롭다운 메뉴 선택
-            $('.dd-menu').click(function(){
-                $('.drop-list-menu').addClass('hide-op');
-
-                let menu_name = $(this).children('.search-site-name').text();
-                if(menu_name != "사이트") {
-                    $('.list-main .search-site-name').text(menu_name);
-                    $('.dd-menu').removeClass('dd-clicked-effect');
-                    $(this).addClass('dd-clicked-effect');
-                    $('.dd-menu').addClass('ssn-hover');
-                    $('.n-ssn-hover').removeClass('ssn-hover');
-                    $(this).removeClass('ssn-hover');
-                    $('.search-input-box input').attr('placeholder', menu_name+" 검색");
-                }
-                  
-            });
+            
 
             
         </script>

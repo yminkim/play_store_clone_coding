@@ -707,17 +707,39 @@
             .mn-back-position-un {
                 height: 0px;
                 transition: all 0.5s;
+                z-index: 2;
             }
 
             .mn-back-position-on {
                 height: 220px;
                 transition: all 0.5s;
+                z-index: 2;
             }
 
             .mn-back-position-on2 {
                 height: 160px;
                 transition: all 0.5s;
+                z-index: 2;
             }
+
+            .mn-back-display-un {
+                visibility: hidden;
+                z-index: 2;
+            }
+
+            .mn-back-display-on {
+                height: 220px;
+                visibility: visible;
+                z-index: 3;
+            }
+
+            .mn-back-display-on2 {
+                height: 160px;
+                visibility: visible;
+                z-index: 3;
+            }
+
+
 
             .mn-top {
                 width: 100%;
@@ -903,7 +925,7 @@
                 height: 100%;
                 background-color: rgba(0, 0, 0, 0.808);
                 opacity: 1;
-                z-index: 2;
+                z-index: 4;
             }
 
             .hide-op2 {
@@ -1398,7 +1420,7 @@
                                 <a href="">
                                     <div class="mnp">
                                         <div class="mnp-img-area">
-                                            <img src="img/mnp-psblog.png" alt="">
+                                            <img src="img/mnp-buygame.png" alt="">
                                         </div>
                                         <div class="mn-name">PS Store</div>
                                     </div>
@@ -2431,6 +2453,11 @@
                 $('.menu-list li').addClass('ml-h');
                 $('.menu-list li').children('.menu-name').removeClass('menu-list-clicked');
                 $('.menu-list li').children('.fas').removeClass('arrow-kaiten');
+
+                $('.mn-back').removeClass('mn-back-display-un');
+                $('.mn-back').removeClass('mn-back-display-on');
+                $('.mn-back').removeClass('mn-back-display-on2');
+
                 if(clickedVal == 0) {  // 메뉴가 닫혀있을 때
                     //기존거 닫아주는 코드 있으면 될듯
                     // 6번은 하단 메뉴가 없어서 따로 파줌
@@ -2465,7 +2492,7 @@
                     $('.menu-list').children('li').children('.fas').removeClass('arrow-kaiten');
 
                     clickedVal = 0;
-                } else {
+                } else { // 메뉴가 열려있는데 그 메뉴가 아닌 다른 메뉴를 선택했을 때
 
                     $(this).children('.menu-name').addClass('menu-list-clicked'); // 선택 시 폰트색 변경
                     $(this).removeClass('ml-h');
@@ -2475,11 +2502,14 @@
                     $('.mn-back').removeClass('mn-back-position-on');
                     $('.mn-back').addClass('mn-back-position-un');
 
+                    $('.mn-back').addClass('mn-back-display-un');
+                    
                     if(number == 6) {
-                        $('.mn-back-'+ number).addClass('mn-back-position-on2');
+                        $('.mn-back-'+ number).addClass('mn-back-display-on2');
                     } else {
-                        $('.mn-back-'+ number).addClass('mn-back-position-on');
+                        $('.mn-back-'+ number).addClass('mn-back-display-on');
                     }
+
                     temp = number;
                     clickedVal = 1;
                 }

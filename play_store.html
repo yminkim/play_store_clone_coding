@@ -131,6 +131,11 @@
                 margin-top: 7px;
             }
 
+            .arrow-kaiten {
+                transform: rotate(180deg);
+                transition: 0.5s;
+            }
+
             .menu-name {
                 margin-right: 5px;
             }
@@ -205,7 +210,11 @@
             }
 
 
-            .category-list-name:hover, .menu-list li:hover {
+            .category-list-name:hover, .ml-h:hover {
+                color: rgb(4, 113, 214);
+            }
+
+            .menu-list-clicked {
                 color: rgb(4, 113, 214);
             }
 
@@ -1464,12 +1473,26 @@
                                 <a href="">
                                     <div class="mnp">
                                         <div class="mnp-img-area">
-                                            <img src="img/mnp-psblog.png" alt="">
+                                            <img src="img/mnp-qmark.png" alt="">
                                         </div>
-                                        <div class="mn-name">PS Blog</div>
+                                        <div class="mn-name">고객지원</div>
                                     </div>
                                 </a>
                             </div>
+
+
+                            <!-- 메뉴 -->
+                            <div class="mnp-container">
+                                <a href="">
+                                    <div class="mnp">
+                                        <div class="mnp-img-area">
+                                            <img src="img/mnp-psmark.png" alt="">
+                                        </div>
+                                        <div class="mn-name">PSN 상태</div>
+                                    </div>
+                                </a>
+                            </div>
+
                             
                         </div>
                     </div>
@@ -2290,9 +2313,13 @@
 
 
                 if(value > targetS) {    // 현재 스크롤 > 마지막 스크롤 = 스크롤을 내렸을 때
-                    $('.header-menu').addClass('fixed-top-menu-m40');   
-                    $('.header-menu').removeClass('fixed-top-menu-0');  
-                    $('.store-category-menu-container').removeClass('fixed-top-menu-p40'); 
+                    if(clickedVal == 1) { // 스크롤 페이지가 열려있을 때 header-menu를 -40하지 말고 상단에 고정
+
+                    } else {
+                        $('.header-menu').addClass('fixed-top-menu-m40');   
+                        $('.header-menu').removeClass('fixed-top-menu-0');  
+                        $('.store-category-menu-container').removeClass('fixed-top-menu-p40'); 
+                    }
                 } else {
                     $('.header-menu').removeClass('fixed-top-menu-m40');
                     $('.store-category-menu-container').addClass('fixed-top-menu-p40');
@@ -2398,10 +2425,12 @@
             
             //하드웨어 클릭 시 슬라이드 메뉴
             let clickedVal = 0;
+            $('.menu-list li').addClass('ml-h'); // 호버 시 텍스트 파랗게
             $('.menu-list li').click(function(){
                 let number = $(this).children('.menu-name').data('value'); // 게임~고객지원 각 1~6번
-                
-
+                $('.menu-list li').addClass('ml-h');
+                $('.menu-list li').children('.menu-name').removeClass('menu-list-clicked');
+                $('.menu-list li').children('.fas').removeClass('arrow-kaiten');
                 if(clickedVal == 0) {  // 메뉴가 닫혀있을 때
                     //기존거 닫아주는 코드 있으면 될듯
                     // 6번은 하단 메뉴가 없어서 따로 파줌
@@ -2412,6 +2441,13 @@
                     } else {
                         $('.mn-back-'+ number).addClass('mn-back-position-on');
                     }
+
+                    $(this).children('.fas').addClass('arrow-kaiten'); // 선택 시 화살표 반전 애니메이션
+
+
+                    $(this).children('.menu-name').addClass('menu-list-clicked'); // 선택 시 폰트색 변경
+                    $(this).removeClass('ml-h');
+
                     clickedVal = 1;
                     temp = number;
 
@@ -2425,8 +2461,16 @@
 
                     $('.mn-back-'+ number).addClass('mn-back-position-un');
                     //$('.mn-back-'+ number).removeClass('mn-back-position-on');
+
+                    $('.menu-list').children('li').children('.fas').removeClass('arrow-kaiten');
+
                     clickedVal = 0;
                 } else {
+
+                    $(this).children('.menu-name').addClass('menu-list-clicked'); // 선택 시 폰트색 변경
+                    $(this).removeClass('ml-h');
+                    $(this).children('.fas').addClass('arrow-kaiten');
+
                     $('.mn-back').removeClass('mn-back-position-on2');
                     $('.mn-back').removeClass('mn-back-position-on');
                     $('.mn-back').addClass('mn-back-position-un');

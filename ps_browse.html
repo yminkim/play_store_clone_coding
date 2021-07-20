@@ -608,21 +608,99 @@
                 box-shadow: inset 0 0 5px 2px rgb(59, 150, 235);
             }
 
+            /* footer */
+            .footer-container {
+                height: 585px;
+                background-color: rgb(0, 81, 156);
+                padding: 65px 0;
+                color: #fff;
+            }
+
+            .footer-area {
+                width: 1370px;
+                height: 100%;
+                margin: 0 auto;
+            }
+            
+            .footer-area {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .footer-top-area, .region-area {
+                display: flex;
+            }
+
+            .footer-top-area {
+                margin-bottom: 90px;
+            }
+
+            .footer-top-area .fab {
+                font-size: 54px;
+                margin-left: 15px;
+            }
+
+            .region-area {
+                margin-left: 95px;
+                align-items: center;
+            }
+
+            .region-area .fas {
+                font-size: 23px;
+                margin-right: 20px;
+            }
+
+            .region-korea {
+                font-size:  16px;
+            }
+
+            .side-menu {
+                display: flex;
+            }
+            
+            .side-menu ul li {
+                list-style: none;
+                margin-bottom: 10px;
+            }
+
+            .side-menu ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 18px;
+            }
+
+            .sd {
+                margin-right: 300px;
+            }
+
+            .last-footer {
+                margin-top: auto;
+                text-align: center;
+            }
+
+            .last-footer a {
+                text-decoration: none;
+                color: #fff;
+                font-size:  16px;
+            }
+
+            .sd ul li a:hover, .last-footer a:hover {
+                color: rgb(199, 199, 199);
+            }
+
+
             /*위에는 기존 css 복사*/
             /*메인*/
             .main-container {
                 width: 1380px;
-                background-color: bisque;
                 margin: 0 auto;
                 display: flex;
                 justify-content: space-between;
-                height: 5000px;
                 margin-top: 35px;
             }
 
             .post-container {
                 width: 1030px;
-                background-color: rgb(194, 154, 231);
                 display: flex;
                 flex-direction: column;
             }
@@ -647,6 +725,7 @@
                 display: flex;
                 color: rgb(65, 65, 65);
                 margin-top: 20px;
+                margin-bottom: 50px;
             }
 
             .game-count {
@@ -658,7 +737,6 @@
                  width: 135px;
                 display: flex;
                 flex-direction: column;
-                margin-right: 40px;
             }
 
             .sc-item-container a {
@@ -683,8 +761,8 @@
             .sc-item-info-area {
                 display: flex;
                 flex-direction: column;
-                padding: 10px 4px;
-                height: 135px;
+                padding: 0px 4px;
+                height: 115px;
             }
 
             .sc-item-title {
@@ -698,7 +776,173 @@
                 margin-bottom: 5px;
             }
 
+            .post-middle-area {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .post-middle-area .sc-item-container {
+                margin: 0 22px 0 22px;
+            }
+
+            .post-middle-area .sc-item-container:nth-child(6n+1){
+                margin: 0 22px 0 0;
+            }
+
+            .post-middle-area .sc-item-container:nth-child(6n+6){
+                margin: 0 0 0 22px;
+            }
+
+            .post-bottom-area {
+                margin: 100px auto;
+            }
+
+            .post-bottom .fas, .page-number-area div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                padding: 2px;
+                border: 2px solid rgba(255, 255, 255, 0);
+                background-clip: content-box;
+                cursor: pointer;
+            }
+
+            .post-bottom {
+                display: flex;
+            }
             
+            .page-number-area {
+                display: flex;
+            }
+
+            .post-bottom .fas {
+                font-size: 8px;
+            }
+
+            .left-move-btn {
+                margin-right: 20px;
+            }
+
+            .right-move-btn {
+                margin-left: 20px;
+            }
+
+            .num-a a {
+                text-decoration: none;
+                color: rgb(65, 65, 65);
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .back-gray {
+                background-color: rgb(228, 228, 228);
+            }
+            
+            .stop-point {
+                background-color: rgb(139, 139, 139) !important;
+                color: rgb(182, 182, 182);
+                cursor: no-drop !important;
+            }
+
+            .next-point:hover {
+                background-color: rgb(0, 81, 156) !important;
+                color: rgb(216, 216, 216);
+            }
+
+            .next-point {
+                background-color: rgb(0, 106, 206) !important;
+                color: #fff !important;
+            }
+            
+
+            .checked-number a {
+                background-color: rgb(0, 106, 206) !important;
+                color: #fff !important;
+            }
+
+            /* 옵션 영역 */
+            .option-area {
+                width: 100%;
+                height: 800px;
+                background-color: rgb(153, 185, 161);
+                overflow: scroll;
+                display: flex;
+                flex-direction: column;
+                
+            }
+
+            .option-area::-webkit-scrollbar {
+                display: none;
+            }
+
+            .option-empty-space {
+                margin-top: 147px;
+            }
+
+            .sort-banner-containter {
+                border: 2px solid rgba(0, 106, 206, 0);
+                padding: 2px;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+
+            .sort-area {
+                width: 100%;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                border-radius: 8px;
+                position: relative;
+            }
+
+            .sort-area:hover {
+                background-color: rgb(219, 219, 219);
+            }
+
+            .sort-area-clicked-backc {
+                background-color: rgb(219, 219, 219);
+            }
+
+            .sort-area-clicked-border {
+                border: 2px solid rgba(0, 106, 206, 1);
+            }
+
+            .sort-text {
+                font-size: 25px;
+                color: rgb(54, 54, 54);
+                font-weight: 100;
+            }
+
+            .sort-topic {
+                font-size: 20px;
+                color: gray;
+            }
+            
+            .sort-banner-border {
+                width: 100%;
+                height: 20px;
+                border-bottom: 1px solid rgb(189, 189, 189);
+            }
+
+            .sort-area .fas {
+                font-size: 20px;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                color: rgb(4, 113, 214);
+            }
+            
+            .kaiten {
+                transform: rotate(180deg);
+            }
+
+
+
         </style>
     </head>
     <body>
@@ -1277,12 +1521,362 @@
                             </div>
                         </a>
                     </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/sc-dishored.png" alt="">
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <div class="post-bottom-area"></div>
+                <div class="post-bottom-area">
+                    <div class="post-bottom">
+                        <div class="left-move-btn fas fa-chevron-left stop-point"></div>
+                        <div class="page-number-area">
+                            <div class="h-border num-a checked-number"><a href="">1</a></div>
+                            <div class="h-border num-a"><a href="">2</a></div>
+                            <div class="h-border num-a"><a href="">3</a></div>
+                            <div class="h-border num-a"><a href="">4</a></div>
+                            <div class="h-border num-a"><a href="">5</a></div>
+                        </div>
+                        <div class="right-move-btn fas fa-chevron-right h-border next-point"></div>
+                    </div>
+                </div>
             </div>
-            <div class="option-container"></div>
+            <div class="option-container">
+                <div class="option-area">
+                    <div class="option-empty-space"></div>
+                    <div class="sort-banner-containter">
+                        <div class="sort-area">
+                            <div class="sort-text">정렬</div>
+                            <div class="sort-topic">최다 다운로드</div>
+                            <div class="sort-banner-border"></div>
+                            <div class="fas fa-chevron-down"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
+
+        <footer class="footer-container">
+            <div class="footer-area">
+                <div class="footer-top-area">
+                    <div class="fab fa-playstation"></div>
+                    <div class="region-area">
+                        <div class="fas fa-globe"></div>
+                        <div class="region-korea">국가 / 지역: 한국</div>
+                    </div>
+                </div>
+
+                <div class="side-menu">
+                    <div class="sd sd-menu-1">
+                        <ul>
+                            <li><a href="">고객지원</a></li>
+                            <li><a href="">개인정보처리방침</a></li>
+                            <li><a href="">웹사이트 이용약관</a></li>
+                            <li><a href="">사이트맵</a></li>
+                            <li><a href="">PlayStation Studios</a></li>
+                            <li><a href="">법률 정보</a></li>
+                            <li><a href="">SIE에 대하여</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sd sd-menu-2">
+                        <ul>
+                            <li><a href="">PSN 이용약관</a></li>
+                            <li><a href="">PS Store 취소 방침</a></li>
+                            <li><a href="">건강상 유의사항</a></li>
+                            <li><a href="">등급 관련 정보</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sd sd-menu-3">
+                        <ul>
+                            <li><a href="">Facebook</a></li>
+                            <li><a href="">Twitter</a></li>
+                            <li><a href="">YouTube</a></li>
+                            <li><a href="">Instagram</a></li>
+                            <li><a href="">Android 앱</a></li>
+                            <li><a href="">iOS 앱</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="last-footer"><a href="">© 2021 Sony Interactive Entertainment Inc. 모든 권리 보유.</a></div>
+            </div>
+        </footer>
+
+
 
 
 
@@ -1339,6 +1933,16 @@
                 $(this).children('a').children('.sc-item-img-area').addClass('blue-border');
             }, function(){
                 $(this).children('a').children('.sc-item-img-area').removeClass('blue-border');
+            });
+
+            // 하단 버튼 hover 시 테두리
+            $('.h-border').hover(function(){
+                $(this).addClass('blue-border');
+                $(this).children('a').addClass('back-gray');
+
+            }, function(){
+                $(this).removeClass('blue-border');
+                $(this).children('a').removeClass('back-gray');
             });
            
             
@@ -1478,8 +2082,38 @@
                 
             });
 
-            
 
+            //페이지 버튼 선택
+            let page_num = 1;
+            $('.num-a').click(function(){
+                
+                $('.num-a').removeClass('checked-number');
+                $(this).addClass('checked-number');
+                page_num = $(this).text();
+            });
+            
+            // page 넘버로 좌우 버튼 활성화 처리 하면 됨.
+
+            let va = 0;
+            $('.sort-banner-containter').click(function(){
+                $('.sort-area').addClass('sort-area-clicked-backc')
+                $('.sort-banner-containter').addClass('sort-area-clicked-border');
+                if(va == 0) {
+                    $('.sort-topic').addClass('hide-op');
+                    $('.sort-area').children('.fas').addClass('kaiten');
+                    va = 1;
+                } else {
+                    $('.sort-topic').removeClass('hide-op');
+                    $('.sort-area').children('.fas').removeClass('kaiten');
+                    va = 0;
+                }
+                
+            });
+
+            //백, 볼더 지워줄거
+            $(body).click(function(){
+
+            });
             
         </script>
     </body>

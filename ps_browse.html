@@ -707,7 +707,6 @@
 
             .option-container {
                 width: 330px;
-                background-color: rgb(205, 255, 238);
             }
 
             .post-top-area {
@@ -886,7 +885,14 @@
 
             .sort-banner-containter {
                 border: 2px solid rgba(0, 106, 206, 0);
-                padding: 2px;
+                padding: 3px;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+
+            .sort-banner-containter2 {
+                border: 2px solid rgba(0, 106, 206, 0);
+                padding: 3px;
                 border-radius: 10px;
                 cursor: pointer;
             }
@@ -900,7 +906,16 @@
                 position: relative;
             }
 
-            .sort-area:hover {
+            .sort-area2 {
+                width: 100%;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                border-radius: 8px;
+                position: relative;
+            }
+
+            .sort-area:hover, .sort-list-item:hover, .sort-area2:hover {
                 background-color: rgb(219, 219, 219);
             }
 
@@ -909,10 +924,16 @@
             }
 
             .sort-area-clicked-border {
-                border: 2px solid rgba(0, 106, 206, 1);
+                border: 2px solid rgba(0, 106, 206, 1) !important;
             }
 
             .sort-text {
+                font-size: 25px;
+                color: rgb(54, 54, 54);
+                font-weight: 100;
+            }
+            
+            .sort-text2 {
                 font-size: 25px;
                 color: rgb(54, 54, 54);
                 font-weight: 100;
@@ -936,9 +957,88 @@
                 right: 20px;
                 color: rgb(4, 113, 214);
             }
+
+            .sort-area2 .fas {
+                font-size: 20px;
+                position: absolute;
+                top: 16px;
+                right: 20px;
+                color: rgb(4, 113, 214);
+            }
             
             .kaiten {
                 transform: rotate(180deg);
+            }
+
+            .sort-list-item-area {
+                width: 100%;
+                height: 83px;
+                padding: 3px;
+                border: 2px solid rgba(0, 106, 206, 0);
+                cursor: pointer;
+            }
+
+            .sort-list-item {
+                width: 100%;
+                height: 100%;
+                border-radius: 8px;
+            }
+
+            .check-circle {
+                width: 35px;
+                height: 35px;
+                border-radius: 25px;
+                margin-left: auto;
+                padding: 2px;
+                border: 2px solid rgba(0, 106, 206, 0);
+                background-clip: content-box;
+            }
+
+            .checked-circle {
+                width: 100%;
+                height: 100%;
+                padding: 5px;
+                border-radius: 25px;
+                background-clip: content-box;
+                border: 2px solid rgb(100, 100, 100);
+            }
+
+            .sort-area-tie {
+                display: flex;
+                height: 100%;
+                align-items: center;
+                color: gray;
+                padding: 0 7px 0 30px;
+            }
+
+            .sort-option-title {
+                font-size: 20px;
+            }
+
+            .background-color-none {
+                background-color: rgba(0, 0, 0, 0);
+            }
+
+            .background-color-display {
+                background-color: rgb(0, 0, 0) !important;
+            }
+
+            .circle-hover-e {
+                border-color: rgb(0, 106, 206) !important;
+            }
+
+            .circle-hover-e2 {
+                background-color: rgb(0, 106, 206) !important;
+            }
+            
+            .p-circle-clicked-e {
+                border: 2px solid rgba(0, 106, 206, 1) !important;
+                background-color: rgb(0, 106, 206) !important;
+            }
+
+            .c-circle-clicked-e { 
+                border: 2px solid rgb(0, 0, 0) !important;
+                background-color: #fff !important;
             }
 
 
@@ -1815,6 +1915,7 @@
             <div class="option-container">
                 <div class="option-area">
                     <div class="option-empty-space"></div>
+                    <!-- 정렬 배너 -->
                     <div class="sort-banner-containter">
                         <div class="sort-area">
                             <div class="sort-text">정렬</div>
@@ -1823,6 +1924,149 @@
                             <div class="fas fa-chevron-down"></div>
                         </div>
                     </div>
+                    <!-- 정렬 옵션 리스트 -->
+                    <div class="sort-list-item-container hide-op">
+                        <!-- 옵션 아이템 -->
+                        <div class="sort-list-item-area">
+                            <div class="sort-list-item">
+                                <div class="sort-area-tie">
+                                    <div class="sort-option-title">베스트셀러</div>
+                                    <div class="check-circle">
+                                        <div class="checked-circle" data-value="0"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 옵션 아이템 -->
+                        <div class="sort-list-item-area">
+                            <div class="sort-list-item">
+                                <div class="sort-area-tie">
+                                    <div class="sort-option-title">최다 다운로드</div>
+                                    <div class="check-circle">
+                                        <div class="checked-circle background-color-display" data-value="1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 옵션 아이템 -->
+                        <div class="sort-list-item-area">
+                            <div class="sort-list-item">
+                                <div class="sort-area-tie">
+                                    <div class="sort-option-title">이름(내림차순)</div>
+                                    <div class="check-circle">
+                                        <div class="checked-circle" data-value="0"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 옵션 아이템 -->
+                        <div class="sort-list-item-area">
+                            <div class="sort-list-item">
+                                <div class="sort-area-tie">
+                                    <div class="sort-option-title">이름(오름차순)</div>
+                                    <div class="check-circle">
+                                        <div class="checked-circle" data-value="0"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 옵션 아이템 -->
+                        <div class="sort-list-item-area">
+                            <div class="sort-list-item">
+                                <div class="sort-area-tie">
+                                    <div class="sort-option-title">출시일(오래된 순)</div>
+                                    <div class="check-circle">
+                                        <div class="checked-circle" data-value="0"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 옵션 아이템 -->
+                        <div class="sort-list-item-area">
+                            <div class="sort-list-item">
+                                <div class="sort-area-tie">
+                                    <div class="sort-option-title">출시일(새로운 순)</div>
+                                    <div class="check-circle">
+                                        <div class="checked-circle" data-value="0"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 옵션 아이템 -->
+                        <div class="sort-list-item-area">
+                            <div class="sort-list-item">
+                                <div class="sort-area-tie">
+                                    <div class="sort-option-title">가격(낮은 순)</div>
+                                    <div class="check-circle">
+                                        <div class="checked-circle" data-value="0"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 옵션 아이템 -->
+                        <div class="sort-list-item-area">
+                            <div class="sort-list-item">
+                                <div class="sort-area-tie">
+                                    <div class="sort-option-title">가격(높은 순)</div>
+                                    <div class="check-circle">
+                                        <div class="checked-circle" data-value="0"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+
+                    </div>
+
+                    <!-- 가격 옵션 배너 -->
+                    <div class="sort-banner-containter2" data-value="0">
+                        <div class="sort-area2">
+                            <div class="sort-text2">가격</div>
+                            <div class="fas fa-chevron-down"></div>
+                        </div>
+                    </div>
+                    <!-- 정렬 옵션 리스트 -->
+                    <!-- <div class="sort-list-item-container hide-op"> -->
+
+                    <!-- 장르 옵션 배너 -->
+                    <div class="sort-banner-containter2" data-value="0">
+                        <div class="sort-area2">
+                            <div class="sort-text2">장르</div>
+                            <div class="fas fa-chevron-down"></div>
+                        </div>
+                    </div>
+
+                    <!-- 플랫폼 옵션 배너 -->
+                    <div class="sort-banner-containter2" data-value="0">
+                        <div class="sort-area2">
+                            <div class="sort-text2">플랫폼</div>
+                            <div class="fas fa-chevron-down"></div>
+                        </div>
+                    </div>
+
+                    <!-- 발매일 옵션 배너 -->
+                    <div class="sort-banner-containter2" data-value="0">
+                        <div class="sort-area2">
+                            <div class="sort-text2">발매일</div>
+                            <div class="fas fa-chevron-down"></div>
+                        </div>
+                    </div>
+
+                    <!-- PlayStation VR 옵션 배너 -->
+                    <div class="sort-banner-containter2" data-value="0">
+                        <div class="sort-area2">
+                            <div class="sort-text2">PlayStation VR</div>
+                            <div class="fas fa-chevron-down"></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -2095,14 +2339,16 @@
             // page 넘버로 좌우 버튼 활성화 처리 하면 됨.
 
             let va = 0;
-            $('.sort-banner-containter').click(function(){
-                $('.sort-area').addClass('sort-area-clicked-backc')
+            $(document).on('click', '.sort-banner-containter', function(){
+                $('.sort-area').addClass('sort-area-clicked-backc');
                 $('.sort-banner-containter').addClass('sort-area-clicked-border');
                 if(va == 0) {
+                    $('.sort-list-item-container').removeClass('hide-op');
                     $('.sort-topic').addClass('hide-op');
                     $('.sort-area').children('.fas').addClass('kaiten');
                     va = 1;
                 } else {
+                    $('.sort-list-item-container').addClass('hide-op');
                     $('.sort-topic').removeClass('hide-op');
                     $('.sort-area').children('.fas').removeClass('kaiten');
                     va = 0;
@@ -2110,11 +2356,78 @@
                 
             });
 
-            //백, 볼더 지워줄거
-            $(body).click(function(){
-
-            });
             
+            $('.sort-banner-containter2').click(function(){
+                let va2 = $(this).data('value');
+                $(this).children('.sort-area2').addClass('sort-area-clicked-backc');
+                $(this).addClass('sort-area-clicked-border');
+                if(va2 == 0) {
+                   // $('.sort-list-item-container2').removeClass('hide-op');
+                    $(this).children('.sort-area2').children('.fas').addClass('kaiten');
+                    $(this).data('value', 1);
+                } else {
+                    //$('.sort-list-item-container2').addClass('hide-op');
+                    $(this).children('.sort-area2').children('.fas').removeClass('kaiten');
+                    $(this).data('value', 0);
+                }
+                
+            });
+
+            //백, 볼더 지워줄거
+             $(document).on('click',function(event){  ///.sort-banner-containter
+                 let target = event.target;
+
+                //  console.log($('.sort-banner-containter > * > *') != event.currentTarget.querySelector('.sort-banner-containter > * > *'));
+                //  console.log($('.sort-banner-containter > * > *') != $(target).is('.sort-banner-containter > * > *'));
+                 // target != event.currentTarget.querySelector('.sort-banner-containter > * > *')
+                 // !$(target).is('.sort-banner-containter > * > *')
+                 //target.parentNode.parentNode != document.querySelector('.sort-banner-containter')
+                 if(!$(target).is('.sort-banner-containter > * > *')) { 
+                     $('.sort-area').removeClass('sort-area-clicked-backc');
+                     $('.sort-banner-containter').removeClass('sort-area-clicked-border');
+                 } 
+             });
+            
+
+            // 정렬 옵션 선택
+            $('.sort-list-item-area').click(function(){
+                //배너 정렬 하단 카테고리 텍스트 변경
+                let nameO = $(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text();
+                $('.sort-topic').text(nameO);
+
+                //자식 서클 검정처리
+                $('.checked-circle').removeClass('background-color-display');
+                $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').addClass('background-color-display');
+
+                //******************  이 영역은 다른 부분 선택 시 제거되어야 함
+                //배경
+                $('.sort-list-item').removeClass('sort-area-clicked-backc');
+                $(this).children('.sort-list-item').addClass('sort-area-clicked-backc');
+                //부모 서클 테두리
+                $('.check-circle').removeClass('p-circle-clicked-e');
+                $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').addClass('p-circle-clicked-e');
+                //자식 서클 테두리, 배경색
+                $('.checked-circle').removeClass('c-circle-clicked-e');
+                $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').addClass('c-circle-clicked-e');
+                //******************
+                
+                // 호버 인식용 data 적용
+                $('.checked-circle').data('value', 0);
+                $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').data('value', 1);
+            });
+
+            // 정렬 옵션 호버
+            $('.sort-list-item-area').hover(function(){
+                //console.log($(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').data('num'));
+                $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').addClass('circle-hover-e');
+                if($(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').data('value') == 1) {
+                    $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').addClass('circle-hover-e2');
+                }
+            }, function(){
+                $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').removeClass('circle-hover-e');
+                $('.checked-circle').removeClass('circle-hover-e2');
+            });
+
         </script>
     </body>
 </html>

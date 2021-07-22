@@ -240,7 +240,7 @@
             }
 
             .hide-op {
-                display: none;
+                display: none !important;
             }
 
             .blue-border {
@@ -868,7 +868,6 @@
             .option-area {
                 width: 100%;
                 height: 800px;
-                background-color: rgb(153, 185, 161);
                 overflow: scroll;
                 display: flex;
                 flex-direction: column;
@@ -910,7 +909,6 @@
                 width: 100%;
                 padding: 10px;
                 display: flex;
-                flex-direction: column;
                 border-radius: 8px;
                 position: relative;
             }
@@ -1041,7 +1039,85 @@
                 background-color: #fff !important;
             }
 
+            /*가격 정렬 옵션 리스트*/
+            .price-box {
+                font-size: 20px;
+                color: rgb(68, 68, 68);
+                padding: 15px 40px;
+                border: 1px solid rgb(185, 185, 185);
+                border-radius: 10px;
+                cursor: pointer;
+            }
 
+            .price-box-container {
+                border: 2px solid rgba(0, 106, 206, 0);
+                padding: 2px;
+                background-clip: content-box;
+                border-radius: 13px;
+                margin: 2px 5px;
+            }
+
+            .price-sort-list-item-container {           
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .price-box:hover {
+                background-color: rgb(185, 185, 185);
+                border-color: rgb(148, 148, 148);
+            }
+
+            /*옵션이 선택되었을 때 호버 시*/
+            .price-box-double-hover:hover {
+                background-color: rgb(0, 70, 136);
+                border-color: rgb(0, 70, 136);
+            }
+
+            .price-option-clicked-color {
+                color: #fff;
+                background-color: rgb(0, 96, 185);
+                border-color: rgb(0, 96, 185);
+            }
+
+            .price-option-clicked-color2 {
+                background-color: rgb(185, 185, 185);
+            }
+
+            .price-option-clicked-border-color {
+                border-color: rgb(0, 96, 185);
+            }
+            
+            .option-count-circle {
+                font-weight: bold;
+                font-size: 17px;
+                color: #fff;
+                background-color: rgba(0, 132, 255, 1);
+                width: 25px;
+                height: 25px;
+                border-radius: 25px;
+                margin-top: auto;
+                margin-left: 15px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+
+            .platform-btn-area {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .platform-btn-text {
+                font-size: 20px;
+            }
+
+            .platform-btn-img {
+                height: 35px;
+                width: 60px;
+            }
 
         </style>
     </head>
@@ -1925,7 +2001,7 @@
                         </div>
                     </div>
                     <!-- 정렬 옵션 리스트 -->
-                    <div class="sort-list-item-container hide-op">
+                    <div class="sort-list-item-container hide-op sortsort">
                         <!-- 옵션 아이템 -->
                         <div class="sort-list-item-area">
                             <div class="sort-list-item">
@@ -2025,46 +2101,172 @@
 
                     </div>
 
-                    <!-- 가격 옵션 배너 -->
-                    <div class="sort-banner-containter2" data-value="0">
-                        <div class="sort-area2">
-                            <div class="sort-text2">가격</div>
-                            <div class="fas fa-chevron-down"></div>
+
+                    <!-- 가격 옵션 -->
+                    <div class="sort-option-big-container">
+                        <!-- 가격 옵션 배너 -->
+                        <div class="sort-banner-containter2" data-value="0">
+                            <div class="sort-area2">
+                                <div class="sort-text2">가격</div>
+                                <div class="option-count-circle hide-op">0</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </div>
+                        </div>
+                        <!-- 정렬 옵션 리스트 -->
+                        <div class="price-sort-list-item-container hide-op">
+                            <div class="price-box-container">
+                                <div class="price-box" data-value="0">무료</div>
+                            </div>
+                            <div class="price-box-container">
+                                <div class="price-box" data-value="0">4,999원 이하</div>
+                            </div>
+                            <div class="price-box-container">
+                                <div class="price-box" data-value="0">5,000원 - 9,999원</div>
+                            </div>
+                            <div class="price-box-container">
+                                <div class="price-box" data-value="0">10,000원 - 19,999원</div>
+                            </div>
+                            <div class="price-box-container">
+                                <div class="price-box" data-value="0">20,000원 - 49,999원</div>
+                            </div>
+                            <div class="price-box-container">
+                                <div class="price-box" data-value="0">50,000원 이상</div>
+                            </div>
+
                         </div>
                     </div>
-                    <!-- 정렬 옵션 리스트 -->
-                    <!-- <div class="sort-list-item-container hide-op"> -->
 
-                    <!-- 장르 옵션 배너 -->
-                    <div class="sort-banner-containter2" data-value="0">
-                        <div class="sort-area2">
-                            <div class="sort-text2">장르</div>
-                            <div class="fas fa-chevron-down"></div>
+                    <!-- 장르 옵션 -->
+                    <div class="sort-option-big-container">
+                        <!-- 장르 옵션 배너 -->
+                        <div class="sort-banner-containter2" data-value="0">
+                            <div class="sort-area2">
+                                <div class="sort-text2">장르</div>
+                                <div class="option-count-circle hide-op">0</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </div>
+                        </div>
+                        <!-- 정렬 옵션 리스트 -->
+                        <div class="price-sort-list-item-container hide-op">
+                            <!-- 옵션 아이템 -->
+                            <div class="sort-list-item-area">
+                                <div class="sort-list-item">
+                                    <div class="sort-area-tie">
+                                        <div class="sort-option-title" data-clicked="0">액션</div>
+                                        <div class="check-circle">
+                                            <div class="checked-circle" data-value="0"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 옵션 아이템 -->
+                            <div class="sort-list-item-area">
+                                <div class="sort-list-item">
+                                    <div class="sort-area-tie">
+                                        <div class="sort-option-title" data-clicked="0">어드밴처</div>
+                                        <div class="check-circle">
+                                            <div class="checked-circle" data-value="0"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
-                    <!-- 플랫폼 옵션 배너 -->
-                    <div class="sort-banner-containter2" data-value="0">
-                        <div class="sort-area2">
-                            <div class="sort-text2">플랫폼</div>
-                            <div class="fas fa-chevron-down"></div>
+                    <!-- 플랫폼 옵션 -->   
+                    <div class="sort-option-big-container">
+                        <!-- 플랫폼 옵션 배너 -->
+                        <div class="sort-banner-containter2" data-value="0">
+                            <div class="sort-area2">
+                                <div class="sort-text2">플랫폼</div>
+                                <div class="option-count-circle hide-op">0</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </div>
+                        </div>
+                        <!-- 정렬 옵션 리스트 -->
+                        <div class="price-sort-list-item-container hide-op">
+                            <div class="price-box-container">
+                                <div class="price-box platform-btn-area" data-value="0">
+                                    <div class="platform-btn-img"><img src="img/option-plaform-ps4.png" alt=""></div>
+                                    <div class="platform-btn-text">PS4</div>
+                                </div>
+                            </div>
+                            <div class="price-box-container">
+                                <div class="price-box platform-btn-area" data-value="0">
+                                    <div class="platform-btn-img"><img src="img/option-plaform-ps5.png" alt=""></div>
+                                    <div class="platform-btn-text">PS5</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- 발매일 옵션 배너 -->
-                    <div class="sort-banner-containter2" data-value="0">
-                        <div class="sort-area2">
-                            <div class="sort-text2">발매일</div>
-                            <div class="fas fa-chevron-down"></div>
+                    <!-- 발매일 옵션 -->
+                    <div class="sort-option-big-container">
+                        <!-- 발매일 옵션 배너 -->
+                        <div class="sort-banner-containter2" data-value="0">
+                            <div class="sort-area2">
+                                <div class="sort-text2">발매일</div>
+                                <div class="option-count-circle hide-op">0</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </div>
                         </div>
+                        <!-- 정렬 옵션 리스트 -->
+                        <div class="price-sort-list-item-container hide-op">
+                            <!-- 옵션 아이템 -->
+                            <div class="sort-list-item-area">
+                                <div class="sort-list-item">
+                                    <div class="sort-area-tie">
+                                        <div class="sort-option-title" data-clicked="0">신규 출시</div>
+                                        <div class="check-circle">
+                                            <div class="checked-circle" data-value="0"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 옵션 아이템 -->
+                            <div class="sort-list-item-area">
+                                <div class="sort-list-item">
+                                    <div class="sort-area-tie">
+                                        <div class="sort-option-title" data-clicked="0">곧 제공 예정</div>
+                                        <div class="check-circle">
+                                            <div class="checked-circle" data-value="0"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                            
+
                     </div>
 
-                    <!-- PlayStation VR 옵션 배너 -->
-                    <div class="sort-banner-containter2" data-value="0">
-                        <div class="sort-area2">
-                            <div class="sort-text2">PlayStation VR</div>
-                            <div class="fas fa-chevron-down"></div>
+                    <!-- PlayStation VR 옵션 -->
+                    <div class="sort-option-big-container">
+                        <!-- PlayStation VR 옵션 배너 -->
+                        <div class="sort-banner-containter2" data-value="0">
+                            <div class="sort-area2">
+                                <div class="sort-text2">PlayStation VR</div>
+                                <div class="option-count-circle hide-op">0</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </div>
                         </div>
+
+                        <!-- 정렬 옵션 리스트 -->
+                        <div class="price-sort-list-item-container hide-op">
+                            <div class="price-box-container">
+                                <div class="price-box" data-value="0">VR 없음</div>
+                            </div>
+                            <div class="price-box-container">
+                                <div class="price-box" data-value="0">VR 필수</div>
+                            </div>
+                            <div class="price-box-container">
+                                <div class="price-box" data-value="0">VR 선택 사항</div>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -2358,6 +2560,17 @@
 
             
             $('.sort-banner-containter2').click(function(){
+                // 아이템 리스트 show and hide
+                if($(this).parent('.sort-option-big-container').children('.price-sort-list-item-container').hasClass('hide-op')) {
+                    $(this).parent('.sort-option-big-container').children('.price-sort-list-item-container').removeClass('hide-op');
+                } else {
+                    $(this).parent('.sort-option-big-container').children('.price-sort-list-item-container').addClass('hide-op');
+                }
+                /////////////
+
+                $('.sort-banner-containter2').children('.sort-area2').removeClass('sort-area-clicked-backc');
+                $('.sort-banner-containter2').removeClass('sort-area-clicked-border');
+
                 let va2 = $(this).data('value');
                 $(this).children('.sort-area2').addClass('sort-area-clicked-backc');
                 $(this).addClass('sort-area-clicked-border');
@@ -2383,37 +2596,94 @@
                  // !$(target).is('.sort-banner-containter > * > *')
                  //target.parentNode.parentNode != document.querySelector('.sort-banner-containter')
                  if(!$(target).is('.sort-banner-containter > * > *')) { 
-                     $('.sort-area').removeClass('sort-area-clicked-backc');
-                     $('.sort-banner-containter').removeClass('sort-area-clicked-border');
+                    $('.sort-area').removeClass('sort-area-clicked-backc');
+                    $('.sort-banner-containter').removeClass('sort-area-clicked-border');
                  } 
+                 if(!$(target).is('.sort-banner-containter2 *')) { 
+                    $('.sort-banner-containter2').children('.sort-area2').removeClass('sort-area-clicked-backc');
+                    $('.sort-banner-containter2').removeClass('sort-area-clicked-border');
+                 } 
+
+                
              });
+
+
+            // 정렬 옵션 백 지워줄 거 //sort-list-item
+            $(document).on('click',function(event){
+                let target = event.target;
+                console.log($('.sort-list-item-area > * > * > *'));
+                if(!$(target).is('.sort-list-item-area *')) { 
+                    $('.sort-list-item').removeClass('sort-area-clicked-backc');
+                    $('.check-circle').removeClass('p-circle-clicked-e');
+                    $('.checked-circle').removeClass('c-circle-clicked-e');
+                }
+            });
             
 
             // 정렬 옵션 선택
             $('.sort-list-item-area').click(function(){
-                //배너 정렬 하단 카테고리 텍스트 변경
-                let nameO = $(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text();
-                $('.sort-topic').text(nameO);
-
-                //자식 서클 검정처리
-                $('.checked-circle').removeClass('background-color-display');
-                $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').addClass('background-color-display');
-
-                //******************  이 영역은 다른 부분 선택 시 제거되어야 함
-                //배경
-                $('.sort-list-item').removeClass('sort-area-clicked-backc');
-                $(this).children('.sort-list-item').addClass('sort-area-clicked-backc');
                 //부모 서클 테두리
                 $('.check-circle').removeClass('p-circle-clicked-e');
                 $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').addClass('p-circle-clicked-e');
+
                 //자식 서클 테두리, 배경색
                 $('.checked-circle').removeClass('c-circle-clicked-e');
                 $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').addClass('c-circle-clicked-e');
-                //******************
+
+                //배경
+                $('.sort-list-item').removeClass('sort-area-clicked-backc');
+                $(this).children('.sort-list-item').addClass('sort-area-clicked-backc');
+
+
+                //sortsort = 정렬 배너쪽 리스트이며, 구분을 위해 생성함
+                //배너 정렬 하단 카테고리 텍스트 변경
+                if($(this).parent('.sort-list-item-container').hasClass('sortsort')) { 
+                    // 선택된 옵션의 텍스트를 배너에 넣어주기 위한 변수 지정
+                    let nameO = $(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text();
+                    $('.sort-topic').text(nameO);
                 
-                // 호버 인식용 data 적용
-                $('.checked-circle').data('value', 0);
-                $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').data('value', 1);
+                    //자식 서클 검정처리
+                      // 정렬 배너에서 옵션을 선택했을 때 장르, 출시일의 영향을 주지 않기 위해 바로 아래줄의 코드로 정렬 배너 쪽만 검은점을 제거해줌
+                    $(this).parent('.sort-list-item-container').children('.sort-list-item-area').children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').removeClass('background-color-display');
+                    $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').addClass('background-color-display');
+                   
+                    // 호버 인식용 data 적용
+                    $('.checked-circle').data('value', 0);
+                    $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').data('value', 1);
+                    
+                } else { // 장르, 발매일 옵션 리스트
+                    // 선택 됐는지를 확인하기 위한 변수 지정
+                    let clicked_z = $(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').attr('data-clicked');
+                    
+                    if(clicked_z == 1) { // 선택된 상태에서 눌렀을 때 = 해제할 때 
+                        //선택 검은점을 제거
+                        $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').removeClass('background-color-display');
+                        // 닫힘 처리를 위해 data-clicked 를 0으로 초기화
+                        $(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').attr('data-clicked', 0);
+                        // 호버 인식용 data 적용
+                        $('.checked-circle').data('value', 0);
+                    } else { // 닫힌상태에서 선택할 때
+                        // 선택 검은점 추가
+                        $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').addClass('background-color-display');
+                        // 열림처리를 위해 data-clicked를 1로 초기화
+                        $(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').attr('data-clicked', 1);
+                        // 호버 인식용 data 적용
+                        $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').data('value', 1);
+                    }
+
+                    // 선택된 숫자 세고 원의 숫자 바꿔주는 두줄임
+                    let chicked_count_z = $(this).parent('.price-sort-list-item-container').children('.sort-list-item-area').children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title[data-clicked="1"]').length;
+
+                    if(chicked_count_z == 0) {
+                        $(this).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').addClass('hide-op');
+                    } else {
+                        $(this).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').removeClass('hide-op');
+                    }
+
+                    $(this).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').text(chicked_count_z);
+
+
+                }
             });
 
             // 정렬 옵션 호버
@@ -2427,6 +2697,72 @@
                 $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').removeClass('circle-hover-e');
                 $('.checked-circle').removeClass('circle-hover-e2');
             });
+
+
+            //가격 옵션 선택
+            //let option_count = 0; // 옵션 선택된 갯수
+            $('.price-box-container').click(function(){
+                
+                $('.price-box-container').removeClass('price-option-clicked-border-color');
+                $('.price-box').removeClass('price-option-clicked-color2');
+
+                let cliked_btn = $(this).children('.price-box').attr('data-value'); // 1일 때 클릭
+                if(cliked_btn == 0) {
+                    //option_count++;
+
+                    $(this).children('.price-box').attr('data-value', 1);
+                    $(this).children('.price-box').removeClass('price-option-clicked-color2');
+                    $(this).children('.price-box').addClass('price-option-clicked-color');
+                    $(this).children('.price-box').addClass('price-box-double-hover');
+                    
+
+                    $(this).addClass('price-option-clicked-border-color');
+                } else {
+                    //option_count--;
+
+                    $(this).children('.price-box').removeClass('price-option-clicked-color');
+                    $(this).children('.price-box').addClass('price-option-clicked-color2');
+                    $(this).children('.price-box').removeClass('price-box-double-hover');
+                    $(this).children('.price-box').attr('data-value', 0);
+
+                    $(this).addClass('price-option-clicked-border-color');
+                }
+                
+                //option-count-circle 카운트 해주기
+                // if($('.option-count-circle').text() == 0) {
+                //     $('.option-count-circle').addClass('hide-op');
+                // } else {
+                //     $('.option-count-circle').removeClass('hide-op');
+                // }
+                //alert($('.bbbb').children('.price-box-container').children('.price-box').data('value'));
+
+                // 선택된 옵션의 갯수를 측정해주는 변수
+                let option_count = $(this).parent('.price-sort-list-item-container').children('.price-box-container').children('.price-box[data-value="1"]').length;
+
+                if(option_count == 0) {
+                    $(this).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').addClass('hide-op');
+                } else {
+                    $(this).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').removeClass('hide-op');
+                    
+                }
+                // 선택된 수 만큼 원 안에 숫자 변경
+                $(this).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').text(option_count);
+                
+            });
+
+
+            // 정렬 가격 옵션 선택 후 남은 효과 지워줄 거 //sort-list-item
+            $(document).on('click',function(event){
+                let target = event.target;
+                console.log($('.price-box-container *'));
+                if(!$(target).is('.price-box-container *')) { 
+                    $('.price-box-container').removeClass('price-option-clicked-border-color');
+                    $('.price-box').removeClass('price-option-clicked-color2');
+                }
+            });
+
+
+            
 
         </script>
     </body>

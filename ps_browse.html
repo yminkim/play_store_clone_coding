@@ -4,7 +4,7 @@
     <head>
         <title>둘러보기 | 공식 PlayStation™Store</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-        <!--ico 자리-->
+        <link rel="shortcut icon" href="./img/pss_ico.ico.png">
         <meta charset="utf-8">
         <style>
             * {
@@ -1119,6 +1119,25 @@
                 width: 60px;
             }
 
+            /* 장르 더보기 */
+            .view-more-area {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .view-more-area div {
+                font-size: 20px;
+                color: rgb(0, 106, 206);
+                padding: 15px 30px;
+                border-radius: 30px;
+                cursor: pointer;
+            }
+
+            .view-more-area div:hover {
+                background-color: rgb(219, 219, 219);
+            }
+
         </style>
     </head>
     <body>
@@ -2172,6 +2191,70 @@
                                 </div>
                             </div>
 
+                            <!-- 옵션 아이템 -->
+                            <div class="sort-list-item-area">
+                                <div class="sort-list-item">
+                                    <div class="sort-area-tie">
+                                        <div class="sort-option-title" data-clicked="0">슈팅</div>
+                                        <div class="check-circle">
+                                            <div class="checked-circle" data-value="0"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 옵션 아이템 -->
+                            <div class="sort-list-item-area">
+                                <div class="sort-list-item">
+                                    <div class="sort-area-tie">
+                                        <div class="sort-option-title" data-clicked="0">롤플레잉 게임</div>
+                                        <div class="check-circle">
+                                            <div class="checked-circle" data-value="0"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="view-more-area">
+                                <div>더 보기</div>
+                            </div>
+                            <!-- 옵션 아이템 -->
+                            <div class="sort-list-item-area hide-tag hide-op">
+                                <div class="sort-list-item">
+                                    <div class="sort-area-tie">
+                                        <div class="sort-option-title" data-clicked="0">시뮬레이션</div>
+                                        <div class="check-circle">
+                                            <div class="checked-circle" data-value="0"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 옵션 아이템 -->
+                            <div class="sort-list-item-area hide-tag hide-op">
+                                <div class="sort-list-item">
+                                    <div class="sort-area-tie">
+                                        <div class="sort-option-title" data-clicked="0">퍼즐</div>
+                                        <div class="check-circle">
+                                            <div class="checked-circle" data-value="0"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 옵션 아이템 -->
+                            <div class="sort-list-item-area hide-tag hide-op">
+                                <div class="sort-list-item">
+                                    <div class="sort-area-tie">
+                                        <div class="sort-option-title" data-clicked="0">유니크</div>
+                                        <div class="check-circle">
+                                            <div class="checked-circle" data-value="0"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
                         </div>
                     </div>
 
@@ -2759,6 +2842,13 @@
                     $('.price-box-container').removeClass('price-option-clicked-border-color');
                     $('.price-box').removeClass('price-option-clicked-color2');
                 }
+            });
+
+
+            // 장르 리스트에서 더보기 선택
+            $('.view-more-area').click(function(){
+                $('.view-more-area').addClass('hide-op');
+                $('.hide-tag').removeClass('hide-op');
             });
 
 

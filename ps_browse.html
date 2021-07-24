@@ -2177,7 +2177,7 @@
                         <!-- 정렬 옵션 리스트 -->
                         <div class="price-sort-list-item-container hide-op">
                             <div class="price-box-container">
-                                <div class="price-box" data-value="0" data-id="옵션-무료">무료</div>
+                                <div class="price-box" data-value="0" data-id="옵션-무료" id="옵션-무료jjjj">무료</div>
                             </div>
                             <div class="price-box-container">
                                 <div class="price-box" data-value="0" data-id="옵션-49">4,999원 이하</div>
@@ -2915,8 +2915,61 @@
             });
 
             //top-opbox 선택 시 옵션 선택 취소
-            $('.top-opbox').click(function(){
-                alert('sdfdsf');
+            $(document).on("click", '.top-opbox', function(){
+                $(this).remove();
+                let op_box_id = $(this).attr("id");
+                let price_box_container = $('.price-box[data-id='+op_box_id+']').parent('.price-box-container');
+                let sort_area_tie = $('.sort-option-title[data-id='+op_box_id+']').parent('.sort-area-tie');
+                //sort-option-title
+                //$('.price-box').find(datzasdfsdf'')  find 방법 찾아봐라
+
+                // 일반 리스트 초기화  
+                $(price_box_container).removeClass('price-option-clicked-border-color');
+                $('.price-box').removeClass('price-option-clicked-color2');
+                $(price_box_container).children('.price-box').removeClass('price-option-clicked-color');
+                $(price_box_container).children('.price-box').addClass('price-option-clicked-color2');
+                $(price_box_container).children('.price-box').removeClass('price-box-double-hover');
+                $(price_box_container).children('.price-box').attr('data-value', 0);
+
+                //$(sort_area_tie).children('.check-circle').children('.checked-circle')
+                // 장르, 발매일 초기화
+                $(sort_area_tie).children('.check-circle').removeClass('p-circle-clicked-e');
+                //자식 서클 테두리, 배경색
+                $(sort_area_tie).children('.check-circle').children('.checked-circle').removeClass('c-circle-clicked-e');
+                //배경
+                $(sort_area_tie).parent('.sort-list-item').removeClass('sort-area-clicked-backc');
+                $(sort_area_tie).children('.check-circle').children('.checked-circle').removeClass('background-color-display');
+                // 닫힘 처리를 위해 data-clicked 를 0으로 초기화
+                $(sort_area_tie).children('.sort-option-title').attr('data-clicked', 0);
+                // 호버 인식용 data 적용
+                $(sort_area_tie).children('.check-circle').children('.checked-circle').data('value', 0);
+
+                $(price_box_container).addClass('price-option-clicked-border-color');
+                
+                // 선택된 옵션의 갯수를 측정해주는 변수 - 일반 리스트 카운트
+                let option_count = $(price_box_container).parent('.price-sort-list-item-container').children('.price-box-container').children('.price-box[data-value="1"]').length;
+
+                if(option_count == 0) {
+                    $(price_box_container).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').addClass('hide-op');
+                } else {
+                    $(price_box_container).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').removeClass('hide-op');
+                    
+                }
+                // 선택된 수 만큼 원 안에 숫자 변경
+                $(price_box_container).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').text(option_count);
+
+                // - 발매일, 장르 부분 카운트
+                let this_s = $(sort_area_tie).parent('.sort-list-item').parent('.sort-list-item-area'); // 위에서 가져온 카운트 기능을 쓰려는데 this 로 돼있어서 좀 수정함
+                let chicked_count_z = $(this_s).parent('.price-sort-list-item-container').children('.sort-list-item-area').children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title[data-clicked="1"]').length;
+
+                if(chicked_count_z == 0) {
+                    $(this_s).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').addClass('hide-op');
+                } else {
+                    $(this_s).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').removeClass('hide-op');
+                }
+
+                $(this_s).parent('.price-sort-list-item-container').parent('.sort-option-big-container').children('.sort-banner-containter2').children('.sort-area2').children('.option-count-circle').text(chicked_count_z);
+                
             });
 
             //필터 지우기
@@ -2936,7 +2989,7 @@
                 $('.price-box-container').addClass('price-option-clicked-border-color');
                 $('.option-count-circle').addClass('hide-op');
 
-               // 장르, 발매일 초기화
+                // 장르, 발매일 초기화
                 $('.check-circle').removeClass('p-circle-clicked-e');
                 //자식 서클 테두리, 배경색
                 $('.checked-circle').removeClass('c-circle-clicked-e');

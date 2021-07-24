@@ -722,6 +722,7 @@
 
             .item-count-area {
                 display: flex;
+                align-items: center;
                 color: rgb(65, 65, 65);
                 margin-top: 20px;
                 margin-bottom: 50px;
@@ -1138,6 +1139,45 @@
                 background-color: rgb(219, 219, 219);
             }
 
+            /* 타이틀 하단 선택된 리스트 옵션 제어 */
+            .option-list-view-area {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .top-opbox {
+                margin: 10px 5px;
+                font-size: 20px;
+                color: rgb(68, 68, 68);
+                padding: 15px 40px;
+                border-radius: 10px;
+                cursor: pointer;
+                background-color: rgb(185, 185, 185);
+            }
+
+            .top-opbox:hover {
+                background-color: rgb(168, 168, 168);
+            }
+
+            .op-x {
+                margin-left: 10px;
+                font-size: 14px;
+                color: rgb(46, 46, 46);
+            }
+
+            .remove-op {
+                margin-left: 10px;
+                font-size: 20px;
+                color: rgb(0, 96, 185);
+                border: 1px solid rgba(0, 96, 185, 0);
+                border-radius: 5px;
+                padding-top: 2px;
+                cursor: pointer;
+            }
+
+            .remove-op:hover {
+                border: 1px solid rgb(0, 96, 185);
+            }
         </style>
     </head>
     <body>
@@ -1699,9 +1739,12 @@
             <div class="post-container">
                 <div class="post-top-area">
                     <div class="post-area-title">모든 게임</div>
+                    <!-- 선택된 옵션 리스트 출력 -->
+                    <div class="option-list-view-area"></div>
                     <div class="item-count-area">
                         <div class="game-count">1771</div>
                         <div>items</div>
+                        <div class="remove-op">필터 지우기</div>
                     </div>
                 </div>
                 <div class="post-middle-area">
@@ -2134,22 +2177,22 @@
                         <!-- 정렬 옵션 리스트 -->
                         <div class="price-sort-list-item-container hide-op">
                             <div class="price-box-container">
-                                <div class="price-box" data-value="0">무료</div>
+                                <div class="price-box" data-value="0" data-id="옵션-무료">무료</div>
                             </div>
                             <div class="price-box-container">
-                                <div class="price-box" data-value="0">4,999원 이하</div>
+                                <div class="price-box" data-value="0" data-id="옵션-49">4,999원 이하</div>
                             </div>
                             <div class="price-box-container">
-                                <div class="price-box" data-value="0">5,000원 - 9,999원</div>
+                                <div class="price-box" data-value="0" data-id="옵션-5099">5,000원 - 9,999원</div>
                             </div>
                             <div class="price-box-container">
-                                <div class="price-box" data-value="0">10,000원 - 19,999원</div>
+                                <div class="price-box" data-value="0" data-id="옵션-100199">10,000원 - 19,999원</div>
                             </div>
                             <div class="price-box-container">
-                                <div class="price-box" data-value="0">20,000원 - 49,999원</div>
+                                <div class="price-box" data-value="0" data-id="옵션-200499">20,000원 - 49,999원</div>
                             </div>
                             <div class="price-box-container">
-                                <div class="price-box" data-value="0">50,000원 이상</div>
+                                <div class="price-box" data-value="0" data-id="옵션-500">50,000원 이상</div>
                             </div>
 
                         </div>
@@ -2171,7 +2214,7 @@
                             <div class="sort-list-item-area">
                                 <div class="sort-list-item">
                                     <div class="sort-area-tie">
-                                        <div class="sort-option-title" data-clicked="0">액션</div>
+                                        <div class="sort-option-title" data-clicked="0" data-id="옵션-액션">액션</div>
                                         <div class="check-circle">
                                             <div class="checked-circle" data-value="0"></div>
                                         </div>
@@ -2183,7 +2226,7 @@
                             <div class="sort-list-item-area">
                                 <div class="sort-list-item">
                                     <div class="sort-area-tie">
-                                        <div class="sort-option-title" data-clicked="0">어드밴처</div>
+                                        <div class="sort-option-title" data-clicked="0" data-id="옵션-어드밴처">어드밴처</div>
                                         <div class="check-circle">
                                             <div class="checked-circle" data-value="0"></div>
                                         </div>
@@ -2195,7 +2238,7 @@
                             <div class="sort-list-item-area">
                                 <div class="sort-list-item">
                                     <div class="sort-area-tie">
-                                        <div class="sort-option-title" data-clicked="0">슈팅</div>
+                                        <div class="sort-option-title" data-clicked="0" data-id="옵션-슈팅">슈팅</div>
                                         <div class="check-circle">
                                             <div class="checked-circle" data-value="0"></div>
                                         </div>
@@ -2207,7 +2250,7 @@
                             <div class="sort-list-item-area">
                                 <div class="sort-list-item">
                                     <div class="sort-area-tie">
-                                        <div class="sort-option-title" data-clicked="0">롤플레잉 게임</div>
+                                        <div class="sort-option-title" data-clicked="0" data-id="옵션-롤플레잉게임">롤플레잉 게임</div>
                                         <div class="check-circle">
                                             <div class="checked-circle" data-value="0"></div>
                                         </div>
@@ -2222,7 +2265,7 @@
                             <div class="sort-list-item-area hide-tag hide-op">
                                 <div class="sort-list-item">
                                     <div class="sort-area-tie">
-                                        <div class="sort-option-title" data-clicked="0">시뮬레이션</div>
+                                        <div class="sort-option-title" data-clicked="0" data-id="옵션-시뮬레이션">시뮬레이션</div>
                                         <div class="check-circle">
                                             <div class="checked-circle" data-value="0"></div>
                                         </div>
@@ -2234,7 +2277,7 @@
                             <div class="sort-list-item-area hide-tag hide-op">
                                 <div class="sort-list-item">
                                     <div class="sort-area-tie">
-                                        <div class="sort-option-title" data-clicked="0">퍼즐</div>
+                                        <div class="sort-option-title" data-clicked="0" data-id="옵션-퍼즐">퍼즐</div>
                                         <div class="check-circle">
                                             <div class="checked-circle" data-value="0"></div>
                                         </div>
@@ -2246,7 +2289,7 @@
                             <div class="sort-list-item-area hide-tag hide-op">
                                 <div class="sort-list-item">
                                     <div class="sort-area-tie">
-                                        <div class="sort-option-title" data-clicked="0">유니크</div>
+                                        <div class="sort-option-title" data-clicked="0" data-id="옵션-유니크">유니크</div>
                                         <div class="check-circle">
                                             <div class="checked-circle" data-value="0"></div>
                                         </div>
@@ -2271,13 +2314,13 @@
                         <!-- 정렬 옵션 리스트 -->
                         <div class="price-sort-list-item-container hide-op">
                             <div class="price-box-container">
-                                <div class="price-box platform-btn-area" data-value="0">
+                                <div class="price-box platform-btn-area" data-value="0" data-id="옵션-ps4">
                                     <div class="platform-btn-img"><img src="img/option-plaform-ps4.png" alt=""></div>
                                     <div class="platform-btn-text">PS4</div>
                                 </div>
                             </div>
                             <div class="price-box-container">
-                                <div class="price-box platform-btn-area" data-value="0">
+                                <div class="price-box platform-btn-area" data-value="0" data-id="옵션-ps5">
                                     <div class="platform-btn-img"><img src="img/option-plaform-ps5.png" alt=""></div>
                                     <div class="platform-btn-text">PS5</div>
                                 </div>
@@ -2301,7 +2344,7 @@
                             <div class="sort-list-item-area">
                                 <div class="sort-list-item">
                                     <div class="sort-area-tie">
-                                        <div class="sort-option-title" data-clicked="0">신규 출시</div>
+                                        <div class="sort-option-title" data-clicked="0" data-id="옵션-신규출시">신규 출시</div>
                                         <div class="check-circle">
                                             <div class="checked-circle" data-value="0"></div>
                                         </div>
@@ -2313,7 +2356,7 @@
                             <div class="sort-list-item-area">
                                 <div class="sort-list-item">
                                     <div class="sort-area-tie">
-                                        <div class="sort-option-title" data-clicked="0">곧 제공 예정</div>
+                                        <div class="sort-option-title" data-clicked="0" data-id="옵션-곧제공예정">곧 제공 예정</div>
                                         <div class="check-circle">
                                             <div class="checked-circle" data-value="0"></div>
                                         </div>
@@ -2340,13 +2383,13 @@
                         <!-- 정렬 옵션 리스트 -->
                         <div class="price-sort-list-item-container hide-op">
                             <div class="price-box-container">
-                                <div class="price-box" data-value="0">VR 없음</div>
+                                <div class="price-box" data-value="0" data-id="옵션-vr없음">VR 없음</div>
                             </div>
                             <div class="price-box-container">
-                                <div class="price-box" data-value="0">VR 필수</div>
+                                <div class="price-box" data-value="0" data-id="옵션-vr필수">VR 필수</div>
                             </div>
                             <div class="price-box-container">
-                                <div class="price-box" data-value="0">VR 선택 사항</div>
+                                <div class="price-box" data-value="0" data-id="옵션-vr선택사항">VR 선택 사항</div>
                             </div>
                         </div>
 
@@ -2705,6 +2748,10 @@
 
             // 정렬 옵션 선택
             $('.sort-list-item-area').click(function(){
+                let op_name = $(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text();
+                let op_id = $(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').data('id');
+
+
                 //부모 서클 테두리
                 $('.check-circle').removeClass('p-circle-clicked-e');
                 $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').addClass('p-circle-clicked-e');
@@ -2745,6 +2792,11 @@
                         $(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').attr('data-clicked', 0);
                         // 호버 인식용 data 적용
                         $('.checked-circle').data('value', 0);
+
+
+                        //상단 옵션 박스 리스트 제거
+                        $('#'+op_id).remove();
+
                     } else { // 닫힌상태에서 선택할 때
                         // 선택 검은점 추가
                         $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').addClass('background-color-display');
@@ -2752,6 +2804,12 @@
                         $(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').attr('data-clicked', 1);
                         // 호버 인식용 data 적용
                         $(this).children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').data('value', 1);
+
+                        //상단 옵션 박스 리스트 생성
+                        let dives = $('<div class="top-opbox">'+op_name+'<span class="op-x fas fa-times"></span>'+'</div>');
+                        dives.attr('id', op_id);
+                        $('.option-list-view-area').append(dives);
+                        
                     }
 
                     // 선택된 숫자 세고 원의 숫자 바꿔주는 두줄임
@@ -2783,15 +2841,16 @@
 
 
             //가격 옵션 선택
-            //let option_count = 0; // 옵션 선택된 갯수
             $('.price-box-container').click(function(){
+                //선택 시 상단 옵션 리스트에 추가해주기 위한 텍스트 추출 변수
+                let op_name = $(this).children('.price-box').text();
+                let op_id = $(this).children('.price-box').data('id')
                 
                 $('.price-box-container').removeClass('price-option-clicked-border-color');
                 $('.price-box').removeClass('price-option-clicked-color2');
 
                 let cliked_btn = $(this).children('.price-box').attr('data-value'); // 1일 때 클릭
                 if(cliked_btn == 0) {
-                    //option_count++;
 
                     $(this).children('.price-box').attr('data-value', 1);
                     $(this).children('.price-box').removeClass('price-option-clicked-color2');
@@ -2800,8 +2859,15 @@
                     
 
                     $(this).addClass('price-option-clicked-border-color');
+
+
+
+                    // 제목 하단 선택옵션 리스트 추가
+                    let divs = $('<div class="top-opbox">'+op_name+'<span class="op-x fas fa-times"></span>'+'</div>');
+                    divs.attr('id', op_id);
+                    $('.option-list-view-area').append(divs);
+
                 } else {
-                    //option_count--;
 
                     $(this).children('.price-box').removeClass('price-option-clicked-color');
                     $(this).children('.price-box').addClass('price-option-clicked-color2');
@@ -2809,16 +2875,13 @@
                     $(this).children('.price-box').attr('data-value', 0);
 
                     $(this).addClass('price-option-clicked-border-color');
+
+                    // 제목 하단 선택옵션 리스트 제거
+                    $('#'+op_id).remove();
+                    
+
                 }
                 
-                //option-count-circle 카운트 해주기
-                // if($('.option-count-circle').text() == 0) {
-                //     $('.option-count-circle').addClass('hide-op');
-                // } else {
-                //     $('.option-count-circle').removeClass('hide-op');
-                // }
-                //alert($('.bbbb').children('.price-box-container').children('.price-box').data('value'));
-
                 // 선택된 옵션의 갯수를 측정해주는 변수
                 let option_count = $(this).parent('.price-sort-list-item-container').children('.price-box-container').children('.price-box[data-value="1"]').length;
 
@@ -2851,8 +2914,40 @@
                 $('.hide-tag').removeClass('hide-op');
             });
 
+            //top-opbox 선택 시 옵션 선택 취소
+            $('.top-opbox').click(function(){
+                alert('sdfdsf');
+            });
 
-            
+            //필터 지우기
+            $('.remove-op').click(function(){
+               // 상단 옵션 박스 제거
+                $('.top-opbox').remove();
+
+               // 일반 리스트 초기화  
+                $('.price-box-container').removeClass('price-option-clicked-border-color');
+                $('.price-box').removeClass('price-option-clicked-color2');
+                $('.price-box-container').children('.price-box').removeClass('price-option-clicked-color');
+                $('.price-box-container').children('.price-box').addClass('price-option-clicked-color2');
+                $('.price-box-container').children('.price-box').removeClass('price-box-double-hover');
+                $('.price-box-container').children('.price-box').attr('data-value', 0);
+
+               // 카운트 원 초기화
+                $('.price-box-container').addClass('price-option-clicked-border-color');
+                $('.option-count-circle').addClass('hide-op');
+
+               // 장르, 발매일 초기화
+                $('.check-circle').removeClass('p-circle-clicked-e');
+                //자식 서클 테두리, 배경색
+                $('.checked-circle').removeClass('c-circle-clicked-e');
+                //배경
+                $('.sort-list-item').removeClass('sort-area-clicked-backc');
+                $('.price-sort-list-item-container').children('.sort-list-item-area').children('.sort-list-item').children('.sort-area-tie').children('.check-circle').children('.checked-circle').removeClass('background-color-display');
+                // 닫힘 처리를 위해 data-clicked 를 0으로 초기화
+                $('.price-sort-list-item-container').children('.sort-list-item-area').children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').attr('data-clicked', 0);
+                // 호버 인식용 data 적용
+                $('.checked-circle').data('value', 0);
+            });
 
         </script>
     </body>

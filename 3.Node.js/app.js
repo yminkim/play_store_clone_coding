@@ -26,3 +26,19 @@ app.get('/playstation_Store_collections',function(req,res){
 app.get('/playstation_Store_browse',function(req,res){
     res.render('ps_browse.html');
 });
+
+app.get('/playstation_Store_latest',function(req,res){
+    res.render('play_store_latest.html');
+});
+
+app.get('/playstation_Store_deals',function(req,res){
+    res.render('play_store_deals.html');
+});
+
+app.get('/playstation_Store_ps5',function(req,res){
+    res.render('play_store_ps5.html');
+});
+
+app.get('/playstation_Store_subscriptions',function(req,res){
+    res.render('play_store_subscriptions.html');
+});

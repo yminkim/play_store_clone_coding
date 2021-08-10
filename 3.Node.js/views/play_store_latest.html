@@ -705,6 +705,7 @@
             }
 
             .category-list-name-v2-display-menu {
+                min-width: 97px;
                 padding: 6px;
                 display: none;
                 align-items: center;
@@ -744,7 +745,7 @@
             .category-list-area-v2 ul {
                 width: 140px;
                 list-style: none;
-                box-shadow: 0px 5px 5px 0px rgb(204, 204, 204);
+                box-shadow: 0px 5px 5px 0px rgb(75, 75, 75);
             }
 
             .category-list-area-v2 ul li a {
@@ -866,12 +867,14 @@
                     display: none;
                 }
 
+                .main-post {
+                    width: 48% !important;
+                }
+
             }
 
             @media screen and (max-width: 700px) {
-                .header-menu-area {
-                    height: 60px;
-                }
+                
 
                 .menu-list-container {
                     display: none;
@@ -926,13 +929,11 @@
 
             .banner-img-area {
                 /* height: 670px; */
+                z-index: -1;
                 overflow: hidden;
                 position: relative;
             }
 
-            .banner-img-area img {
-                width: 100%;
-            }
 
             .banner-img-area::after {
                 content: "";
@@ -1039,7 +1040,7 @@
             }
 
             .main-post {
-                margin: 40px 15px 0 15px;
+                margin: 1%;
                 width: 23%;
                 
                 padding: 2px;
@@ -1298,6 +1299,20 @@
 
             .more-find-c {
                 margin-bottom: 100px;
+            }
+
+
+            /* 배너 */
+            .banner-container {
+                margin: 0 auto;
+                display: flex;
+            }
+
+            .banner-area {
+                width: 200px;
+                height: 200px;
+                background-color: aqua;
+                margin: 0 20px;
             }
 
         </style>
@@ -1890,6 +1905,23 @@
 
             
         </div>
+
+
+        <div class="main-banner-container">
+            <div>
+                <img src="img/mainpage-banner_test.png" alt="">
+
+                <div class="banner-container">
+                    <div class="banner-area"></div>
+                    <div class="banner-area"></div>
+                    <div class="banner-area"></div>
+                    <div class="banner-area"></div>
+                    <div class="banner-area"></div>
+                    <div class="banner-area"></div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="main-banner-container">
             <div class="banner-img-area">

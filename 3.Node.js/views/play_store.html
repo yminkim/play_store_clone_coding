@@ -107,6 +107,7 @@
             }
 
             .header-menu-area {
+                justify-content: space-between;
                 display: flex;
                 padding: 0 20px;
                 height: 40px;
@@ -249,7 +250,7 @@
             }
 
             .banner-img-area {
-                 
+                z-index: -1;
                 overflow: hidden;
                 position: relative;
             }
@@ -340,7 +341,7 @@
             /* 메인 */
             .main-post-top {
                 display: flex;
-                justify-content: space-between;
+                justify-content: center;
                 flex-wrap: wrap;
             }
 
@@ -352,7 +353,7 @@
             .main-post {
                 margin-top: 40px;
                 width: 23%;
-                
+                margin: 1%;
                 padding: 2px;
                 border: 2px solid #fff;
             }
@@ -368,7 +369,7 @@
             }
 
             .hide-op {
-                display: none;
+                display: none !important;
             }
 
             .main-show-btn {
@@ -987,13 +988,241 @@
                 box-shadow: inset 0 0 5px 2px rgb(59, 150, 235);
             }
 
-            @media screen and (max-width: 1365px) {
+            /* @media screen and (max-width: 1365px) {
                 .main-post {
                     width: 31.3333%;
                 }
+            } */
+
+            /*반응형 작업 시작*/
+            .media-list-menu {
+                margin-left: 35px;
             }
 
+            .store-category-menu-container {
+                align-items: center;
+            }
+
+            .store-category-menu-container div .fas {
+                font-size: 12px;
+                margin-left: 20px;
+            }
+
+            .category-list-name-v2-display-menu {
+                min-width: 97px;
+                padding: 6px;
+                display: none;
+                align-items: center;
+                color: rgb(112, 112, 112);
+                border: 1px solid rgba(0, 106, 206, 0);
+                cursor: pointer;
+                position: relative;
+            }
+
+            .category-list-name-v2-display-menu div {
+                display: flex;
+            }
+
+            .around-veiw {
+                font-size: 13px;
+            }
+
+            .around-veiw-h:hover {
+                color: rgb(0, 106, 206);
+            }
+
+            .around-veiw-checked-b {
+                border: 1px solid rgb(0, 106, 206);
+            }
+
+            .arrow-kaiten2 {
+                transform: rotate(180deg);
+            }
             
+
+            .category-list-area-v2 {
+                position: absolute;
+                top: 31px;
+                left: 0px;
+            }
+
+            .category-list-area-v2 ul {
+                width: 140px;
+                list-style: none;
+                box-shadow: 0px 5px 5px 0px rgb(75, 75, 75);
+            }
+
+            .category-list-area-v2 ul li a {
+                text-decoration: none;
+                
+                color: rgb(112, 112, 112);
+                font-size: 14px;
+            }
+
+            .category-list-area-v2 ul li a:hover {
+                
+                color: #fff;
+            }
+            
+
+            .category-list-name-v2 {
+                background-color: rgb(255, 255, 255);
+                padding: 20px;
+            }
+
+            .category-list-name-v2:hover {
+                background-color: rgb(0, 106, 206);
+            }
+
+            .hamburger {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                display: none;
+            }
+            
+            .hamburger span {
+                height: 2px;
+                width: 20px;
+                background-color: gray;
+                margin: 2px 0;
+            }
+
+            .slide-menu {
+                width: 0vw;
+                height: 100vh;
+                background-color: #fff;
+                position: absolute;
+                z-index: 3;
+                display: none;
+            }
+
+            .slide-menu-width {
+                width: 100vw;
+                transition: 0.5s;
+            }
+
+            @media screen and (max-width: 1700px) { /* 원래는 1920 */
+                .option-container {
+                    display: none;
+                }
+
+                .post-container {
+                    width: 100%;
+                }
+            }
+
+            @media screen and (max-width: 1600px) {
+                .menu-name {
+                    font-size: 13px;
+                }
+
+                .menu-list li {
+                    margin-right: 25px;
+                }
+
+                .main-post {
+                    width: 31.3333% !important;
+                }
+            }
+
+            @media screen and (max-width: 1300px) {
+                .menu-name {
+                    font-size: 11px;
+                }
+
+                .menu-list li {
+                    margin-right: 10px;
+                }
+
+                .category-list-area ul li {
+                    font-size: 13px;
+                }
+
+                .logo-img-area img {
+                    width: 150px;
+                }
+
+                .post-container {
+                    width: 80%;
+                }
+
+                
+            }
+
+            @media screen and (max-width: 930px) {
+                
+
+                .category-list-name-v2-display-menu {
+                    display: flex;
+                    
+                }
+
+                .post-container {
+                    width: 50%;
+                }
+
+                .sc-item-container {
+                    width: 18%;
+                }
+
+                .category-list-area {
+                    display: none;
+                }
+
+                .main-post {
+                    width: 48% !important;
+                }
+
+            }
+
+            @media screen and (max-width: 700px) {
+                
+
+                .menu-list-container {
+                    display: none;
+                }
+
+                .search-box {
+                    display: none;
+                }
+
+                .post-container {
+                    width: 100vw;
+                    justify-content: center;
+                }
+
+                .header-login-box {
+                    margin-right: 0px;
+                }
+
+                .sc-item-container {
+                    width: 40%;
+                }
+
+                .header-logo {
+                    display: none;
+                }
+
+                .home-logo {
+                    display: flex;
+                    align-items: center;
+                    transform: scale(1.5);
+                }
+
+                .header-menu-right {
+                    margin-left: unset;
+                }
+
+                .hamburger {
+                    display: flex;
+                }
+
+                .slide-menu {
+                    display: flex;
+                }
+            }
         
 
  
@@ -1010,6 +1239,11 @@
            
             <div class="header-menu">
                 <div class="header-menu-area">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                     <a href="" class="home-logo fab fa-playstation"></a>
                     <div class="menu-list-container">
                         <ul class="menu-list">
@@ -1054,39 +1288,41 @@
                         </div>
                     </div>
 
-                    <div class="search-box-clicked">
-                        <div class="dimmed hide-op2"></div>
-                        <div class="search-box-container2">
-                            <div class="search-box-container search-focus-out">
-                                <div class="dropdown">
-                                    <div class="dd-main list-main ssn-hover">
-                                        <div class="search-site-name">PlayStation Store</div>
+                    
+
+                </div>
+
+                <div class="search-box-clicked">
+                    <div class="dimmed hide-op2"></div>
+                    <div class="search-box-container2">
+                        <div class="search-box-container search-focus-out">
+                            <div class="dropdown">
+                                <div class="dd-main list-main ssn-hover">
+                                    <div class="search-site-name">PlayStation Store</div>
+                                    <div class="fas fa-chevron-down"></div>
+                                </div>
+
+                                <div class="drop-list-menu hide-op">
+                                    <div class="dd-main dd-menu n-ssn-hover">
+                                        <div class="search-site-name ssn-1">사이트</div>
                                         <div class="fas fa-chevron-down"></div>
                                     </div>
-
-                                    <div class="drop-list-menu hide-op">
-                                        <div class="dd-main dd-menu n-ssn-hover">
-                                            <div class="search-site-name ssn-1">사이트</div>
-                                            <div class="fas fa-chevron-down"></div>
-                                        </div>
-                                        <div class="dd-main dd-menu ssn-hover">
-                                            <div class="search-site-name">PlayStation.com</div>
-                                        </div>
-                                        <div class="dd-main dd-menu dd-clicked-effect">
-                                            <div class="search-site-name">PlayStation Store</div>
-                                        </div>
+                                    <div class="dd-main dd-menu ssn-hover">
+                                        <div class="search-site-name">PlayStation.com</div>
+                                    </div>
+                                    <div class="dd-main dd-menu dd-clicked-effect">
+                                        <div class="search-site-name">PlayStation Store</div>
                                     </div>
                                 </div>
-                                
-                                <div class="search-input-box">
-                                    <input type="text" placeholder="PlayStation Store 검색">
-                                    <div class="x-icon fas fa-times"></div>
-                                    <div class="search-icon-box fas fa-search"></div>
-                                </div>
+                            </div>
+                            
+                            <div class="search-input-box">
+                                <input type="text" placeholder="PlayStation Store 검색">
+                                <div class="x-icon fas fa-times"></div>
+                                <div class="search-icon-box fas fa-search"></div>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 
                 <!-- 게임 -->
@@ -1532,6 +1768,7 @@
              
             </div>
 
+            <div class="slide-menu"></div>
 
             <div class="store-category-menu-container">
                 <div class="logo-img-area">
@@ -1550,6 +1787,24 @@
                     </ul>
                 </div>
 
+                <div class="category-list-name-v2-display-menu around-veiw-h">
+                    <div>
+                        <div class="around-veiw">둘러보기</div>
+                        <div class="fas fa-chevron-down"></div>
+                    </div>
+
+                    <div class="category-list-area-v2 hide-op">
+                        <ul>
+                            <li><a href=""><div class="category-list-name-v2">최신 콘텐츠</div></a></li>
+                            <li><a href=""><div class="category-list-name-v2">카테고리</div></a></li>
+                            <li><a href=""><div class="category-list-name-v2">프로모션</div></a></li>
+                            <li><a href=""><div class="category-list-name-v2">PS5</div></a></li>
+                            <li><a href=""><div class="category-list-name-v2">구독 서비스</div></a></li>
+                            <li><a href=""><div class="category-list-name-v2">둘러보기</div></a></li>
+                        </ul>
+                    </div>
+
+                </div>
                 
                 <div class="logo-img-area"></div>
 
@@ -2258,7 +2513,7 @@
                         </a>
                     </div>
 
-                    <div class="f-main-post"></div>
+                    
 
                     <div class="main-post">
                         <a href="">
@@ -2272,7 +2527,7 @@
                         </a>
                     </div>
 
-                    <div class="f-main-post"></div>
+                   
                 </div>
 
             </div>
@@ -2524,6 +2779,35 @@
                     clickedVal = 1;
                 }
                 
+            });
+
+            /*반응형 작업 시작*/
+            let openMenu = 0;
+            $('.category-list-name-v2-display-menu').click(function(){
+                if(openMenu == 0) {
+                    $('.category-list-name-v2-display-menu').removeClass('around-veiw-h');
+                    $('.category-list-name-v2-display-menu').addClass('around-veiw-checked-b');
+                    $('.category-list-area-v2').removeClass('hide-op');
+                    openMenu = 1;
+                } else {
+                    $('.category-list-name-v2-display-menu').addClass('around-veiw-h');
+                    $('.category-list-name-v2-display-menu').removeClass('around-veiw-checked-b');
+                    $('.category-list-area-v2').addClass('hide-op');
+                    openMenu = 0;
+                }
+            });
+
+
+
+            let openSlideMenu = 0;
+            $('.hamburger').click(function(){
+                if(openSlideMenu == 0) {
+                    $('.slide-menu').addClass('slide-menu-width');
+                    openSlideMenu = 1;
+                } else {
+                    $('.slide-menu').removeClass('slide-menu-width');
+                    openSlideMenu = 0;
+                }
             });
 
             

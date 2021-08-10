@@ -336,7 +336,7 @@
                 top: 40px;
                 width: 100%;
                 background-color: #fff;
-                box-shadow: 0 10px 10px 0px rgb(51, 51, 51);
+                box-shadow: 0 10px 10px 0px rgb(75, 75, 75);
                 z-index: 1;
                 overflow: hidden;
             }
@@ -705,6 +705,7 @@
             }
 
             .category-list-name-v2-display-menu {
+                min-width: 97px;
                 padding: 6px;
                 display: none;
                 align-items: center;
@@ -862,12 +863,14 @@
                     display: none;
                 }
 
+                .main-post {
+                    width: 48% !important;
+                }
+
             }
 
             @media screen and (max-width: 700px) {
-                .header-menu-area {
-                    height: 60px;
-                }
+               
 
                 .menu-list-container {
                     display: none;
@@ -921,13 +924,11 @@
             }
 
             .banner-img-area { 
+                z-index: -1;
                 overflow: hidden;
                 position: relative;
             }
 
-            .banner-img-area img {
-                width: 100%;
-            }
 
             .banner-img-area::after {
                 content: "";

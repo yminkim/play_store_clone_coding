@@ -807,6 +807,10 @@
                 .post-container {
                     width: 100%;
                 }
+
+                .banner-container {
+                    width: 1320px !important;
+                }
             }
 
             @media screen and (max-width: 1600px) {
@@ -823,7 +827,7 @@
                 }
             }
 
-            @media screen and (max-width: 1300px) {
+            @media screen and (max-width: 1350px) {
                 .menu-name {
                     font-size: 11px;
                 }
@@ -842,6 +846,10 @@
 
                 .post-container {
                     width: 80%;
+                }
+
+                .banner-container {
+                    width: 886px !important;
                 }
 
                 
@@ -870,6 +878,13 @@
                 .main-post {
                     width: 48% !important;
                 }
+
+
+                .banner-container {
+                    width: 620px !important;
+                }
+
+                
 
             }
 
@@ -918,11 +933,15 @@
                 .slide-menu {
                     display: flex;
                 }
+
+                .banner-container {
+                    width: 1700px !important;
+                }
             }
 
             /* 배너 */
             .main-banner-container {
-                margin: 80px 0;
+                margin: 35px 0;
                 
                 position: relative;
             }
@@ -1304,15 +1323,98 @@
 
             /* 배너 */
             .banner-container {
+                width: 1600px;
                 margin: 0 auto;
+                margin-top: 30px;
                 display: flex;
             }
 
             .banner-area {
-                width: 200px;
-                height: 200px;
-                background-color: aqua;
-                margin: 0 20px;
+                width: 16.1%;
+                margin: 0 0.2%;
+                padding: 4px;
+                border-radius: 15px;
+                border: 3px solid rgba(255, 255, 255, 0);
+                cursor: pointer;
+                transition: all 0.5s;
+            }
+
+            .banner-area-clicked {
+                border: 3px solid rgb(26, 116, 201);
+                transition: all 0.1s;
+            }
+
+            .banner-area:hover {
+                transform: translateY(-15px);
+            }
+
+            .banner-area img {
+                
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                opacity: 0.7;
+            }
+
+            .banner-area img:hover {
+                box-shadow: 0px 20px 40px -15px #8b8b8b;
+                transition: all 0.3s;
+            }
+
+            .img-opacity {
+                opacity: 0.5 !important;
+                transition: all 0.3s;
+            }
+
+            .on-img-opacity {
+                opacity: 1 !important;
+            }
+
+        
+            /* .move-banner-container img {
+                width: 100%;
+            }  */
+            
+
+            /* .back-img-area {
+                width: 1900px;
+                height: 700px;
+            } */
+
+            #bg-i {
+                width: 100vw;
+                height: 700px;
+
+            }
+
+             .background-img-1 {
+                background-image: url('img/banners-1.png');
+                transition: all 0.5s linear;
+            }
+
+            .background-img-2 {
+                background-image: url('img/banners-2.png');
+                transition: all 0.5s linear;
+            }
+
+            .background-img-3 {
+                background-image: url('img/banners-3.png');
+                transition: all 0.5s linear;
+            }
+
+            .background-img-4 {
+                background-image: url('img/banners-4.png');
+                transition: all 0.5s linear;
+            }
+
+            .background-img-5 {
+                background-image: url('img/banners-5.png');
+                transition: all 0.5s linear;
+            }
+
+            .background-img-6 {
+                background-image: url('img/banners-6.png');
+                transition: all 0.5s linear;
             }
 
         </style>
@@ -1907,19 +2009,36 @@
         </div>
 
 
-        <div class="main-banner-container">
+        <div class="move-banner-container">
             <div>
-                <img src="img/mainpage-banner_test.png" alt="">
+                <!-- <img src="img/empty-img.png" alt=""> -->
+                
+                <div id="bg-i" class="back-img-area background-img-1"></div>
+                
+                
+                
 
                 <div class="banner-container">
-                    <div class="banner-area"></div>
-                    <div class="banner-area"></div>
-                    <div class="banner-area"></div>
-                    <div class="banner-area"></div>
-                    <div class="banner-area"></div>
-                    <div class="banner-area"></div>
+                    <div class="banner-area banner-area-1" data-value="1">
+                        <img src="img/subbanners-1.png" alt="">
+                    </div>
+                    <div class="banner-area banner-area-2" data-value="2">
+                        <img src="img/subbanners-2.png" alt="">
+                    </div>
+                    <div class="banner-area banner-area-3" data-value="3">
+                        <img src="img/subbanners-3.png" alt="">
+                    </div>
+                    <div class="banner-area banner-area-4" data-value="4">
+                        <img src="img/subbanners-4.png" alt="">
+                    </div>
+                    <div class="banner-area banner-area-5" data-value="5">
+                        <img src="img/subbanners-5.png" alt="">
+                    </div>
+                    <div class="banner-area banner-area-6" data-value="6">
+                        <img src="img/subbanners-6.png" alt="">
+                    </div>
                 </div>
-            </div>
+            
         </div>
 
 
@@ -2782,6 +2901,88 @@
                     openSlideMenu = 0;
                 }
             });
+
+
+            //상단 이동 배너
+            $('.banner-area').hover(function(){
+                $('.banner-area img').addClass('img-opacity');
+                $(this).children('img').removeClass('img-opacity');
+                $(this).children('img').addClass('on-img-opacity');
+            }, function(){
+                $('.banner-area img').removeClass('img-opacity');
+                $(this).children('img').removeClass('on-img-opacity');
+            });
+
+           
+
+            // 배너 선택
+             // 하단 배너 클릭 시 배너 이미지 변경 이벤트
+            let banner_value = 1; // 슬라이드 자동 넘김용 위치 표시 변수
+            $('.banner-area').click(function(){
+                $('.banner-area').removeClass('banner-area-clicked');
+                $(this).addClass('banner-area-clicked');
+
+
+                let banner_num = $(this).data('value');
+                banner_value = banner_num;
+
+                // 아래 바꾸려면 css 랑 html 내용도 주석 바꿔줘야함.
+                //js에서 변경
+                // let src = "img/banners-"+banner_value+".png";
+                // $('.move-banner-container').children('img').attr('src', src);
+
+                //css에서 변경
+                $('#bg-i').removeClass();
+                $('#bg-i').addClass('back-img-area');
+                $('.back-img-area').addClass('background-img-'+banner_num);
+
+             
+            });
+
+
+            let stop_val = true;
+            let banner_auto_move = null;
+
+            function bannerAutoMove() {
+                console.log(banner_value);
+                    //하단 배너 하이라이트
+
+                    //클릭 시 생기는 볼더처리
+                    $('.banner-area').removeClass('banner-area-clicked');
+                    $('.banner-area-'+banner_value).addClass('banner-area-clicked');
+                    
+                    // 선택된 영역 opacity 1로
+                    $('.banner-area').children('img').removeClass('on-img-opacity');
+                    $('.banner-area-'+banner_value).children('img').addClass('on-img-opacity');
+
+                    //큰 배너 이미지 변경
+                    $('#bg-i').removeClass();
+                    $('#bg-i').addClass('back-img-area');
+                    $('.back-img-area').addClass('background-img-'+banner_value);
+                    
+                    
+                    banner_value++;
+                    if(banner_value == 7)
+                        banner_value = 1;
+            }
+
+
+            let bannerAutoMoveInterval = bannerAutoMove();
+
+            // 배너 자동으로 3초마다 넘기기
+            bannerAutoMoveInterval = setInterval(bannerAutoMove, 3000);
+
+            //배너 호버 시 setInterval의 동작이 중단
+            $('.banner-area').hover(function() {
+                clearInterval(bannerAutoMoveInterval);
+                banner_value--;
+            }, function() {
+                // unhover 시 function 실행
+                bannerAutoMoveInterval = bannerAutoMove();
+                // unhover 시 3초후 function
+                bannerAutoMoveInterval = setInterval(bannerAutoMove, 3000);
+            });
+ 
         </script>
     </body>
 

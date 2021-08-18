@@ -1,0 +1,2909 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>최신 콘텐츠 | 공식 PlayStation™Store</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+        <link rel="shortcut icon" href="./img/pss_ico.ico.png">
+        <meta charset="utf-8">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "맑은고딕";
+            }
+            
+            /* 헤더 */
+            .header-logo {
+                display: flex;
+                width: 100%;
+                height: 35px;   
+                background-color: black;
+            }
+
+            .header-logo-img {
+                margin-left: auto;
+                height: 100%;
+            }
+
+            .header-logo-img img {
+                width: 85px;
+                vertical-align: -webkit-baseline-middle;
+            }
+
+            .menu-list li {
+                list-style: none;
+                display: flex;
+                float: left;
+                cursor: pointer;
+            }
+
+            .home-logo {
+                font-size: 25px;
+                color: rgb(4, 113, 214);
+                text-decoration: none;
+                margin-top: 5px;
+            }
+
+            .header-menu {
+                z-index: 4;
+                width: 100%;
+                background-color: #fff;
+                position: relative;
+            }
+
+            /* .lili:checked~.new-content{
+                top: 40px;
+                background-color: rgb(54, 54, 54);
+                transition: 0.3s;
+            } */
+
+            
+            /* .new-content {
+                position: absolute;
+                top: -540px;
+                width: 100vmax;
+                height: 500px;
+                background-color: rgb(4, 113, 214);
+             } */
+
+           
+
+            .header-menu-right {
+            margin-left: auto;
+                display: flex;
+            }
+
+            .header-login-box {
+                display: flex;
+                align-items: center;
+                text-align: center;
+                margin-right: 20px;
+            }
+            
+            .header-login-box a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: rgb(54, 54, 54);
+                color: #fff;
+                border-radius: 20px;
+                font-size: 16px;
+                text-decoration: none;
+                padding: 1px;
+                border: 1px solid rgba(141, 141, 141, 0);
+                background-clip: content-box;
+                width: 75px;
+                height: 28px;
+
+            }
+
+            .header-login-box a:hover {
+                border: 1px solid rgb(141, 141, 141);
+                background-clip: rgb(141, 141, 141);
+            }
+
+            .header-menu-area {
+                /* 반응형 변경점 space-between */
+                justify-content: space-between;
+                display: flex;
+                padding: 0 20px;
+                height: 40px;
+            }
+
+            .menu-list-container {
+                margin-left: 35px;
+                margin-top: 7px;
+                position: relative;
+            }
+
+
+            
+
+            .menu-list li {
+                margin-right: 45px;
+                font-size: 15px;
+                color: gray;   
+            }
+
+            .menu-list li .fas {
+                font-size: 11px;
+                margin-top: 7px;
+            }
+
+            .arrow-kaiten {
+                transform: rotate(180deg);
+                transition: 0.5s;
+            }
+
+            .menu-name {
+                margin-right: 5px;
+            }
+
+            .search-box {
+                margin: auto;
+                display: flex;
+                align-items: center;
+                width: 110px;
+                height: 34px;
+                padding: 0px 15px 0 5px;
+                border: 1px solid rgb(230, 230, 230);
+                color: rgb(54, 54, 54);
+                
+            }
+
+            .search-box:hover {
+                border: 1px solid rgb(68, 68, 68);
+            }
+
+            .search-box .fas {
+                margin-left: auto;
+            }
+
+            /* 카테고리 메뉴 */
+            .store-category-menu-container {
+                z-index: 3;
+                width: 100%;
+                background-color: #fff;
+                display: flex;
+                height: 65px;
+            }
+
+
+            .logo-img-area {
+                display: flex;
+                align-items: center;
+                width: 170px;
+                margin-left: 20px;
+            }
+
+            .logo-img-area img {
+                width: 170px;
+            }
+
+            .logo-img-area a {
+                display: flex;
+                align-items: center;
+            }
+
+            .category-list-area {
+                margin: 0 auto;
+            }
+
+            .category-list-area ul li {
+                list-style: none;
+                float: left;
+                font-size: 15px;
+            }
+
+            .category-list-area ul li a {
+                text-decoration: none;
+                
+            }
+
+            .category-list-name {
+                height: 65px;
+                line-height: 65px;
+                padding: 0 15px;
+                color: rgb(54, 54, 54);
+                font-weight: 400;
+            }
+
+
+            .category-list-name:hover, .ml-h:hover {
+                color: rgb(4, 113, 214);
+            }
+
+            .menu-list-clicked {
+                color: rgb(4, 113, 214);
+            }
+
+            .fixed-top-menu-m40 {
+                position: sticky;
+                top: -40px;
+                transition: all 0.5s;
+            }
+
+            .fixed-top-menu-0 {
+                position: sticky;
+                top: 0px;
+                transition: all 0.5s;
+            }
+
+            .fixed-top-menu-p40 {
+                position: sticky;
+                top: 40px;
+            }
+
+            .category-category {
+                border-bottom: 4px solid rgb(4, 113, 214);
+                color: rgb(4, 113, 214);
+            }
+
+            .hide-op {
+                display: none !important;
+            }
+
+            .blue-border {
+                border: 2px solid rgb(0, 96, 185) !important;
+            }
+
+            /* footer */
+            .footer-container {
+                height: 585px;
+                background-color: rgb(0, 81, 156);
+                padding: 65px 0;
+                color: #fff;
+            }
+
+            .footer-area {
+                width: 1370px;
+                height: 100%;
+                margin: 0 auto;
+            }
+            
+            .footer-area {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .footer-top-area, .region-area {
+                display: flex;
+            }
+
+            .footer-top-area {
+                margin-bottom: 90px;
+            }
+
+            .footer-top-area .fab {
+                font-size: 54px;
+                margin-left: 15px;
+            }
+
+            .region-area {
+                margin-left: 95px;
+                align-items: center;
+            }
+
+            .region-area .fas {
+                font-size: 23px;
+                margin-right: 20px;
+            }
+
+            .region-korea {
+                font-size:  16px;
+            }
+
+            .side-menu {
+                display: flex;
+            }
+            
+            .side-menu ul li {
+                list-style: none;
+                margin-bottom: 10px;
+            }
+
+            .side-menu ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 18px;
+            }
+
+            .sd {
+                margin-right: 300px;
+            }
+
+            .last-footer {
+                margin-top: auto;
+                text-align: center;
+            }
+
+            .last-footer a {
+                text-decoration: none;
+                color: #fff;
+                font-size:  16px;
+            }
+
+            .sd ul li a:hover, .last-footer a:hover {
+                color: rgb(199, 199, 199);
+            }
+
+            .mn-back {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 40px;
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 10px 10px 0px rgb(51, 51, 51);
+                z-index: 1;
+                overflow: hidden;
+            }
+
+            .mn-back-position-un {
+                height: 0px;
+                transition: all 0.5s;
+                z-index: 2;
+            }
+
+            .mn-back-position-on {
+                height: 220px;
+                transition: all 0.5s;
+                z-index: 2;
+            }
+
+            .mn-back-position-on2 {
+                height: 160px;
+                transition: all 0.5s;
+                z-index: 2;
+            }
+
+            .mn-back-display-un {
+                visibility: hidden;
+                z-index: 2;
+            }
+
+            .mn-back-display-on {
+                height: 220px;
+                visibility: visible;
+                z-index: 3;
+            }
+
+            .mn-back-display-on2 {
+                height: 160px;
+                visibility: visible;
+                z-index: 3;
+            }
+
+
+
+            .mn-top {
+                width: 100%;
+                height: 160px;
+                border-bottom: 1px solid rgb(207, 207, 207);
+            }
+
+            .mn-body-area {
+                padding: 20px 0;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+            }
+
+            .mnp {
+                width: 200px;
+                height: 120px;
+                border-radius: 10px;
+                
+            }
+
+            .mnp:hover {
+                box-shadow: 0 0 5px 0 rgb(94, 94, 94);
+            }
+
+            .mnp-img-area {
+                height: 80px;  
+                line-height: 80px; 
+            }
+
+            .mnp-img-area img {
+                vertical-align: bottom;
+            }
+
+            .mnp-container {
+                margin: 0 10px;
+               
+            }
+
+            .mnp-container a {
+                text-decoration: none;
+            }
+
+            .mn-name {
+                color: rgb(51, 51, 51);
+                font-size: 15px;
+                font-weight: bold;
+            }
+
+            .mn-bottom {
+                width: 100%;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+
+            .circle {
+                width: 10px;
+                height: 10px;
+                border-radius: 15px;
+                background-color: rgb(0, 106, 206);
+            }
+
+            .mnb-container ul li {
+                margin: 0 20px;
+                list-style: none;
+            }
+
+            .mnb-container ul li a {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+            }
+
+            .mnb-container ul li {
+                float: left;
+            }
+            
+            .mnb-name {
+                font-size: 15px;
+            }
+
+            .circle-area {
+                margin-right: 10px;
+                margin-top: 2px;
+            }
+
+            .mnb-name {
+                color: rgb(51, 51, 51);
+            }
+
+            .mnb-name:hover {
+                color: rgb(0, 106, 206);
+            }
+
+
+
+
+            .search-box-container {
+                position: fixed;
+                top: 50px;
+                right: 10px;
+                display: flex;
+                height: 65px;
+                z-index: 651;
+            }
+            
+            .search-input-box {
+                display: flex;
+            }
+
+            .search-input-box input {
+                width: 380px;
+                height: 65px;
+                border: none;
+                border-left: 1px solid rgb(204, 204, 204);
+                padding: 0 27px 0 18px;
+                cursor: pointer;
+                font-size: 16px;
+                color: rgb(70, 70, 70);
+            }
+            .search-input-box input:focus {
+                outline: 2px solid rgba(0, 132, 255, 0.5);
+            }
+
+            .dd-main {
+                display: flex;
+                align-items: center;
+                width: 210px;
+                height: 65px;
+                font-weight: bold;
+                padding: 20px;
+                background-color: #fff;
+                text-align: center;
+                color: rgb(43, 43, 43);
+                cursor: pointer;
+            }
+
+            .search-icon-box {
+                width: 65px;
+                height: 65px;
+                background-color: rgb(0, 96, 185);
+                text-align: center;
+                line-height: 65px;
+                color: #fff;
+                font-size: 17px;
+                cursor: pointer;
+            }
+
+            .x-icon {
+                position: absolute;
+                right: 80px;
+                font-size: 15px;
+                top: 26px;
+                color: rgb(0, 96, 185);
+            }
+
+            .search-site-name {
+                font-size: 18px;
+            }
+
+            .dd-main .fas {
+                margin-left: auto;
+                font-size: 15px;
+                line-height: 30px;
+            }
+
+            .drop-list-menu {
+                position: absolute;
+                top: 0px;
+            }
+
+            .dimmed {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.808);
+                opacity: 1;
+                z-index: 4;
+            }
+
+            .hide-op2 {
+                visibility: hidden;
+                transition: all 0.3s;
+                opacity: 0;
+            }
+
+            
+
+            .search-box-clicked {
+                transition: all 0.3s
+            }
+
+            .ssn-1 {
+                color: gray;
+            }
+
+            .n-ssn-hover {
+                box-shadow: inset 0 0px 10px -7px black;
+            }
+
+            .ssn-hover:hover {
+                color: rgb(0, 96, 185);
+                
+            }
+
+            .list-main {
+                outline: 2px solid rgba(255, 0, 0, 0);
+            }
+
+            /*검색창 확대 축소용*/
+            .search-focus-in {
+                transform-origin: top right;
+                transform: scale( 1, 1 );
+                transition: all 0.3s;
+            }
+
+            .search-focus-out {
+                transform-origin: top right;
+                transform: scale( 0, 0 );
+                transition: all 0.3s;
+            }
+
+            .dd-clicked-effect {
+                background-color: rgb(0, 106, 206);
+                color: #fff;
+                box-shadow: inset 0 0 5px 2px rgb(59, 150, 235);
+            }
+
+            /* footer */
+            .footer-container {
+                height: 585px;
+                background-color: rgb(0, 81, 156);
+                padding: 65px 0;
+                color: #fff;
+            }
+
+            .footer-area {
+                width: 1370px;
+                height: 100%;
+                margin: 0 auto;
+            }
+            
+            .footer-area {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .footer-top-area, .region-area {
+                display: flex;
+            }
+
+            .footer-top-area {
+                margin-bottom: 90px;
+            }
+
+            .footer-top-area .fab {
+                font-size: 54px;
+                margin-left: 15px;
+            }
+
+            .region-area {
+                margin-left: 95px;
+                align-items: center;
+            }
+
+            .region-area .fas {
+                font-size: 23px;
+                margin-right: 20px;
+            }
+
+            .region-korea {
+                font-size:  16px;
+            }
+
+            .side-menu {
+                display: flex;
+            }
+            
+            .side-menu ul li {
+                list-style: none;
+                margin-bottom: 10px;
+            }
+
+            .side-menu ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 18px;
+            }
+
+            .sd {
+                margin-right: 300px;
+            }
+
+            .last-footer {
+                margin-top: auto;
+                text-align: center;
+            }
+
+            .last-footer a {
+                text-decoration: none;
+                color: #fff;
+                font-size:  16px;
+            }
+
+            .sd ul li a:hover, .last-footer a:hover {
+                color: rgb(199, 199, 199);
+            }
+
+            /*반응형 작업 시작*/
+            .media-list-menu {
+                margin-left: 35px;
+            }
+
+            .store-category-menu-container {
+                align-items: center;
+            }
+
+            .store-category-menu-container div .fas {
+                font-size: 12px;
+                margin-left: 20px;
+            }
+
+            .category-list-name-v2-display-menu {
+                padding: 6px;
+                display: none;
+                align-items: center;
+                color: rgb(112, 112, 112);
+                border: 1px solid rgba(0, 106, 206, 0);
+                cursor: pointer;
+                position: relative;
+            }
+
+            .category-list-name-v2-display-menu div {
+                display: flex;
+            }
+
+            .around-veiw {
+                font-size: 13px;
+            }
+
+            .around-veiw-h:hover {
+                color: rgb(0, 106, 206);
+            }
+
+            .around-veiw-checked-b {
+                border: 1px solid rgb(0, 106, 206);
+            }
+
+            .arrow-kaiten2 {
+                transform: rotate(180deg);
+            }
+            
+
+            .category-list-area-v2 {
+                position: absolute;
+                top: 31px;
+                left: 0px;
+            }
+
+            .category-list-area-v2 ul {
+                width: 140px;
+                list-style: none;
+                box-shadow: 0px 5px 5px 0px rgb(204, 204, 204);
+            }
+
+            .category-list-area-v2 ul li a {
+                text-decoration: none;
+                
+                color: rgb(112, 112, 112);
+                font-size: 14px;
+            }
+
+            .category-list-area-v2 ul li a:hover {
+                
+                color: #fff;
+            }
+            
+
+            .category-list-name-v2 {
+                background-color: rgb(255, 255, 255);
+                padding: 20px;
+            }
+
+            .category-list-name-v2:hover {
+                background-color: rgb(0, 106, 206);
+            }
+
+            .hamburger {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                display: none;
+            }
+            
+            .hamburger span {
+                height: 2px;
+                width: 20px;
+                background-color: gray;
+                margin: 2px 0;
+            }
+
+            .slide-menu {
+                width: 0vw;
+                height: 100vh;
+                background-color: #fff;
+                position: absolute;
+                z-index: 3;
+                display: none;
+            }
+
+            .slide-menu-width {
+                width: 100vw;
+                transition: 0.5s;
+            }
+
+            @media screen and (max-width: 1700px) { /* 원래는 1920 */
+                .option-container {
+                    display: none;
+                }
+
+                .post-container {
+                    width: 100%;
+                }
+            }
+
+            @media screen and (max-width: 1600px) {
+                .menu-name {
+                    font-size: 13px;
+                }
+
+                .menu-list li {
+                    margin-right: 25px;
+                }
+            }
+
+            @media screen and (max-width: 1300px) {
+                .menu-name {
+                    font-size: 11px;
+                }
+
+                .menu-list li {
+                    margin-right: 10px;
+                }
+
+                .category-list-area ul li {
+                    font-size: 13px;
+                }
+
+                .logo-img-area img {
+                    width: 150px;
+                }
+
+                .post-container {
+                    width: 80%;
+                }
+
+                
+            }
+
+            @media screen and (max-width: 930px) {
+                
+
+                .category-list-name-v2-display-menu {
+                    display: flex;
+                    
+                }
+
+                .post-container {
+                    width: 50%;
+                }
+
+                .sc-item-container {
+                    width: 18%;
+                }
+
+                .category-list-area {
+                    display: none;
+                }
+
+            }
+
+            @media screen and (max-width: 700px) {
+                .header-menu-area {
+                    height: 60px;
+                }
+
+                .menu-list-container {
+                    display: none;
+                }
+
+                .search-box {
+                    display: none;
+                }
+
+                .post-container {
+                    width: 100vw;
+                    justify-content: center;
+                }
+
+                .header-login-box {
+                    margin-right: 0px;
+                }
+
+                .sc-item-container {
+                    width: 40%;
+                }
+
+                .header-logo {
+                    display: none;
+                }
+
+                .home-logo {
+                    display: flex;
+                    align-items: center;
+                    transform: scale(1.5);
+                }
+
+                .header-menu-right {
+                    margin-left: unset;
+                }
+
+                .hamburger {
+                    display: flex;
+                }
+
+                .slide-menu {
+                    display: flex;
+                }
+            }
+
+            /* 배너 */
+            .main-banner-container {
+                margin: 80px 0;
+                
+                position: relative;
+            }
+
+            .banner-img-area {
+                height: 670px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .banner-img-area::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 88%, rgba(255, 255, 255, 1) 100%);
+                opacity: 0.99;
+            }
+
+            .banner-info-container {
+                width: 100%;
+                height: 150px;
+                background-color: rgba(255, 255, 255, 0.90);
+                position: absolute;
+                bottom: -75px;
+                box-shadow: 0 30px 30px 0px rgb(238, 238, 238);
+            }
+
+            .banner-info-area {
+                width: 1400px;
+                height: 150px;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                padding: 30px 5px;
+            }
+
+            .banner-info-game-area {
+                display: flex;
+                flex-direction: column;
+                cursor: default;
+            }
+
+            .banner-info-game-name {
+                font-size: 35px;
+            }
+
+            .banner-info-game-desc {
+                margin-top: auto;
+                font-size: 16px;
+                height: 44px;
+                line-height: 44px;
+            }
+
+            .banner-info-more {
+                margin-left: auto;
+                display: flex;
+                align-items: center;
+            }
+
+            .banner-info-more a {
+                text-decoration: none;
+            }
+
+            .more-btn {
+                color: #fff;
+                padding: 16px 2px;
+                background-color: rgb(4, 113, 214);
+                border-radius: 30px;
+                font-weight: bold;
+                border: 2px solid #fff;
+                background-clip: content-box;
+            }
+
+            .more-btn span {
+                padding: 14px 16px;
+                background-color: rgb(4, 113, 214);
+                border-radius: 25px;
+            }
+
+            .more-btn span:hover {
+                background-color: rgb(0, 96, 185);
+            }
+
+            .more-btn:hover {
+                border: 2px solid rgb(0, 96, 185);
+            }
+
+            .h100 {
+                height: 60px;
+            }
+            
+            /* 메인 */
+            /* .main-post-top .main-post:nth-child(4n+1) {
+                margin-left: 0px
+            }
+
+            .main-post-top .main-post:nth-child(4n+4) {
+                margin-right: 0px;
+            } */
+
+            .main-post-top {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .main-post a img {
+                width: 100%;
+            }
+
+            .main-post {
+                margin: 40px 18px 0 18px;
+                width: 444px;
+                height: 444px;
+                padding: 2px;
+                border: 2px solid #fff;
+            }
+
+            .f-main-post {
+                margin-top: 40px;
+                width: 444px;
+                height: 444px;
+            }
+
+            .main-post:hover {
+                border: 2px solid rgb(4, 113, 214);
+            }
+
+            .hide-op {
+                display: none;
+            }
+
+            .main-show-btn {
+                color: rgb(0, 96, 185);
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0 auto;
+                border-radius: 25px;
+                cursor: pointer;
+                width: 100px;
+                height: 50px;
+                text-align: center;
+                line-height: 42px;
+                padding: 2px;
+                border: 2px solid  rgba(209, 209, 209, 0);
+                margin-top: 10px;
+            }
+
+            .main-show-btn:hover {
+                background-color: rgb(209, 209, 209);
+                border: 2px solid  rgb(209, 209, 209);
+                background-clip: content-box;
+            }
+
+            .show-btn-area {
+                width: 100%;
+                display: flex;
+            }
+
+            .main-show-btn:hover {
+                background-color: rgb(216, 216, 216);
+            }
+
+            /* 스크롤 포스트 */
+            .scroll-menu-container-s {
+                width: 1450px;
+                margin: 0 auto;
+                position: relative;
+                margin-bottom: 55px;
+            }
+
+            .scroll-menu-container {
+                width: 1400px;
+                overflow: hidden;
+                position: relative;
+                margin-left: 25px;
+            }
+           
+            .scroll-top-area {
+                display: flex;
+                margin-bottom: 30px;
+            }
+
+            .scroll-all-view {
+                margin-left: auto;
+                display: flex; 
+                align-items: center;
+                font-size: 15px;
+            }
+
+            .scroll-all-view a {
+                text-decoration: none;
+                color: rgb(4, 113, 214);
+                font-weight: bold;
+            }
+
+            .scroll-topic {
+                font-size: 35px;
+                color: rgb(54, 54, 54);
+            }
+
+            .sc-item-container {
+                width: 16%;
+                margin: 0 0.3333%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .sc-item-container a {
+                text-decoration: none;
+                color: black;
+            }
+
+            .sc-item-img-area {
+                padding: 2px;
+                border: 2px solid rgba(0, 96, 185, 0);
+                overflow: hidden;
+                position: relative;
+            }
+
+            .sc-item-img-area:hover {
+                border: 2px solid rgb(0, 96, 185);
+                border-radius: 12px;
+            }
+
+       
+
+            .sc-item-img-area img {
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+            }
+
+            .sc-item-info-area {
+                display: flex;
+                flex-direction: column;
+                padding: 0 4px 10px 4px;
+                color: rgb(243, 243, 243);
+            }
+
+            
+
+            .sc-item-title {
+                font-size: 16px;
+                display: -webkit-box;
+                word-wrap: break-word;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                margin-bottom: 5px;
+            }
+
+            .sc-item-price {
+                font-size: 16px;
+                margin-right: 10px;
+
+            }
+
+            .sale-box {
+                font-size: 14px;
+                display: flex;
+                color: #fff;
+                margin-bottom: 5px;
+            }
+
+            .sale-box div {
+                
+                background-color: rgb(54, 54, 54);
+                padding: 1px 4px;
+            }
+
+            .platform-area {
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                display: flex;
+            }
+           
+            .ps-icon {
+                line-height: 13px;
+                color: #fff;
+                border: 1px solid #fff;
+                background-color: rgba(0, 0, 0, 0.637);
+                font-size: 10px;
+                text-align: center;
+                padding: 1px 4px;
+                display: flex;
+                align-items: center;
+                letter-spacing: 1px;
+                font-weight: bold;
+                margin-right: 4px;
+            }
+
+            .scroll-body-area {
+                transform: translateX(0px);
+                display: flex;
+                transition: 0.5s;
+            }
+
+            .sc-all-post-area {
+                width: 200px;
+                height: 200px;
+                padding: 2px;
+                border: 2px solid rgba(128, 128, 128, 0);
+
+            }
+
+            .sc-all-post-area:hover {
+                border: 2px solid rgb(0, 96, 185);
+            }
+
+            .sc-all-post-text {
+                border: 1px solid rgb(194, 194, 194);
+                border-radius: 10px;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                line-height: 194px;
+               
+            }
+
+            .move-btn {
+                width: 50px;
+                height: 50px;
+                border-radius: 25px;
+                background-color: rgb(4, 113, 214);
+                position: absolute;
+                z-index: 2;
+                cursor: pointer;
+                color: #fff;
+                text-align: center;
+                font-size: 25px;
+                line-height: 50px;
+                top: 155px;
+            }
+
+            .move-btn-r {
+                
+                right: 0px
+            }
+
+            .display_hidden {
+                display: none;
+            }
+            
+            .price-boxes {
+                display: flex;
+                align-items: center;
+                font-size: 16px;
+            }
+
+            .won {
+                color: rgb(173, 173, 173);
+                text-decoration: line-through;
+            }
+
+            /* 장르별 검색 */
+            .post-topic-title {
+                text-align: center;
+                font-size: 35px;
+                color: rgb(54, 54, 54);
+            }
+            
+            .more-find {
+                margin-top: 100px;
+            }
+
+            .more-find-c {
+                margin-bottom: 100px;
+            }
+
+
+            /*게임페이지 css 작업 시작*/
+
+            .game-back-img-container {
+                width: 100%;
+                height: 470px;
+                overflow: hidden;
+            }
+
+            .game-back-img-container img {
+                width: 100%;
+            }
+
+            .game-info-container {
+                display: flex;
+                position: relative;
+                width: 100%;
+                padding: 0 30px;
+            }
+
+            .game-info {
+                position: absolute;
+                bottom: 0;
+                width: 655px;
+                height: 350px;
+                background-color: rgba(26, 26, 26, 0.945);
+
+                display: flex;
+                flex-direction: column;
+                padding: 30px 40px;
+
+                color: rgb(231, 231, 231);
+                font-weight: 100;
+            }
+
+        
+
+            .game-title {
+                font-size: 32px;
+                line-height: 120%;
+            }
+
+            .game-publisher {
+                font-size: 12px;
+                font-weight: bold;
+                margin: 10px 0;
+            }
+
+            .game-platform {
+                display: flex;
+                margin-bottom: 10px;
+            }
+
+            .game-price-box, .discount-info-box {
+                cursor: pointer;
+            }
+
+            .game-price-box {
+                display: flex;
+                align-items: center;
+                font-weight: 400;
+                margin-top: 30px;
+            }
+
+            .game-price {
+                font-size: 25px;
+                margin-right: 15px;
+
+            }
+
+            .game-cost {
+                font-size: 20px;
+                text-decoration: line-through;
+                color: rgb(145, 145, 145);
+            }
+
+            .discount-info-box {
+                display: flex;
+                font-size: 12px;
+                font-weight: bold;
+                margin: 2px 0;
+            }
+
+            .dicount-rate {
+                margin-left: 5px;
+                margin-right: 10px;
+            }
+
+            .cart-area {
+                display: flex;
+                align-items: center;
+                margin-top: auto;
+                
+            }
+
+            .go-cart {
+                width: 90%;
+                height: 40px;
+                background-color: rgb(224, 82, 0);
+                border-radius: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+                font-weight: bold;
+                border: none;
+                color: rgb(231, 231, 231);
+                cursor: pointer;
+                margin-right: 10px;
+            }
+
+            .go-cart:hover {
+                background-color: rgb(172, 63, 0);
+            }
+
+            .cart-area .far {
+                border: none;
+                cursor: pointer;
+                color: rgb(231, 231, 231);
+                margin-left: auto;
+                font-size: 24px;
+                font-weight: 100;
+                width: 40px;
+                height: 40px;
+                background-color: rgb(54, 54, 54);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 20px;
+            }
+
+            .cart-area .far:hover {
+                background-color: rgb(75, 75, 75);
+            }
+
+            .game-option {
+                width: 596px;
+                margin-left: 120px;
+                margin-top: 25px;
+                margin-bottom: 25px;
+            }
+
+            .game-option ul, .game-option ul li {
+                display: flex;
+            }
+
+            .game-option ul {
+                flex-wrap: wrap;
+            }
+
+            .game-option ul li {
+                display: flex;
+                align-items: center;
+                margin: 5px 20px 5px 0px;
+                color: rgb(231, 231, 231);
+            }
+
+            .empty-width {
+                width: 655px;
+            }
+
+            .game-option ul li .fas {
+                font-size: 25px;
+                margin: 0 10px;
+            }
+
+            .op-detail {
+                width: 236px;
+                font-size: 14px;
+                font-weight: 400;
+            }
+
+            .game-grade a img {
+                width: 48px;
+                height: 72px;
+            }
+
+            .game-grade a img:hover {
+                filter: brightness(80%);
+            }
+
+            .game-grade {
+                margin: 25px 0;
+            }
+
+
+            /* 에디션부터 */
+            .main-container { 
+                color: rgb(248, 248, 248);
+                margin: 60px;
+            }
+
+            .edition-title {
+                font-weight: 100;
+                font-size: 40px;
+                text-align: center;
+                margin: 65px 0;
+
+            }
+
+            .edition-box {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .edition-post {
+                display: flex;
+                flex-direction: column;
+
+                width: 32%;
+                margin: 0.66666%;
+                background-color: rgba(26, 26, 26, 1);
+            }
+
+            .edition-img-box img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .edition-info-box {
+                padding: 0 30px 30px 30px;
+            }
+
+            .edition-info-title {
+                font-size: 20px;
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .game-platform2 {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .edition-list {
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 20px;
+                justify-content: space-between;
+                font-size: 16px;
+            }
+
+            .edition-list li {
+                width: 43%;
+                margin-left: 20px;
+                line-height: 25px;
+            }
+
+            .h30 {
+                height: 30px;
+            }
+
+
+            /* 게임 및 법률 정보 */
+            .game-info-container2 {
+                width: 52%;
+                background-color: rgba(26, 26, 26, 1);
+                margin: 0 auto;
+                margin-bottom: 60px;
+                padding: 30px;
+            }
+
+            .game-detail-info {
+                width: 54%;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 60px;
+            }
+
+            .detail-box {
+                width: 47%;
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .detail-box ul li {
+                list-style: none;
+                display: flex;
+                padding: 8px;
+            }
+
+            .detail-title {
+                width: 35%;
+            }
+
+            .detail-contents {
+                width: 65%;
+                font-weight: bold;
+            }
+
+            .copyright {
+                text-align: center;
+            }
+
+            body {
+                background-color: #090a0a;
+            }
+
+
+            /* 추가 콘텐츠 */
+
+            .more-contents-title {
+                text-align: center;
+                font-size: 25px;
+                font-weight: 100;
+
+                margin: 60px 0;
+            }
+
+            .more-contents-container {
+                display: flex;
+
+            }
+
+            .contents-type {
+                font-size: 11px;
+                font-weight: bold;
+                color: rgb(124, 124, 124);
+            }
+
+            .mc-more-view {
+                display: flex;
+                justify-content: center;
+            }
+            
+            .view-btn {
+                padding: 10px 15px;
+                font-weight: bold;
+                border-radius: 25px;
+                cursor: pointer;
+            }
+
+            .view-btn:hover {
+                background-color: rgb(54, 54, 54);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="header-logo">
+            <div class="header-logo-img">
+                <img src="img/sony_banner.jpg" alt="">
+            </div>
+        </div>
+       
+        <div class="header-menu">
+            <div class="header-menu-area">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <a href="" class="home-logo fab fa-playstation"></a>
+                <div class="menu-list-container">
+                    <ul class="menu-list">
+                        <li>
+                            <div class="menu-name" data-value="1">게임</div>
+                            <div class="fas fa-chevron-down"></div>
+                        </li>
+                        <li>
+                            <div class="menu-name mn-hw" data-value="2">하드웨어</div>
+                            <div class="fas fa-chevron-down"></div>
+                        </li>
+                        <li>
+                            <div class="menu-name" data-value="3">서비스</div>
+                            <div class="fas fa-chevron-down"></div>
+                        </li>
+                        <li>
+                            <div class="menu-name" data-value="4">뉴스</div>
+                            <div class="fas fa-chevron-down"></div>
+                        </li>
+                        <li>
+                            <div class="menu-name" data-value="5">구입</div>
+                            <div class="fas fa-chevron-down"></div>
+                        </li>
+                        <li>
+                            <div class="menu-name" data-value="6">고객지원</div>
+                            <div class="fas fa-chevron-down"></div>
+                        </li>
+                    </ul>
+
+                    
+
+
+
+                </div>
+                <div class="header-menu-right">
+                    <div class="header-login-box">
+                        <a href="">로그인</a>
+                    </div>
+                    <div class="search-box">
+                        <div class="search-box-text">검색</div>
+                        <div class="fas fa-search"></div>
+                    </div>
+                </div>
+
+                
+
+            </div>
+            
+            <div class="search-box-clicked">
+                <div class="dimmed hide-op2"></div>
+                <div class="search-box-container2">
+                    <div class="search-box-container search-focus-out">
+                        <div class="dropdown">
+                            <div class="dd-main list-main ssn-hover">
+                                <div class="search-site-name">PlayStation Store</div>
+                                <div class="fas fa-chevron-down"></div>
+                            </div>
+
+                            <div class="drop-list-menu hide-op">
+                                <div class="dd-main dd-menu n-ssn-hover">
+                                    <div class="search-site-name ssn-1">사이트</div>
+                                    <div class="fas fa-chevron-down"></div>
+                                </div>
+                                <div class="dd-main dd-menu ssn-hover">
+                                    <div class="search-site-name">PlayStation.com</div>
+                                </div>
+                                <div class="dd-main dd-menu dd-clicked-effect">
+                                    <div class="search-site-name">PlayStation Store</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="search-input-box">
+                            <input type="text" placeholder="PlayStation Store 검색">
+                            <div class="x-icon fas fa-times"></div>
+                            <div class="search-icon-box fas fa-search"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 게임 -->
+            <div class="mn-back header-menu-game mn-back-position-un mn-back-1">
+                <div class="mn-top">
+                    <div class="mn-body-area">
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-ps5.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PS5</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-ps4.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PS4</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-vr.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PS VR</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-psplus.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PS Plus</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-buygame.png" alt="">
+                                    </div>
+                                    <div class="mn-name">게임 구매</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        
+                    </div>
+                </div>
+                <div class="mn-bottom">
+                    <div class="mnb-body-area">
+                        <div class="mnb-container">
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name">Indies</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name"><strong>PlayStation</strong> 이번 달 소식</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name"><strong>PlayStation Hits</strong></div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name">프로모션</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name">토너먼트</div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 하드웨어 -->
+            <div class="mn-back header-menu-game mn-back-position-un mn-back-2">
+                <div class="mn-top">
+                    <div class="mn-body-area">
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-ps5.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PS5</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-ps4.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PS4</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-ps4pro.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PS4 Pro</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-vr.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PS VR</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        
+                    </div>
+                </div>
+                <div class="mn-bottom">
+                    <div class="mnb-body-area">
+                        <div class="mnb-container">
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name"><strong>DualSense</strong> 무선 컨트롤러</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name"><strong>PULSE 3D</strong> 무선 헤드셋</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name"><strong>PS5</strong> 액세서리</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name"><strong>DUALSHOCK 4</strong> 무선 컨트롤러</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name"><strong>PS4</strong> 액세서리</div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 서비스 -->
+            <div class="mn-back header-menu-game mn-back-position-un mn-back-3">
+                <div class="mn-top">
+                    <div class="mn-body-area">
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-psplus.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PS Plus</div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="mn-bottom">
+                    <div class="mnb-body-area">
+                        <div class="mnb-container">
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name"><strong>PS5</strong> 엔터테이먼트</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name"><strong>PS4</strong> 엔터테이먼트</div>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 뉴스 -->
+            <div class="mn-back header-menu-game mn-back-position-un mn-back-4">
+                <div class="mn-top">
+                    <div class="mn-body-area">
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-psblog.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PS Blog</div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="mn-bottom">
+                    <div class="mnb-body-area">
+                        <div class="mnb-container">
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name">보도자료</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name">공식 <strong>PSN</strong> 계정</div>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 구입 -->
+            <div class="mn-back header-menu-game mn-back-position-un mn-back-5">
+                <div class="mn-top">
+                    <div class="mn-body-area">
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-buygame.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PS Store</div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="mn-bottom">
+                    <div class="mnb-body-area">
+                        <div class="mnb-container">
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name"><strong>PS Store</strong>란?</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name">계제 방법 안내</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name">프로모션</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name">구독 서비스</div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="">
+                                        <div class="circle-area">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="mnb-name">판매점 안내</div>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 고객지원 -->
+            <div class="mn-back header-menu-game mn-back-position-un mn-back-6">
+                <div class="mn-top">
+                    <div class="mn-body-area">
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-qmark.png" alt="">
+                                    </div>
+                                    <div class="mn-name">고객지원</div>
+                                </div>
+                            </a>
+                        </div>
+
+
+                        <!-- 메뉴 -->
+                        <div class="mnp-container">
+                            <a href="">
+                                <div class="mnp">
+                                    <div class="mnp-img-area">
+                                        <img src="img/mnp-psmark.png" alt="">
+                                    </div>
+                                    <div class="mn-name">PSN 상태</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        
+                    </div>
+                </div>
+                
+            </div>
+            
+         
+        </div>
+
+        <!-- 반응형 변경점 -->
+        <div class="slide-menu"></div>
+
+
+        <div class="store-category-menu-container">
+            <div class="logo-img-area">
+                <a href="">
+                    <img src="img/playstation_store_logo.jpg" alt="">
+                </a>
+            </div>
+            <div class="category-list-area">
+                <ul>
+                    <li><a href="http://3.35.50.179:3000/playstation_Store_latest"><div class="category-list-name">최신 콘텐츠</div></a></li>
+                    <li><a href="http://3.35.50.179:3000/playstation_Store_collections"><div class="category-list-name">카테고리</div></a></li>
+                    <li><a href="http://3.35.50.179:3000/playstation_Store_deals"><div class="category-list-name">프로모션</div></a></li>
+                    <li><a href="http://3.35.50.179:3000/playstation_Store_ps5"><div class="category-list-name">PS5</div></a></li>
+                    <li><a href="http://3.35.50.179:3000/play_store_subscriptions"><div class="category-list-name">구독 서비스</div></a></li>
+                    <li><a href="http://3.35.50.179:3000/playstation_Store_browse"><div class="category-list-name">둘러보기</div></a></li>
+                </ul>
+            </div>
+
+            <!-- <div class="media-list-menu"> -->
+                <div class="category-list-name-v2-display-menu around-veiw-h">
+                    <div>
+                        <div class="around-veiw">둘러보기</div>
+                        <div class="fas fa-chevron-down"></div>
+                    </div>
+
+                    <div class="category-list-area-v2 hide-op">
+                        <ul>
+                            <li><a href=""><div class="category-list-name-v2">최신 콘텐츠</div></a></li>
+                            <li><a href=""><div class="category-list-name-v2">카테고리</div></a></li>
+                            <li><a href=""><div class="category-list-name-v2">프로모션</div></a></li>
+                            <li><a href=""><div class="category-list-name-v2">PS5</div></a></li>
+                            <li><a href=""><div class="category-list-name-v2">구독 서비스</div></a></li>
+                            <li><a href=""><div class="category-list-name-v2">둘러보기</div></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                
+            <!-- </div> -->
+
+
+            <div class="logo-img-area"></div>
+
+            
+        </div>
+
+        <div class="game-back-img-container">
+            <img src="img/game_bg_img_dragonballz.png" alt="">
+        </div>
+
+        <main>
+            <div class="game-info-container">
+                <div class="game-info">
+                    <div class="game-title">드래곤볼 Z 카카로트 (중국어(간체자), 한국어, 태국어, 중국어(번체자))</div>
+                    <div class="game-publisher">BANDAI NAMCO Entertainment Inc.</div>
+                    <div class="game-platform">
+                        <div class="ps-icon">PS4</div>
+                        <div class="ps-icon">PS5</div>
+                    </div>
+                    <div class="game-price-box">
+                        <div class="game-price">22,680원</div>
+                        <div class="game-cost">64,800원</div>
+                    </div>
+                    <div class="discount-info-box">
+                        <div class="dicount-rate">65% 할인</div>
+                        <div class="end-date">2021/8/18에 프로모션 종료</div>
+                    </div>
+                    <div class="cart-area">
+                        <button class="go-cart">장바구니에 담기</button>
+                        <button class="far fa-heart" type="button"></button>
+                    </div> 
+                </div>
+                <div class="empty-width"></div>
+                <div class="game-option">
+                    <ul>
+                        <li>
+                            <div class="fas fa-user"></div>
+                            <div class="op-detail">온라인 플레이의 경우 PS Plus 필요</div>
+                        </li>
+
+                        <li>
+                            <div class="fas fa-user"></div>
+                            <div class="op-detail">온라인 플레이 선택 사항</div>
+                        </li>
+
+                        <li>
+                            <div class="fas fa-user"></div>
+                            <div class="op-detail">최대 64명의 PS Plus 온라인 플레이어 지원</div>
+                        </li>
+
+                        <li>
+                            <div class="fas fa-user"></div>
+                            <div class="op-detail">인게임 구매 선택 사항</div>
+                        </li>
+
+                        <li>
+                            <div class="fas fa-user"></div>
+                            <div class="op-detail">DUALSHOCK 4 진동</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="game-grade">
+                    <a href=""><img src="img/g12.png" alt=""></a>
+                </div>
+
+                
+            </div>
+
+            <div class="main-container">
+                <div class="edition-title">에디션</div>
+                <div class="edition-box">
+                    
+                    <!-- 에디션 포스트 -->
+                    <div class="edition-post">
+                        <div class="edition-img-box"><img src="img/edition-banner-dragonball-z-2.png" alt=""></div>
+                        <div class="edition-info-box">
+                            <div class="edition-info-title">드래곤볼 Z 카카로트 (중국어(간체자), 한국어, 태국어, 중국어(번체자))</div>
+                            <div class="game-platform2">
+                                <div class="ps-icon">PS4</div>
+                                <div class="ps-icon">PS5</div>
+                            </div>
+
+
+                            <div class="edition-content-container">
+                                <ul class="edition-list">
+                                    <li>PS4™용 NBA 2K22</li>
+                                    <li>MyCAREER 스킬 부스트</li>
+                                    <li>예약 구매 콘텐츠 포함 내역:</li>
+                                    <li>게토레이 부스트</li>
+                                    <li>5,000 VC + 5,000 MyTEAM 포인트</li>
+                                    <li>Luka Doncic MyPLAYER 저지</li>
+                                    <li>MyTEAM 프로모션 팩 10개</li>
+                                </ul>
+                            </div>
+                            
+
+                            <div class="game-price-box">
+                                <div class="game-price">22,680원</div>
+                                <div class="game-cost">64,800원</div>
+                            </div>
+                            <div class="discount-info-box">
+                                <div class="dicount-rate">65% 할인</div>
+                                <div class="end-date">2021/8/18에 프로모션 종료</div>
+                            </div>
+
+                            <div class="h30"></div>
+                            <div class="cart-area">
+                                <button class="go-cart">장바구니에 담기</button>
+                                <button class="far fa-heart" type="button"></button>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <!-- 에디션 포스트 -->
+                    <div class="edition-post">
+                        <div class="edition-img-box"><img src="img/edition-banner-dragonball-z-2.png" alt=""></div>
+                        <div class="edition-info-box">
+                            <div class="edition-info-title">드래곤볼 Z 카카로트 (중국어(간체자), 한국어, 태국어, 중국어(번체자))</div>
+                            <div class="game-platform2">
+                                <div class="ps-icon">PS4</div>
+                                <div class="ps-icon">PS5</div>
+                            </div>
+
+
+                            <div class="edition-content-container">
+                                <ul class="edition-list">
+                                    <li>PS4™용 NBA 2K22</li>
+                                    <li>MyCAREER 스킬 부스트</li>
+                                    <li>예약 구매 콘텐츠 포함 내역:</li>
+                                    <li>게토레이 부스트</li>
+                                    <li>5,000 VC + 5,000 MyTEAM 포인트</li>
+                                    <li>Luka Doncic MyPLAYER 저지</li>
+                                    <li>MyTEAM 프로모션 팩 10개</li>
+                                </ul>
+                            </div>
+                            
+
+                            <div class="game-price-box">
+                                <div class="game-price">22,680원</div>
+                                <div class="game-cost">64,800원</div>
+                            </div>
+                            <div class="discount-info-box">
+                                <div class="dicount-rate">65% 할인</div>
+                                <div class="end-date">2021/8/18에 프로모션 종료</div>
+                            </div>
+
+                            <div class="h30"></div>
+                            <div class="cart-area">
+                                <button class="go-cart">장바구니에 담기</button>
+                                <button class="far fa-heart" type="button"></button>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <!-- 에디션 포스트 -->
+                    <div class="edition-post">
+                        <div class="edition-img-box"><img src="img/edition-banner-dragonball-z-2.png" alt=""></div>
+                        <div class="edition-info-box">
+                            <div class="edition-info-title">드래곤볼 Z 카카로트 (중국어(간체자), 한국어, 태국어, 중국어(번체자))</div>
+                            <div class="game-platform2">
+                                <div class="ps-icon">PS4</div>
+                                <div class="ps-icon">PS5</div>
+                            </div>
+
+
+                            <div class="edition-content-container">
+                                <ul class="edition-list">
+                                    <li>PS4™용 NBA 2K22</li>
+                                    <li>MyCAREER 스킬 부스트</li>
+                                    <li>예약 구매 콘텐츠 포함 내역:</li>
+                                    <li>게토레이 부스트</li>
+                                    <li>5,000 VC + 5,000 MyTEAM 포인트</li>
+                                    <li>Luka Doncic MyPLAYER 저지</li>
+                                    <li>MyTEAM 프로모션 팩 10개</li>
+                                </ul>
+                            </div>
+                            
+
+                            <div class="game-price-box">
+                                <div class="game-price">22,680원</div>
+                                <div class="game-cost">64,800원</div>
+                            </div>
+                            <div class="discount-info-box">
+                                <div class="dicount-rate">65% 할인</div>
+                                <div class="end-date">2021/8/18에 프로모션 종료</div>
+                            </div>
+
+                            <div class="h30"></div>
+                            <div class="cart-area">
+                                <button class="go-cart">장바구니에 담기</button>
+                                <button class="far fa-heart" type="button"></button>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <!-- 에디션 포스트 -->
+                    <div class="edition-post">
+                        <div class="edition-img-box"><img src="img/edition-banner-dragonball-z-2.png" alt=""></div>
+                        <div class="edition-info-box">
+                            <div class="edition-info-title">드래곤볼 Z 카카로트 (중국어(간체자), 한국어, 태국어, 중국어(번체자))</div>
+                            <div class="game-platform2">
+                                <div class="ps-icon">PS4</div>
+                                <div class="ps-icon">PS5</div>
+                            </div>
+
+
+                            <div class="edition-content-container">
+                                <ul class="edition-list">
+                                    <li>PS4™용 NBA 2K22</li>
+                                    <li>MyCAREER 스킬 부스트</li>
+                                    <li>예약 구매 콘텐츠 포함 내역:</li>
+                                    <li>게토레이 부스트</li>
+                                    <li>5,000 VC + 5,000 MyTEAM 포인트</li>
+                                    <li>Luka Doncic MyPLAYER 저지</li>
+                                    <li>MyTEAM 프로모션 팩 10개</li>
+                                </ul>
+                            </div>
+                            
+
+                            <div class="game-price-box">
+                                <div class="game-price">22,680원</div>
+                                <div class="game-cost">64,800원</div>
+                            </div>
+                            <div class="discount-info-box">
+                                <div class="dicount-rate">65% 할인</div>
+                                <div class="end-date">2021/8/18에 프로모션 종료</div>
+                            </div>
+
+                            <div class="h30"></div>
+                            <div class="cart-area">
+                                <button class="go-cart">장바구니에 담기</button>
+                                <button class="far fa-heart" type="button"></button>
+                            </div> 
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="more-contents-title">추가 콘텐츠</div>
+                <div class="more-contents-container">
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/mc-dragonballz1.png" alt="">
+                                <div class="platform-area">
+                                    <div class="ps-icon">PS4</div>
+                                    <div class="ps-icon">PS5</div>
+                                </div>
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="contents-type">추가 콘텐츠</div>
+                                <div class="sc-item-title">dishonored (영어)</div>
+                                <div class="sale-box">
+                                    <div>-50%</div>
+                                </div>
+                                <div class="price-boxes">
+                                    <div class="sc-item-price">14,400원</div>
+                                    <div class="won">28,800원</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/mc-dragonballz2.png" alt="">
+                                <div class="platform-area">
+                                    <div class="ps-icon">PS4</div>
+                                    <div class="ps-icon">PS5</div>
+                                </div>
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                                <div class="sc-item-price">14,000원</div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/mc-dragonballz3.png" alt="">
+                                <div class="platform-area">
+                                    <div class="ps-icon">PS4</div>
+                                    <div class="ps-icon">PS5</div>
+                                </div>
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                                <div class="sc-item-price">14,000원</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/mc-dragonballz4.png" alt="">
+                                <div class="platform-area">
+                                    <div class="ps-icon">PS4</div>
+                                    <div class="ps-icon">PS5</div>
+                                </div>
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                                <div class="sc-item-price">14,000원</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/mc-dragonballz5.png" alt="">
+                                <div class="platform-area">
+                                    <div class="ps-icon">PS4</div>
+                                    <div class="ps-icon">PS5</div>
+                                </div>
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                                <div class="sc-item-price">14,000원</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 포스트 -->
+                    <div class="sc-item-container">
+                        <a href="">
+                            <div class="sc-item-img-area">
+                                <img src="img/mc-dragonballz6.png" alt="">
+                                <div class="platform-area">
+                                    <div class="ps-icon">PS4</div>
+                                    <div class="ps-icon">PS5</div>
+                                </div>
+                            </div>
+                            <div class="sc-item-info-area">
+                                <div class="sc-item-title">dishonored (영어)</div>
+                                <div class="sc-item-price">14,000원</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mc-more-view"><div class="view-btn">더 보기</div></div>
+
+
+        
+                <div class="edition-title">게임 및 법률 정보</div>
+                <div class="game-info-container2">
+                    ※본 아이템이 포함되어 있는 세트 상품도 있습니다. 중복구입이 되지 않도록 주의하여 주십시오.
+
+                    드래곤볼 Z 카카로트에서 오공과 Z 전사들의 이야기를 체험하라! 원작의 장대한 전투는 물론, 오공, 오반, 베지터와 다른 캐릭터들과 함께 싸우고, 낚시하고, 먹고, 훈련하며 드래곤볼 Z의 세계에서 살아가자. 스토리를 진행하며 새로운 지역을 탐험하고 모험하며, 드래곤볼 Z 세계의 여러 전사들과 강한 유대를 형성해보자.
+                    
+                    권리표기:
+                    ©BIRD STUDIO / SHUEISHA, TOEI ANIMATION
+                    ©BANDAI NAMCO Entertainment Inc.
+                </div>
+
+                <div class="game-detail-info">
+                    <div class="detail-box">
+                        <ul>
+                            <li>
+                                <div class="detail-title">플랫폼:</div>
+                                <div class="detail-contents">PS4</div>
+                            </li>
+                            <li>
+                                <div class="detail-title">출시:</div>
+                                <div class="detail-contents">2016/10/21</div>
+                            </li>
+                            <li>
+                                <div class="detail-title">퍼블리셔:</div>
+                                <div class="detail-contents">Electronic Arts Inc.</div>
+                            </li>
+                            <li>
+                                <div class="detail-title">장르:</div>
+                                <div class="detail-contents">액션, 어드벤처, 롤플레잉 게임</div>
+                            </li>
+                            <li>
+                                <div class="detail-title">음성:</div>
+                                <div class="detail-contents">일본어</div>
+                            </li>
+                            <li>
+                                <div class="detail-title">화면 언어:</div>
+                                <div class="detail-contents">중국어 (간체자), 중국어 (번체자), 타이어, 한국어</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="detail-box">
+                        PS5에서 이 게임을 플레이하려면 최신 시스템 소프트웨어로 시스템을 업데이트해야 할 수도 있습니다. 이 게임은 PS5에서 플레이할 수 있으나 PS4에서 사용할 수 있는 일부 기능을 사용하지 못할 수도 있습니다. 자세한 사항은 PlayStation.com/bc에서 확인하세요.
+
+본 소프트웨어는 다운로드 후에는 재화의 가치가 현저히 감소하기 때문에 환불되지 않습니다. 관련 법률에 따라 재화의 가치가 손상되지 않은, 즉 다운로드 하지 않은 경우에 한하여 제품 수령일로부터 14일 이내 환불을 요청하신 경우에만 환불 처리가 가능합니다.
+
+본 제품의 구매 또는 사용을 위해서는 SEN 이용약관에 동의하셔야 합니다.
+                    </div>
+                </div>
+
+
+                <div class="copyright">© 2005-2021 Take-Two Interactive Software, Inc. and its subsidiaries. 2K, the 2K logo, and Take-Two Interactive Software are all trademarks and/or registered trademarks of Take-Two Interactive Software, Inc. The NBA and NBA member team identifications are the intellectual property of NBA Properties, Inc. and the respective NBA member teams. © 2021 NBA Properties, Inc. All Rights Reserved. Officially licensed product of the National Basketball Players Association. All other trademarks are property of their respective owners.
+                    Take-Two Privacy Policy & EULA</div>
+            </div>
+
+
+        </main>
+
+
+
+        
+
+        <footer class="footer-container">
+            <div class="footer-area">
+                <div class="footer-top-area">
+                    <div class="fab fa-playstation"></div>
+                    <div class="region-area">
+                        <div class="fas fa-globe"></div>
+                        <div class="region-korea">국가 / 지역: 한국</div>
+                    </div>
+                </div>
+
+                <div class="side-menu">
+                    <div class="sd sd-menu-1">
+                        <ul>
+                            <li><a href="">고객지원</a></li>
+                            <li><a href="">개인정보처리방침</a></li>
+                            <li><a href="">웹사이트 이용약관</a></li>
+                            <li><a href="">사이트맵</a></li>
+                            <li><a href="">PlayStation Studios</a></li>
+                            <li><a href="">법률 정보</a></li>
+                            <li><a href="">SIE에 대하여</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sd sd-menu-2">
+                        <ul>
+                            <li><a href="">PSN 이용약관</a></li>
+                            <li><a href="">PS Store 취소 방침</a></li>
+                            <li><a href="">건강상 유의사항</a></li>
+                            <li><a href="">등급 관련 정보</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sd sd-menu-3">
+                        <ul>
+                            <li><a href="">Facebook</a></li>
+                            <li><a href="">Twitter</a></li>
+                            <li><a href="">YouTube</a></li>
+                            <li><a href="">Instagram</a></li>
+                            <li><a href="">Android 앱</a></li>
+                            <li><a href="">iOS 앱</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="last-footer"><a href="">© 2021 Sony Interactive Entertainment Inc. 모든 권리 보유.</a></div>
+            </div>
+        </footer>
+
+        <!-- 짜스 -->
+        <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+        <script>
+
+            // 스크롤 시 카테고리 메뉴 고정  header-menu  store-category-menu-container
+            let value; // 스크롤 즉시 위치 기록 
+            let targetS; // 마지막 스크롤 위치 기록
+            let setS = $('.store-category-menu-container').offset();
+            $(window).scroll(function(){
+                value = $(document).scrollTop();
+
+
+                if(value > targetS) {    // 현재 스크롤 > 마지막 스크롤 = 스크롤을 내렸을 때
+                    if(clickedVal == 1) { // 스크롤 페이지가 열려있을 때 header-menu를 -40하지 말고 상단에 고정
+
+                    } else {
+                        $('.header-menu').addClass('fixed-top-menu-m40');   
+                        $('.header-menu').removeClass('fixed-top-menu-0');  
+                        $('.store-category-menu-container').removeClass('fixed-top-menu-p40'); 
+                    }
+                } else {
+                    $('.header-menu').removeClass('fixed-top-menu-m40');
+                    $('.store-category-menu-container').addClass('fixed-top-menu-p40');
+                    $('.header-menu').addClass('fixed-top-menu-0');
+                }
+
+                targetS = $(document).scrollTop(); // 마지막 스크롤 위치 저장
+
+                
+                if(value > setS.top) {
+                    $('.store-category-menu-container').addClass('fixed-top-menu-0');
+                } else {
+                    $('.store-category-menu-container').removeClass('fixed-top-menu-0');
+                }
+
+            });
+            
+
+
+
+
+          
+
+            
+
+            // 하단 버튼 hover 시 테두리
+            $('.h-border').hover(function(){
+                $(this).addClass('blue-border');
+                $(this).children('a').addClass('back-gray');
+
+            }, function(){
+                $(this).removeClass('blue-border');
+                $(this).children('a').removeClass('back-gray');
+            });
+           
+            
+            //스크롤 박스 버튼 동작
+            $('.move-btn-r').click(function(){
+                $(this).parent('.scroll-menu-container-s').children('.scroll-menu-container').children('.scroll-body-area').css('transform', 'translateX(-1440px)');
+                $(this).parent('.scroll-menu-container-s').children('.move-btn-l').removeClass('display_hidden');
+                $(this).parent('.scroll-menu-container-s').children('.move-btn-r').addClass('display_hidden');
+            });
+
+            $('.move-btn-l').click(function(){
+                $(this).parent('.scroll-menu-container-s').children('.scroll-menu-container').children('.scroll-body-area').css('transform', 'translateX(0px)');
+                $(this).parent('.scroll-menu-container-s').children('.move-btn-r').removeClass('display_hidden');
+                $(this).parent('.scroll-menu-container-s').children('.move-btn-l').addClass('display_hidden');
+            });
+
+
+            //드롭 다운 
+            $('.list-main').click(function(){
+                $('.drop-list-menu').removeClass('hide-op'); 
+            });
+
+            //드롭다운 메뉴 선택
+            $('.dd-menu').click(function(){
+                $('.drop-list-menu').addClass('hide-op');  //클릭 시 리스트 하이드
+
+                let menu_name = $(this).children('.search-site-name').text();
+                if(menu_name != "사이트") {
+                    $('.list-main .search-site-name').text(menu_name);
+                    $('.dd-menu').removeClass('dd-clicked-effect');
+                    $(this).addClass('dd-clicked-effect');
+                    $('.dd-menu').addClass('ssn-hover');
+                    $('.n-ssn-hover').removeClass('ssn-hover');
+                    $(this).removeClass('ssn-hover');
+                    $('.search-input-box input').attr('placeholder', menu_name+" 검색");
+                }
+                  
+            });
+            
+
+            //딤 지우기
+            $('.dimmed').click(function(){
+                //$('.search-box-clicked').addClass('hide-op2');
+                $('.dimmed').addClass('hide-op2');
+                $('.search-box-container').removeClass('search-focus-in');
+                $('.search-box-container').addClass('search-focus-out');
+                $('.drop-list-menu').addClass('hide-op');
+                $('.search-input-box input').val('');
+                
+            });
+
+            // search
+            $('.search-box').click(function(){
+                //$('.search-box-clicked').removeClass('hide-op2');
+                //$('.search-box-clicked').addClass('hide-op2');
+                $('.dimmed').removeClass('hide-op2');
+                $('.search-box-container').removeClass('search-focus-out');
+                $('.search-box-container').addClass('search-focus-in');
+                $('.search-input-box input').focus();
+            });
+
+            //x-icon 텍스트 지우기
+            $('.x-icon').click(function(){
+                $('.search-input-box input').val('');
+                $('.search-input-box input').focus();
+            });
+
+            
+            //하드웨어 클릭 시 슬라이드 메뉴
+            let clickedVal = 0;
+            $('.menu-list li').addClass('ml-h'); // 호버 시 텍스트 파랗게
+            $('.menu-list li').click(function(){
+                let number = $(this).children('.menu-name').data('value'); // 게임~고객지원 각 1~6번
+                $('.menu-list li').addClass('ml-h');
+                $('.menu-list li').children('.menu-name').removeClass('menu-list-clicked');
+                $('.menu-list li').children('.fas').removeClass('arrow-kaiten');
+
+                $('.mn-back').removeClass('mn-back-display-un');
+                $('.mn-back').removeClass('mn-back-display-on');
+                $('.mn-back').removeClass('mn-back-display-on2');
+
+                if(clickedVal == 0) {  // 메뉴가 닫혀있을 때
+                    //기존거 닫아주는 코드 있으면 될듯
+                    // 6번은 하단 메뉴가 없어서 따로 파줌
+                    
+                    $('.mn-back-'+ number).removeClass('mn-back-position-un');
+                    if(number == 6) {
+                        $('.mn-back-'+ number).addClass('mn-back-position-on2');
+                    } else {
+                        $('.mn-back-'+ number).addClass('mn-back-position-on');
+                    }
+
+                    $(this).children('.fas').addClass('arrow-kaiten'); // 선택 시 화살표 반전 애니메이션
+
+
+                    $(this).children('.menu-name').addClass('menu-list-clicked'); // 선택 시 폰트색 변경
+                    $(this).removeClass('ml-h');
+
+                    clickedVal = 1;
+                    temp = number;
+
+                } else if(clickedVal == 1 && temp == number) {    // 메뉴가 열려있을 때
+
+                    if(number == 6) {
+                        $('.mn-back-'+ number).removeClass('mn-back-position-on2');
+                    } else {
+                        $('.mn-back-'+ number).removeClass('mn-back-position-on');
+                    }
+
+                    $('.mn-back-'+ number).addClass('mn-back-position-un');
+                    //$('.mn-back-'+ number).removeClass('mn-back-position-on');
+
+                    $('.menu-list').children('li').children('.fas').removeClass('arrow-kaiten');
+
+                    clickedVal = 0;
+                } else { // 메뉴가 열려있는데 그 메뉴가 아닌 다른 메뉴를 선택했을 때
+
+                    $(this).children('.menu-name').addClass('menu-list-clicked'); // 선택 시 폰트색 변경
+                    $(this).removeClass('ml-h');
+                    $(this).children('.fas').addClass('arrow-kaiten');
+
+                    $('.mn-back').removeClass('mn-back-position-on2');
+                    $('.mn-back').removeClass('mn-back-position-on');
+                    $('.mn-back').addClass('mn-back-position-un');
+
+                    $('.mn-back').addClass('mn-back-display-un');
+                    
+                    if(number == 6) {
+                        $('.mn-back-'+ number).addClass('mn-back-display-on2');
+                    } else {
+                        $('.mn-back-'+ number).addClass('mn-back-display-on');
+                    }
+
+                    temp = number;
+                    clickedVal = 1;
+                }
+                
+            });
+
+            /*반응형 작업 시작*/
+            let openMenu = 0;
+            $('.category-list-name-v2-display-menu').click(function(){
+                if(openMenu == 0) {
+                    $('.category-list-name-v2-display-menu').removeClass('around-veiw-h');
+                    $('.category-list-name-v2-display-menu').addClass('around-veiw-checked-b');
+                    $('.category-list-area-v2').removeClass('hide-op');
+                    openMenu = 1;
+                } else {
+                    $('.category-list-name-v2-display-menu').addClass('around-veiw-h');
+                    $('.category-list-name-v2-display-menu').removeClass('around-veiw-checked-b');
+                    $('.category-list-area-v2').addClass('hide-op');
+                    openMenu = 0;
+                }
+            });
+
+
+
+            let openSlideMenu = 0;
+            $('.hamburger').click(function(){
+                if(openSlideMenu == 0) {
+                    $('.slide-menu').addClass('slide-menu-width');
+                    openSlideMenu = 1;
+                } else {
+                    $('.slide-menu').removeClass('slide-menu-width');
+                    openSlideMenu = 0;
+                }
+            });
+        </script>
+    </body>
+
+
+</html>

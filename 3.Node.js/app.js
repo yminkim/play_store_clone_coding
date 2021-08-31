@@ -54,7 +54,7 @@ app.get('/playstation_Store_game_page',function(req,res){
 
 // mysql 테스트용 게시판
 app.get('/list', function (req, res) {
-    var sql = 'SELECT * FROM BOARD';    
+    var sql = 'SELECT * FROM board';    
     conn.query(sql, function (err, rows, fields) {
         if(err) console.log('query is not excuted. select fail...\n' + err);
         else res.render('list.ejs', {list : rows});
@@ -69,11 +69,61 @@ app.post('/writeAf', function (req, res) {
     var body = req.body;
     console.log(body);
 
-    var sql = 'INSERT INTO BOARD VALUES(?, ?, ?, NOW())';
-    var params = [body.id, body.title, body.content];
+    var sql = 'INSERT INTO board (author, title, content, regdate) VALUES (?, ?, ?, NOW())';
+    var params = [body.author, body.title, body.content];
     console.log(sql);
     conn.query(sql, params, function(err) {
         if(err) console.log('query is not excuted. insert fail...\n' + err);
         else res.redirect('/list');
     });
+  
 });
+
+
+app.get('/delete/:id', function(req, res) {
+    var sql = 'delete from board where id = ?';
+    var params = [req.params.id];
+    console.log("id값: "+params);
+    conn.query(sql, params, function(err) {
+        if(err) console.log('query is not excuted. delete fail...\n' + err);
+        else res.redirect('/list');
+    });
+
+});
+
+app.get('/edit/:id', function(req, res){
+    var sql = 'SELECT * FROM board where id = ?';    
+    var params = [req.params.id];
+    console.log("id값: "+params);
+    conn.query(sql, params, function (err, rows, fields) {
+        if(err) console.log('query is not excuted. select fail...\n' + err);
+        else res.render('update.ejs', {list : rows});
+    });
+});
+
+app.post('/updateAf', function(req, res) {
+    var body = req.body;
+    var sql = 'update board set author = ?, title = ?, content = ? where id = ?';
+    var queryparams = [body.author, body.title, body.content, req.query.id];
+    console.log(queryparams);
+    conn.query(sql, queryparams, function(err) {
+        if(err) console.log('query is not excuted. update fail...\n' + err);
+        else res.redirect('/list');
+    });
+});
+
+
+//게시글 페이지
+
+app.get('/read/:id', function (req, res) {
+    var sql = 'SELECT * FROM board where id = ?';    
+    var params = [req.params.id];
+    conn.query(sql, params, function (err, rows, fields) {
+        if(err) console.log('query is not excuted. select fail...\n' + err);
+        else res.render('read.ejs', {list : rows});
+    });
+});
+
+
+
+

@@ -69,8 +69,8 @@ app.post('/writeAf', function (req, res) {
     var body = req.body;
     console.log(body);
 
-    var sql = 'INSERT INTO board (author, title, content, regdate) VALUES (?, ?, ?, NOW())';
-    var params = [body.author, body.title, body.content];
+    var sql = 'INSERT INTO board (author, title, content, regdate, post_pw) VALUES (?, ?, ?, NOW(), ?)';
+    var params = [body.author, body.title, body.content, body.post_pw];
     console.log(sql);
     conn.query(sql, params, function(err) {
         if(err) console.log('query is not excuted. insert fail...\n' + err);
@@ -103,12 +103,12 @@ app.get('/edit/:id', function(req, res){
 
 app.post('/updateAf', function(req, res) {
     var body = req.body;
-    var sql = 'update board set author = ?, title = ?, content = ? where id = ?';
-    var queryparams = [body.author, body.title, body.content, req.query.id];
+    var sql = 'update board set title = ?, content = ? where id = ?';
+    var queryparams = [body.title, body.content, req.query.id];
     console.log(queryparams);
     conn.query(sql, queryparams, function(err) {
         if(err) console.log('query is not excuted. update fail...\n' + err);
-        else res.redirect('/list');
+        else res.redirect('/read/'+ req.query.id);
     });
 });
 

@@ -17,7 +17,6 @@
 
         main {
             width: 50%;
-            height: 500px;
             background-color: #fff;
             margin: 8% auto;
             display: flex;
@@ -69,7 +68,46 @@
             border-top: 1px solid rgb(218, 218, 218);
             border-bottom: 1px solid rgb(218, 218, 218);
             padding: 10px 5px;
+            margin-bottom: 20px;
         }
+
+
+        /* 버튼 */
+        .sub-btn {
+            margin-top: auto;
+            margin-left: auto;
+            display: flex;
+        }
+
+        .sub-btn button, .sub-btn a {
+            border: none;
+            border-radius: 5px;
+            
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: rgb(160, 192, 229);
+            color: rgb(0, 132, 255);
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .sub-btn a {
+            background-color: rgb(224, 224, 224);
+            color: black;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+        .delete-btn {
+            background-color: rgb(255, 177, 177);
+            color: rgb(255, 17, 17);
+            font-weight: 700;
+        }
+
+
     </style>
 </head>
 <body>
@@ -79,15 +117,22 @@
             <div class="post-title"><%= list[0].title %></div> 
             <div class="write-info-box">
                 <div class="info-area-a">
-                    <img src="img/eaBanner.png" alt="">
+                    <img src="../img/eaBanner.png" alt="">
                 </div>
                 <div class="info-area-b">
                     <div class="post-writer"><%= list[0].author %></div>
                     <div class="post-date"><%= list[0].regdate.getFullYear() %>-<%= list[0].regdate.getMonth() +1%>-<%= list[0].regdate.getDate() %> <%= list[0].regdate.getHours() %>:<%= list[0].regdate.getMinutes() %></div>
                 </div>
-            </div>
-            <div class="content-area"><%= list[0].content %></div>
+            </div> 
+            <div class="content-area"><%- list[0].content.replace(/\n/g, '<br>') %></div>
         </div>
+
+        <div class="sub-btn">
+            <a href="/list">취소</a>
+            <button class="submit-btn" onclick="location.href='/edit/<%=list[0].id%>'">수정</button>
+            <button class="delete-btn" onclick="location.href='/delete/<%=list[0].id%>'">삭제</button>
+        </div>
+
     </main>
 
     

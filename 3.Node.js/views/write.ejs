@@ -111,6 +111,10 @@
             text-decoration: none;
         }
 
+        .author-input {
+            margin-right: 20px;
+        }
+
     </style>
 </head>
 <body>
@@ -121,7 +125,9 @@
         <form action="/writeAf" method="post">
             <div class="write-area">
                 <div class="author-area">
-                    작성자 <input type="text" name='author'>
+                    작성자 <input class="author-input" type="text" name='author'>
+                    비밀번호 <input type="text" name='post_pw'>
+                    <!-- <input type="file" accept=".gif, .jpg, .png"> -->
                 </div>
                 <div class="title-area">
                     <input type="text" name='title' placeholder='제목을 입력하세요.'>

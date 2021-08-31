@@ -3,10 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <title>수정페이지</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "맑은고딕";
+        }
+
+        body {
+            background-color: rgb(224, 224, 224);
+        }
+
+        main {
+            width: 50%;
+            height: 500px;
+            background-color: #fff;
+            margin: 8% auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .header-box {
+            width: 100%;
+            border-bottom: 2px solid black;
+        }
+
+        form {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+
+        }
+
+        .write-area {
+            width: 95%;
+            height: 95%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-area {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            
+        }
+
+        input, input:focus, .content-area textarea, .content-area textarea:focus {
+            border: 1px solid rgb(218, 218, 218);
+            outline: none;
+        }
+
+        .author-area input {
+            margin-left: 20px;
+            padding: 5px;
+        }
+
+        .title-area input {
+            margin: 10px 0px;
+            width: 100%;
+            padding: 10px;
+            word-wrap: break-word;
+        }
+
+        .content-area {
+            height: 65%;
+        }
+
+        .content-area textarea {
+            resize: none;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+        }
+
+        .sub-btn {
+            margin-top: auto;
+            margin-left: auto;
+            display: flex;
+        }
+
+        .sub-btn button, .sub-btn a {
+            border: none;
+            border-radius: 5px;
+            
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: rgb(204, 236, 204);
+            color: green;
+            font-weight: 700;
+        }
+
+        .sub-btn a {
+            background-color: rgb(224, 224, 224);
+            color: black;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 
-    
+    <main>
+        <h2>수정하기</h2>
+        <div class="header-box"></div>
+        <form action="/updateAf?id=<%= list[0].id %>" method="post">
+            <div class="write-area">
+                <div class="author-area">
+                    작성자 <input type="text" name='author' value="<%= list[0].author %>" disabled>
+                </div>
+                <div class="title-area">
+                    <input type="text" name='title' value="<%= list[0].title %>">
+                </div>
+                
+                <div class="content-area">
+                    <textarea type="text" name="content"><%= list[0].content %></textarea>
+                </div>
+                
+                <div class="sub-btn">
+                    <a href="/read/<%= list[0].id %>">취소</a>
+                    <button type="submit" class="submit-btn">수정하기</button>
+                </div>
+                
+            </div>
+        
+        </form>
+    </main>
+
+
 
 
 

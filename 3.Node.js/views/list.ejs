@@ -137,11 +137,13 @@
                         <a href="/read/<%=value.id%>"><%=value.title %></a>
                     </div>
                     <div class="post-author"><%=value.author %></div>
-                    <div class="post-date"><%=value.regdate.getHours() %>:<%=value.regdate.getMinutes() %></div>
+                    <div class="post-date">
+                        <% if(value.regdate.getHours() < 10 ){ %>0<%=value.regdate.getHours() %><%} else {%><%=value.regdate.getHours() %><%} %>:<% if(value.regdate.getMinutes() < 10 ){ %>0<%=value.regdate.getMinutes() %>
+                        <%} else {%><%=value.regdate.getMinutes() %><%} %></div>
                 </div>
             <% }); %>
 
-
+                
         </div>
     
         <footer>
@@ -150,7 +152,6 @@
 
     </main>
     
-
     
     <!-- <table border="1">
         <colgroup>

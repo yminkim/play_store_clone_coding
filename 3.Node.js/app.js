@@ -16,6 +16,7 @@ app.use(express.static('views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html'); 
 
+
 // db연결
 db_config.connect(conn);
 
@@ -69,8 +70,8 @@ app.post('/writeAf', function (req, res) {
     var body = req.body;
     console.log(body);
 
-    var sql = 'INSERT INTO board (author, title, content, regdate, post_pw) VALUES (?, ?, ?, NOW(), ?)';
-    var params = [body.author, body.title, body.content, body.post_pw];
+    var sql = 'INSERT INTO board (author, title, content, regdate, post_pw, author_img) VALUES (?, ?, ?, NOW(), ?, ?)';
+    var params = [body.author, body.title, body.content, body.post_pw, body.author_img];
     console.log(sql);
     conn.query(sql, params, function(err) {
         if(err) console.log('query is not excuted. insert fail...\n' + err);

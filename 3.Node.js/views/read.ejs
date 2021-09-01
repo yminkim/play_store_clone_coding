@@ -117,25 +117,53 @@
             <div class="post-title"><%= list[0].title %></div> 
             <div class="write-info-box">
                 <div class="info-area-a">
-                    <img src="../img/eaBanner.png" alt="">
+                    <img src="/img/<%= list[0].author_img %>" alt="">
                 </div>
                 <div class="info-area-b">
                     <div class="post-writer"><%= list[0].author %></div>
-                    <div class="post-date"><%= list[0].regdate.getFullYear() %>-<%= list[0].regdate.getMonth() +1%>-<%= list[0].regdate.getDate() %> <%= list[0].regdate.getHours() %>:<%= list[0].regdate.getMinutes() %></div>
+                    <div class="post-date"><%= list[0].regdate.getFullYear() %>-<% if(list[0].regdate.getMonth()+1 < 10 ){ %>0<%=list[0].regdate.getMonth()+1 %><%} else {%><%=list[0].regdate.getMonth()+1 %><%} %>-<% if(list[0].regdate.getDate() < 10 ){ %>0<%=list[0].regdate.getDate() %><%} else {%><%=list[0].regdate.getDate() %><%} %> <% if(list[0].regdate.getHours() < 10 ){ %>0<%=list[0].regdate.getHours() %><%} else {%><%=list[0].regdate.getHours() %><%} %>:<% if(list[0].regdate.getMinutes() < 10 ){ %>0<%=list[0].regdate.getMinutes() %><%} else {%><%=list[0].regdate.getMinutes() %><%} %></div>
                 </div>
             </div> 
             <div class="content-area"><%- list[0].content.replace(/\n/g, '<br>') %></div>
         </div>
 
         <div class="sub-btn">
-            <a href="/list">취소</a>
-            <button class="submit-btn" onclick="location.href='/edit/<%=list[0].id%>'">수정</button>
-            <button class="delete-btn" onclick="location.href='/delete/<%=list[0].id%>'">삭제</button>
+            <a href="/list">돌아가기</a>
+            <button class="edit-btn submit-btn">수정</button>
+            <button class="edit-btn delete-btn">삭제</button>
         </div>
 
-    </main>
+        
 
-    
+    </main>
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script>
+        // 수정/삭제 버튼 선택 시 패스워드 띄우는 코드
+        $('.edit-btn').click(function(){
+            let input = prompt('접근을 위해 패스워드를 입력해주세요');
+            if(input == '<%=list[0].post_pw %>') {
+                let result;
+                //수정 버튼
+                if($(this).hasClass('submit-btn') == true) {
+                    result = confirm("수정하시겠습니까?");
+                    if(result == true)
+                        location.href="/edit/<%=list[0].id%>";
+                } else if($(this).hasClass('delete-btn') == true) { // 삭제 버튼
+                    result = confirm("삭제하시겠습니까?");
+                    if(result == true)
+                        location.href="/delete/<%=list[0].id%>";
+                }
+
+            } else {
+                alert('패스워드가 틀렸습니다.');
+            }
+        });
+
+        
+    </script>
    
 </body>
 </html>

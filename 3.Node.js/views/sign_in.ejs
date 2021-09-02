@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>검문소</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "맑은고딕";
+        }
+
+        h1 {
+            margin: 30px auto;
+            color: rgb(41, 41, 41);
+            font-size: 35px;
+        }
+
+        body {
+            background-color: rgb(224, 224, 224);
+        }
+
+        main {
+            width: 50%;
+            background-color: #fff;
+            margin: 8% auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-box {
+            width: 65%;
+            margin: auto;
+            font-size: 25px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-box input {
+            width: 100%;
+            font-size: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgb(209, 209, 209);
+            margin-bottom: 5%;
+            color: black;
+        }
+
+        .login-box input:focus {
+            border: 1px solid rgb(0, 132, 255);
+            outline: none;
+        }
+        
+        .login-title {
+            margin-bottom: 2%;
+            font-weight: 700;
+        }
+
+        .submit-btn {
+            width: 100%;
+            font-size: 20px;
+            padding: 10px;
+            background-color: rgb(47, 130, 224);
+            color: #fff;
+            border: 1px solid rgb(47, 130, 224);
+            border-radius: 5px;
+            margin: 5% 0;
+        }
+
+        .sign-up-area {
+            width: 100%;
+            display: flex;
+            border-top: 1px solid gray;
+        }
+
+        .sign-up-area a {
+            font-size: 12px;
+            margin-left: auto;
+            color: gray;
+            text-decoration: none;
+            margin-top: 2%;
+            margin-bottom: 2%;
+        }
+
+        .sign-up-area a:hover {
+            color: rgb(47, 130, 224);
+        }
+
+        .submit-btn:hover {
+            cursor: pointer;
+            background-color: rgb(37, 98, 168);
+        }
+
+    </style>
+</head>
+<body>
+    
+    <main>
+        <h1>로그인</h1>
+        
+        <div class="login-box">
+            <div class="login-title">이메일</div>
+            <input type="text" placeholder="Enter email">
+            <div class="login-title">비밀번호</div>
+            <input type="password" placeholder="Enter password">
+
+            <button class="submit-btn" type="submit">Sign in</button>
+
+            <div class="sign-up-area">
+                <a href="/signUp">회원가입</a>
+            </div>
+        </div>
+        
+
+        <h1></h1>
+    
+        
+
+    </main>
+ 
+</body>
+</html>

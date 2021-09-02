@@ -126,5 +126,13 @@ app.get('/read/:id', function (req, res) {
 });
 
 
+//로그인 페이지
+app.get('/signIn', function (req, res) {
+    res.render('sign_in.ejs');
+});
 
+//회원가입 페이지
+app.get('/signUp', function (req, res) {
+    res.render('sign_up.ejs');
+});
 

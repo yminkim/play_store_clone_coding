@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <meta charset="UTF-8">
-    <title>검문소</title>
+    <title>회원가입</title>
     <style>
         * {
             margin: 0;
@@ -127,24 +127,24 @@
     
     <main>
         <h1>회원가입</h1>
-        
-        <div class="login-box">
-            <div class="login-title">이메일</div>
-            <input class="email-input" type="text" placeholder="Enter email">
-            <div class="login-title">비밀번호</div>
-            <div class="pw-box">
-                <input class="pw-ip" type="password" placeholder="Enter password">
-                <div class="pw-view fas fa-eye-slash"></div>
-            </div>
-            <input class="pw-ip password-input" type="password" placeholder="Enter password again">
+        <form action="/signUpAf" method="post">
+            <div class="login-box">
+                <div class="login-title">이메일</div>
+                <input class="email-input" type="text" placeholder="Enter email" name="login_id">
+                <div class="login-title">비밀번호</div>
+                <div class="pw-box">
+                    <input class="pw-ip" type="password" placeholder="Enter password" name="login_pw">
+                    <div class="pw-view fas fa-eye-slash"></div>
+                </div>
+                <input class="pw-ip password-input" type="password" placeholder="Enter password again">
 
-            <button class="submit-btn" type="submit">Sign up</button>
+                <button class="submit-btn" type="submit">Sign up</button>
 
-            <div class="sign-up-area">
-                <a href="/signIn">로그인 페이지</a>
+                <div class="sign-up-area">
+                    <a href="/signIn">로그인 페이지</a>
+                </div>
             </div>
-        </div>
-        
+        </form>
 
         <h1></h1>
     

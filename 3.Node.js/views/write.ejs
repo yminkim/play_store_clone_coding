@@ -143,7 +143,7 @@
     <main>
         <h2>글작성</h2>
         <div class="header-box"></div>
-        <form action="/writeAf" method="post">
+        <form action="/writeAf" method="post" name="form1">
             <div class="write-area">
                 <div class="author-area">
                     <label class="info-area-a" for="imageUpload">
@@ -154,7 +154,7 @@
                     비밀번호 <input type="text" name='post_pw'>
                 </div>
                 <div class="title-area">
-                    <input type="text" name='title' placeholder='제목을 입력하세요.'>
+                    <input type="text" name='title' placeholder='제목을 입력하세요.' minlength="1">
                 </div>
                 
                 <div class="content-area">
@@ -162,7 +162,7 @@
                 </div>
                 
                 <div class="sub-btn">
-                    <a href="/list">취소</a>
+                    <a onclick="history.back();">취소</a>
                     <button type="submit" class="submit-btn">등록</button>
                 </div>
                 
@@ -189,8 +189,22 @@
         $("#imageUpload").change(function() {
             readURL(this);
         });
+
+        // function required() {
+        //     var empt = document.forms["form1"]["title"].value;
+        //     if(empt == "") {
+        //         alert("Please input a Value");
+        //         return false;
+        //     } else {
+        //         alert('Code has accepted : you can try another');
+        //         return true; 
+        //     }
+        // }
+
+
     </script>
 
+   
 
     <!-- <form action="/writeAf" method="post">
         작성자  : <input type="text" name='author'><br>

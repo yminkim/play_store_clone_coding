@@ -96,7 +96,8 @@
         /* 하단 영역 */
         footer {
             margin-top: 10px;
-            margin-left: auto;
+            display: flex;
+            justify-content: space-between;
         }
 
         footer button {
@@ -109,6 +110,10 @@
         .post-title a {
             text-decoration: none;
             color: black;
+        }
+
+        .hide-op {
+            visibility: hidden;
         }
 
 
@@ -128,61 +133,33 @@
         
 
         <div class="post-area">
-
+            
 
             <% list.forEach(function (value, index) { %>
                 <div class="post-container">
-                    <div class="post-count"><%=index+1 %></div>
+                    <div class="post-count"><%=value.id %></div>
                     <div class="post-title">
                         <a href="/read/<%=value.id%>"><%=value.title %></a>
                     </div>
                     <div class="post-author"><%=value.author %></div>
-                    <div class="post-date">
-                        <% if(value.regdate.getHours() < 10 ){ %>0<%=value.regdate.getHours() %><%} else {%><%=value.regdate.getHours() %><%} %>:<% if(value.regdate.getMinutes() < 10 ){ %>0<%=value.regdate.getMinutes() %>
-                        <%} else {%><%=value.regdate.getMinutes() %><%} %></div>
+                    <div class="post-date"><%= post_time[index] %></div>
                 </div>
             <% }); %>
 
                 
         </div>
-    
+        
         <footer>
+            <button class="hide-op">글쓰기</button>
+            <div class="page-area">
+                <% for(let i =0; i < pages; i++) { %>
+                    <a href="/list?pages=<%=i+1 %>">[<%=i+1 %>]</a>
+                <% }%>
+            </div>
             <button onclick="location.href='/write'">글쓰기</button>
         </footer>
 
     </main>
     
-    
-    <!-- <table border="1">
-        <colgroup>
-            <col width = '60'><col width='200'><col width = '100'>
-        </colgroup>
-        <thead>
-            <tr>
-                <th>글번호</th>
-                <th>rec ID</th>
-                <th>작성자</th>
-                <th>글제목</th>
-                <th>글내용</th>
-                <th>수정</th>
-                <th>삭제</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% list.forEach(function (value, index) { %>
-            <tr>
-                <td><%=index+1 %></td>
-                <td><%=value.id %></td>
-                <td><%=value.author %></td>
-                <td><%=value.title %></td>
-                <td><%=value.content %></td>
-                <td><a href="/edit/<%=value.id%>">edit</a></td>
-                <td><a href="/delete/<%=value.id%>">delete</a></td>
-            </tr>
-            <% }); %>
-        </tbody>
-    </table boader='1'> -->
-
-    <!-- <button onclick="location.href='/write'">글쓰기</button> -->
 </body>
 </html>

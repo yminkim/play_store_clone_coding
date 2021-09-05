@@ -100,18 +100,20 @@
     <main>
         <h1>로그인</h1>
         
-        <div class="login-box">
-            <div class="login-title">이메일</div>
-            <input type="text" placeholder="Enter email">
-            <div class="login-title">비밀번호</div>
-            <input type="password" placeholder="Enter password">
+        <form action="/signInAf" method="post">
+            <div class="login-box">
+                <div class="login-title">이메일</div>
+                <input type="text" placeholder="Enter email" name="login_id">
+                <div class="login-title">비밀번호</div>
+                <input type="password" placeholder="Enter password" name="login_pw">
 
-            <button class="submit-btn" type="submit">Sign in</button>
+                <button class="submit-btn" type="submit">Sign in</button>
 
-            <div class="sign-up-area">
-                <a href="/signUp">회원가입</a>
+                <div class="sign-up-area">
+                    <a href="/signUp">회원가입</a>
+                </div>
             </div>
-        </div>
+        </form>
         
 
         <h1></h1>

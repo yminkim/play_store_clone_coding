@@ -121,14 +121,14 @@
                 </div>
                 <div class="info-area-b">
                     <div class="post-writer"><%= list[0].author %></div>
-                    <div class="post-date"><%= list[0].regdate.getFullYear() %>-<% if(list[0].regdate.getMonth()+1 < 10 ){ %>0<%=list[0].regdate.getMonth()+1 %><%} else {%><%=list[0].regdate.getMonth()+1 %><%} %>-<% if(list[0].regdate.getDate() < 10 ){ %>0<%=list[0].regdate.getDate() %><%} else {%><%=list[0].regdate.getDate() %><%} %> <% if(list[0].regdate.getHours() < 10 ){ %>0<%=list[0].regdate.getHours() %><%} else {%><%=list[0].regdate.getHours() %><%} %>:<% if(list[0].regdate.getMinutes() < 10 ){ %>0<%=list[0].regdate.getMinutes() %><%} else {%><%=list[0].regdate.getMinutes() %><%} %></div>
+                    <div class="post-date"><%= post_date %></div>
                 </div>
             </div> 
             <div class="content-area"><%- list[0].content.replace(/\n/g, '<br>') %></div>
         </div>
 
         <div class="sub-btn">
-            <a href="/list">돌아가기</a>
+            <a onclick="history.back();">돌아가기</a>
             <button class="edit-btn submit-btn">수정</button>
             <button class="edit-btn delete-btn">삭제</button>
         </div>

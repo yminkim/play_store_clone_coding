@@ -116,14 +116,39 @@
             visibility: hidden;
         }
 
+        .page-area a {
+            text-decoration: none;
+            padding: 4px;
+            background-color: #fff;
+            border: 1px solid black;
+            font-size: 13px;
+            color: black;
+        }
 
+        .page-area a:hover {
+            background-color: cornflowerblue;
+        }
+
+
+        .login-info-area {
+            position: absolute;
+            right: 30px;
+            top: 10px;
+            display: flex;
+        }
+        
     </style>
 </head>
 <body>
     
     <main>
+        <div class="login-info-area">
+            <div class="login-info"><%= (locals.user_name) ? user_name.nickname : "로그인해줘" %></div>
+            <a href="/signIn">로그인</a>
+            <form class="unknown" action="/remove_user" method="post"><button type="submit">탈퇴</button></form>
+            <form class="log-out-form" action="/logout" method="post"><button type="submit">로그아웃</button></form>
+        </div>
         <h2>게시글 리스트</h2>
-        <div class=""></div>
         <div class="header-box">
             <div class="title">제목</div>
             <div class="author">작성자</div>
@@ -152,14 +177,25 @@
         <footer>
             <button class="hide-op">글쓰기</button>
             <div class="page-area">
+                <a class="page-first" href="/list?pages=<%=1 %>"><<</a>
                 <% for(let i =0; i < pages; i++) { %>
-                    <a href="/list?pages=<%=i+1 %>">[<%=i+1 %>]</a>
+                    <a href="/list?pages=<%=i+1 %>"><%=i+1 %></a>
                 <% }%>
+                <a class="page-end" href="/list?pages=<%=pages %>">>></a>
             </div>
             <button onclick="location.href='/write'">글쓰기</button>
         </footer>
 
     </main>
-    
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script>
+        if($('.page-first').attr('href') == "/list?pages=2")
+            console.log('asdf');
+        
+    </script>
 </body>
 </html>

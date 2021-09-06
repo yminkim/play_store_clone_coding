@@ -1,4 +1,3 @@
-
 // node_modules 에 있는 express 관련 파일을 가져온다.
 var express = require('express')
 // express 는 함수이므로, 반환값을 변수에 저장한다.
@@ -7,6 +6,24 @@ var db_config = require(__dirname + '/config/database.js');
 var conn = db_config.init();
 var bodyParser = require('body-parser');
 const { application } = require('express');
+
+var session = require('express-session');
+
+// var req.session;
+
+app.use(session({
+    secret: "asdfasdfasdf",
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 600000}
+}));
+
+app.get('/', function(req, res) {
+    //req.session = req.session;
+    //req.session.username = 'asdf';  테스트용 
+    // console.log(req.session.username);테스트용 
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extende: false}));
 
@@ -169,6 +186,7 @@ app.get('/read/:id', function (req, res) {
 
 //로그인 페이지
 app.get('/signIn', function (req, res) {
+    req.session = req.session;
     res.render('sign_in.ejs');
 });
 
@@ -192,28 +210,77 @@ app.post('/signUpAf', function(req, res) {
 //로그인 처리
 app.post('/signInAf', function(req, res) {
     var body = req.body;
-    var sql = 'select exists(select * from user where login_id = ? and login_pw = ?) as isHave;';  
+
+    var sql = 'select id, login_id, nickname from user where login_id = ? and login_pw = ?';
     queryparams = [body.login_id, body.login_pw];
     //console.log(queryparams);
     conn.query(sql, queryparams, function(err, rows, fields) {
-        console.log(req.params.login_id);
-        console.log(body.login_id);
-        if(req.params.login_id == body.login_id)
-            console.log('일단 로그인 확인');
-        else 
-            console.log('실패');
+        if(rows[0] == undefined) {
+            console.log('로그인 실패 처리 해줘야함 해당 페이지에서 얼럿도 띄워주고....');
+            
+        } else {
+            req.session.user = rows[0];
+            console.log("로그인 성공/ 접속 id: " + req.session.user.nickname);
+            res.redirect('/list');
+        }
+        
     });
 });
 
+//로그아웃 처리
+app.post('/logout', function(req, res) {
+    console.log('로그아웃 시도');
+    // req.session = req.session;
+    req.session.destroy(function(err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        req.session;
+        
+    });
+
+    res.redirect('/list');
+
+    // req.session.destroy(function(err) {
+    //     if(err) 
+    //         console.log(err);
+    //     else {
+    //         console.log('세션을 삭제하고 로그아웃 합니다.');
+    //         res.redirect('/list');
+    //         console.log("로그아웃 후 세션"+req.session);
+    //     }
+    // });
+
+});
+
+//탈퇴
+app.post('/remove_user', function(req, res) {
+    let sql = 'delete from user where id = ?';
+    console.log(req.session.user.id);
+    let params = req.session.user.id;
+    conn.query(sql, params, function(err, rows, fields){
+        console.log(params+'회원을 탈퇴합니다.');
+        res.redirect('/signIn');
+    });
+});
 
 //페이지 처리
 //select * from board limit 5 offset value; 인데 value는 (페이지 번호 - 1 ) * 5로 ㄱㄱ
 app.get('/list', function (req, res) {
+    let login_info;
+    if(req.session != null) {
+        login_info = req.session.user;
+        console.log(login_info);
+    }
+    
+
     let sql = 'select count(*) as count from board';
     conn.query(sql, function(err, result, fields) {
         const total = result[0].count;
         const limit = 5;
-        const pages = total / limit;
+        const pages = Math.round(total / limit);
+        //console.log(pages); 페이지 구분
         var page;
 
         if (req.param('pages') == null) {
@@ -284,22 +351,9 @@ app.get('/list', function (req, res) {
                     }
                 }
             }
-
-            // console.log("기준시간용"+today_set);
-            // if(today_set > rows[0].regdate) {
-            //     console.log("기준시간용"+today_set);
-            //     console.log('기준 시간보다 낮다!');
-            //     console.log(today_set);
-            //     console.log(rows[0].regdate);
-            // } else {
-            //     console.log("기준시간용"+today_set);
-            //     console.log('기준 시간보다 높다!');
-            //     console.log(today_set);
-            //     console.log(rows[0].regdate);
-            // }
             
             if(err) console.log('query is not excuted. select fail...\n' + err);
-            else res.render('list.ejs', {list : rows, pages : pages, post_time : post_time}); 
+            else res.render('list.ejs', {list : rows, pages : pages, post_time : post_time, user_name : login_info}); 
 
             
         });

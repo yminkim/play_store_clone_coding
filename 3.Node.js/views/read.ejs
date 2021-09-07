@@ -107,12 +107,38 @@
             font-weight: 700;
         }
 
+        .login-info-area {
+            position: absolute;
+            right: 30px;
+            top: 10px;
+            display: flex;
+        }
 
+        .login-info {
+            margin-right: 10px;
+        }
+
+        .unknown {
+            margin-left: 10px;
+        }
+    
     </style>
 </head>
 <body>
     
     <main>
+        <div class="login-info-area">
+            <div class="login-info">접속: <%= (locals.user_info) ? user_info.nickname : "GUEST" %></div>
+            <% if(locals.user_info == null) { %>
+                <a href="/signIn">로그인</a>
+            <% } else { %>
+                <form class="log-out-form" action="/logout" method="post"><button type="submit">로그아웃</button></form>
+                <form class="unknown" action="/remove_user" method="post"><button type="submit">탈퇴</button></form>
+            <% } %>
+            
+            
+        </div>
+
         <div class="post-area">
             <div class="post-title"><%= list[0].title %></div> 
             <div class="write-info-box">
@@ -129,8 +155,12 @@
 
         <div class="sub-btn">
             <a onclick="history.back();">돌아가기</a>
-            <button class="edit-btn submit-btn">수정</button>
-            <button class="edit-btn delete-btn">삭제</button>
+            <% if(locals.user_info != null) { %>
+                <% if(user_info.id == list[0].user_id) { %>
+                    <button class="edit-btn submit-btn">수정</button>
+                    <button class="edit-btn delete-btn">삭제</button>
+                <% } %>
+            <% } %>
         </div>
 
         
@@ -143,8 +173,8 @@
     <script>
         // 수정/삭제 버튼 선택 시 패스워드 띄우는 코드
         $('.edit-btn').click(function(){
-            let input = prompt('접근을 위해 패스워드를 입력해주세요');
-            if(input == '<%=list[0].post_pw %>') {
+            // let input = prompt('접근을 위해 패스워드를 입력해주세요');
+            // if(input == '<%=list[0].post_pw %>') {
                 let result;
                 //수정 버튼
                 if($(this).hasClass('submit-btn') == true) {
@@ -157,9 +187,9 @@
                         location.href="/delete/<%=list[0].id%>";
                 }
 
-            } else {
-                alert('패스워드가 틀렸습니다.');
-            }
+            // } else {
+            //     alert('패스워드가 틀렸습니다.');
+            // }
         });
 
         

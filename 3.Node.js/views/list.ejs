@@ -136,6 +136,29 @@
             top: 10px;
             display: flex;
         }
+
+        .login-info {
+            margin-right: 10px;
+            display: flex;
+        }
+
+        .unknown {
+            margin-left: 10px;
+        }
+
+        #imagePreview {
+            width: 40px;
+            height: 40px;
+        }
+
+        #imagePreview img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .input-img-c {
+            display: none;
+        }
         
     </style>
 </head>
@@ -143,10 +166,26 @@
     
     <main>
         <div class="login-info-area">
-            <div class="login-info"><%= (locals.user_name) ? user_name.nickname : "로그인해줘" %></div>
-            <a href="/signIn">로그인</a>
-            <form class="unknown" action="/remove_user" method="post"><button type="submit">탈퇴</button></form>
-            <form class="log-out-form" action="/logout" method="post"><button type="submit">로그아웃</button></form>
+            <div class="login-info">접속:
+                <label class="info-area-a" for="imageUpload">
+                    <div id="imagePreview"><img src="/img/genre-1.png" alt=""></div>
+                </label>
+                <input type="file" id="imageUpload" accept=".gif, .jpg, .png" name="author_img" class="input-img-c" %>">
+                    <%= (locals.user_info) ? user_info.nickname : "GUEST" %>
+                </div>
+            <% if(locals.user_info == null) { %>
+                <a href="/signIn">로그인</a>
+            <% } else { %>
+                <form class="log-out-form" action="/logout" method="post">
+                    <button class="user_btn logout_btn" type="submit">로그아웃</button>
+                </form>
+
+                <form class="unknown" action="/remove_user" method="post">
+                    <button class="user_btn out_btn" type="submit">탈퇴</button>
+                </form>
+            <% } %>
+            
+            
         </div>
         <h2>게시글 리스트</h2>
         <div class="header-box">
@@ -183,7 +222,11 @@
                 <% }%>
                 <a class="page-end" href="/list?pages=<%=pages %>">>></a>
             </div>
-            <button onclick="location.href='/write'">글쓰기</button>
+            <% if(locals.user_info == null) { %>
+                <button class="hide-op">글쓰기</button>
+            <% } else { %>
+                <button onclick="location.href='/write'">글쓰기</button>
+            <% } %>
         </footer>
 
     </main>
@@ -195,6 +238,40 @@
     <script>
         if($('.page-first').attr('href') == "/list?pages=2")
             console.log('asdf');
+
+        $('.user_btn').click(function(){
+            let rusult;
+
+            if($(this).hasClass('logout_btn'))
+                result = confirm('로그아웃 하시겠습니까');
+            else 
+                result = confirm('탈퇴 하시겠습니까');
+
+            if(result == true) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+
+        //프로필 사진 변경
+        function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#imagePreview img').attr("src", e.target.result );
+                }
+            reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imageUpload").change(function() {
+            readURL(this);
+        });
+
+        
+        
         
     </script>
 </body>

@@ -82,17 +82,29 @@ app.get('/playstation_Store_game_page',function(req,res){
 // });
 
 app.get('/write', function (req, res) {
-    res.render('write.ejs');
+    let login_info;
+    login_info = req.session.user;
+    console.log(login_info.uesr_img);
+    res.render('write.ejs', {user_info : login_info});
 });
 
 app.post('/writeAf', function (req, res) {
+    
     var body = req.body;
     console.log(body);
+    let author_imgs = req.session.user.user_img;
 
-    var sql = 'INSERT INTO board (author, title, content, regdate, post_pw, author_img) VALUES (?, ?, ?, NOW(), ?, ?)';
-    var params = [body.author, body.title, body.content, body.post_pw, body.author_img];
-    console.log(sql);
+    var sql = 'INSERT INTO board (author, title, content, regdate, post_pw, author_img, user_id) VALUES (?, ?, ?, NOW(), ?, ?, ?)';
+    var params = [body.author, body.title, body.content, body.post_pw, author_imgs, body.user_id];
+
+    
+
+    var sql2 = 'update user set user_img = ? where id = ?';
+    var params2 = [body.author_img, req.session.user.id];
+    
+    
     conn.query(sql, params, function(err) {
+        conn.query(sql2, params2);
         if(err) console.log('query is not excuted. insert fail...\n' + err);
         else res.redirect('/list');
     });
@@ -136,6 +148,15 @@ app.post('/updateAf', function(req, res) {
 //게시글 페이지
 
 app.get('/read/:id', function (req, res) {
+    let login_info;
+    if(req.session != null) {
+        login_info = req.session.user;
+        console.log(login_info);
+    }
+
+    console.log(req.session);
+
+
     var sql = 'SELECT * FROM board where id = ?';    
     var params = [req.params.id];
 
@@ -179,7 +200,7 @@ app.get('/read/:id', function (req, res) {
 
 
         if(err) console.log('query is not excuted. select fail...\n' + err);
-        else res.render('read.ejs', {list : rows, post_date : post_date});
+        else res.render('read.ejs', {list : rows, post_date : post_date, user_info : login_info});
     });
 });
 
@@ -187,7 +208,12 @@ app.get('/read/:id', function (req, res) {
 //로그인 페이지
 app.get('/signIn', function (req, res) {
     req.session = req.session;
-    res.render('sign_in.ejs');
+    let validation = true;
+    if (req.session.valid == false) {
+        validation = false;
+    }
+    res.render('sign_in.ejs', {validation : validation});
+    req.session.valid == true; // 다시 접근했을 때 초기화 시켜주기 위함
 });
 
 //회원가입 페이지
@@ -198,12 +224,12 @@ app.get('/signUp', function (req, res) {
 // 회원가입 처리
 app.post('/signUpAf', function(req, res) {
     var body = req.body;
-    var sql = 'insert into user (login_id, login_pw) values (?, ?)';
-    var queryparams = [body.login_id, body.login_pw];
+    var sql = 'insert into user (login_id, login_pw, nickname) values (?, ?, ?)';
+    var queryparams = [body.login_id, body.login_pw, body.nickname];
     console.log(queryparams);
     conn.query(sql, queryparams, function(err) {
         if(err) console.log('query is not excuted. update fail...\n' + err);
-        else res.redirect('/list');
+        else res.redirect('/signIn');
     });
 });
 
@@ -211,13 +237,14 @@ app.post('/signUpAf', function(req, res) {
 app.post('/signInAf', function(req, res) {
     var body = req.body;
 
-    var sql = 'select id, login_id, nickname from user where login_id = ? and login_pw = ?';
+    var sql = 'select id, login_id, nickname, user_img from user where login_id = ? and login_pw = ?';
     queryparams = [body.login_id, body.login_pw];
     //console.log(queryparams);
     conn.query(sql, queryparams, function(err, rows, fields) {
         if(rows[0] == undefined) {
-            console.log('로그인 실패 처리 해줘야함 해당 페이지에서 얼럿도 띄워주고....');
-            
+            console.log('로그인 실패 처리');
+            req.session.valid = false;
+            res.redirect('/signIn');
         } else {
             req.session.user = rows[0];
             console.log("로그인 성공/ 접속 id: " + req.session.user.nickname);
@@ -278,9 +305,9 @@ app.get('/list', function (req, res) {
     let sql = 'select count(*) as count from board';
     conn.query(sql, function(err, result, fields) {
         const total = result[0].count;
-        const limit = 5;
-        const pages = Math.round(total / limit);
-        //console.log(pages); 페이지 구분
+        const limit = 10;
+        const pages = Math.ceil(total / limit); // ejs에서 페이지 수를 계산해준거임
+        console.log(pages); 
         var page;
 
         if (req.param('pages') == null) {
@@ -353,7 +380,7 @@ app.get('/list', function (req, res) {
             }
             
             if(err) console.log('query is not excuted. select fail...\n' + err);
-            else res.render('list.ejs', {list : rows, pages : pages, post_time : post_time, user_name : login_info}); 
+            else res.render('list.ejs', {list : rows, pages : pages, post_time : post_time, user_info : login_info}); 
 
             
         });

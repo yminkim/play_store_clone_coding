@@ -130,15 +130,15 @@
         <form action="/signUpAf" method="post">
             <div class="login-box">
                 <div class="login-title">이메일</div>
-                <input class="email-input" type="text" placeholder="Enter email" name="login_id">
+                <input class="user_info_id email-input" type="text" placeholder="Enter email" name="login_id">
                 <div class="login-title">닉네임</div>
-                <input class="email-input" type="text" placeholder="Enter nickname" name="nickname">
+                <input class="user_info_nickname email-input" type="text" placeholder="Enter nickname" name="nickname">
                 <div class="login-title">비밀번호</div>
                 <div class="pw-box">
-                    <input class="pw-ip" type="password" placeholder="Enter password" name="login_pw">
+                    <input class="user_info_pw pw-ip" type="password" placeholder="Enter password" name="login_pw">
                     <div class="pw-view fas fa-eye-slash"></div>
                 </div>
-                <input class="pw-ip password-input" type="password" placeholder="Enter password again">
+                <input class="user_info_pw2 pw-ip password-input" type="password" placeholder="Enter password again">
 
                 <button class="submit-btn" type="submit">Sign up</button>
 
@@ -159,6 +159,13 @@
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous"></script>
     <script>
+        //회원가입 중복 여부 체크
+        let overlap = '<%=overlap_ck %>';
+        if(overlap == 'false') {
+            alert('id나 닉네임이 중복됩니다. 바꾸세요');
+        }
+
+
         let pw_val = 0;
         $('.pw-view').click(function(){
             if(pw_val == 0) {
@@ -173,6 +180,25 @@
                 pw_val = 0;
             }
         });
+
+        
+
+        $('.submit-btn').click(function(){
+            if($('.user_info_id').val() == "") {
+                alert('id를 입력해주세요');
+                return false;
+            } else if($('.user_info_nickname').val() == "") {
+                alert('닉네임을 입력해주세요');
+                return false;
+            } else if($('.user_info_pw').val() == "") {
+                alert('패스워드를 입력해주세요');
+                return false;
+            } else if($('.user_info_pw2').val() == "") {
+                alert('패스워드를 재입력해주세요');
+                return false;
+            }
+        });
+        
     </script>
  
 </body>

@@ -103,9 +103,9 @@
         <form action="/signInAf" method="post">
             <div class="login-box">
                 <div class="login-title">이메일</div>
-                <input class="email-box" type="text" placeholder="Enter email" name="login_id">
+                <input class="email-box" type="text" placeholder="Enter email" name="login_id" value="<%=user_info.new_id %>">
                 <div class="login-title">비밀번호</div>
-                <input type="password" placeholder="Enter password" name="login_pw">
+                <input type="password" placeholder="Enter password" name="login_pw" value="<%=user_info.new_pw %>" >
 
                 <button class="submit-btn" type="submit">Sign in</button>
 
@@ -128,15 +128,18 @@
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous"></script>
 <script>
+    //로그인 실패 여부 확인
+    let valid = '<%=validation %>';
+    if (valid == 'false') {
+        alert('로그인 정보가 일치하지 않습니다.');
+    }
+
+
     $('.submit-btn').click(function(){
         if($('.email-box').val() == "") {
             alert('id를 입력해주세요.');
-        } else {
-            let valid = '<%=validation %>';
-            if (valid == 'false') {
-                alert('로그인 정보가 일치하지 않습니다.');
-            }
-        }
+            return false;
+        } 
     });
     
 </script>

@@ -2226,26 +2226,39 @@
         </div>
 
         <div class="game-back-img-container">
-            <img src="img/game_bg_img_dragonballz.png" alt="">
+            <img src="<%= game.background_img%>" alt="">
         </div>
 
         <main>
             <div class="game-info-container">
                 <div class="game-info">
-                    <div class="game-title">드래곤볼 Z 카카로트 (중국어(간체자), 한국어, 태국어, 중국어(번체자))</div>
-                    <div class="game-publisher">BANDAI NAMCO Entertainment Inc.</div>
+                    <div class="game-title"><%= game.title %></div>
+                    <div class="game-publisher"><%= publisher %></div>
                     <div class="game-platform">
-                        <div class="ps-icon">PS4</div>
-                        <div class="ps-icon">PS5</div>
+                        <% device.forEach(function(value, index){ %>
+                            <div class="ps-icon"><%= value.device %></div>
+                        <% }); %>
                     </div>
-                    <div class="game-price-box">
-                        <div class="game-price">22,680원</div>
-                        <div class="game-cost">64,800원</div>
-                    </div>
-                    <div class="discount-info-box">
-                        <div class="dicount-rate">65% 할인</div>
-                        <div class="end-date">2021/8/18에 프로모션 종료</div>
-                    </div>
+
+                    <!-- 할인율 여부에 따른 가격 표시 -->
+                    <% if(locals.discount == null) { %>
+                        <div class="game-price-box">
+                            <div class="game-price"><%= price %>원</div>
+                        </div>
+                    <% } else { %> 
+                        <div class="game-price-box">
+                            <div class="game-price"><%= discount_price %>원</div>
+                            <div class="game-cost"><%= price %>원</div>
+                        </div>
+                    <% } %>
+
+                    <!-- 할인율 여부에 따른 할인 정보 표시 -->
+                    <% if(locals.discount != null) { %>
+                        <div class="discount-info-box">
+                            <div class="dicount-rate"><%=discount_rate %>% 할인</div>
+                            <div class="end-date"><%= discount_end_date %></div>
+                        </div>
+                    <% } %>
                     <div class="cart-area">
                         <button class="go-cart">장바구니에 담기</button>
                         <button class="far fa-heart" type="button"></button>
@@ -2254,34 +2267,16 @@
                 <div class="empty-width"></div>
                 <div class="game-option">
                     <ul>
-                        <li>
-                            <div class="fas fa-user"></div>
-                            <div class="op-detail">온라인 플레이의 경우 PS Plus 필요</div>
-                        </li>
-
-                        <li>
-                            <div class="fas fa-user"></div>
-                            <div class="op-detail">온라인 플레이 선택 사항</div>
-                        </li>
-
-                        <li>
-                            <div class="fas fa-user"></div>
-                            <div class="op-detail">최대 64명의 PS Plus 온라인 플레이어 지원</div>
-                        </li>
-
-                        <li>
-                            <div class="fas fa-user"></div>
-                            <div class="op-detail">인게임 구매 선택 사항</div>
-                        </li>
-
-                        <li>
-                            <div class="fas fa-user"></div>
-                            <div class="op-detail">DUALSHOCK 4 진동</div>
-                        </li>
+                        <% go_arr.forEach(function(value, index){ %>
+                            <li>
+                                <div class="fas fa-user"></div>
+                                <div class="op-detail"><%= go_arr[index] %></div>
+                            </li>
+                        <% }) %>
                     </ul>
                 </div>
                 <div class="game-grade">
-                    <a href=""><img src="img/g12.png" alt=""></a>
+                    <a href=""><img src="<%= game.grade %>" alt=""></a>
                 </div>
 
                 
@@ -2290,170 +2285,57 @@
             <div class="main-container">
                 <div class="edition-title">에디션</div>
                 <div class="edition-box">
+                    <% edition.forEach(function(value, index){ %>
+                        <!-- 에디션 포스트 -->
+                        <div class="edition-post">
+                            <div class="edition-img-box"><img src="<%= value.image %>" alt=""></div>
+                            <div class="edition-info-box">
+                                <div class="edition-info-title"><%= value.title %></div>
+                                <div class="game-platform2">
+                                    <div class="ps-icon">PS4</div>
+                                    <div class="ps-icon">PS5</div>
+                                </div>
+
+
+                                <div class="edition-content-container">
+                                    <ul class="edition-list">
+                                        <!-- 에디션 아이템 출력 -->
+                                        <% for(let i=0 ; i< edition_contents[index].length ; i++) { %>
+                                            <li><%= edition_contents[index][i] %></li>
+                                        <% } %>
+                                        
+                                    </ul>
+                                </div>
+
+                                <!-- 할인율 여부에 따른 가격 표시 -->
+                                <% if(locals.discount == null) { %>
+                                    <div class="game-price-box">
+                                        <div class="game-price"><%= price %>원</div>
+                                    </div>
+                                <% } else { %> 
+                                    <div class="game-price-box">
+                                        <div class="game-price"><%= discount_price %>원</div>
+                                        <div class="game-cost"><%= price %>원</div>
+                                    </div>
+                                <% } %>
+
+                                <!-- 할인율 여부에 따른 할인 정보 표시 -->
+                                <% if(locals.discount != null) { %>
+                                    <div class="discount-info-box">
+                                        <div class="dicount-rate"><%=discount_rate %>% 할인</div>
+                                        <div class="end-date"><%= discount_end_date %></div>
+                                    </div>
+                                <% } %>
+
+                                <div class="h30"></div>
+                                <div class="cart-area">
+                                    <button class="go-cart">장바구니에 담기</button>
+                                    <button class="far fa-heart" type="button"></button>
+                                </div> 
+                            </div>
+                        </div>
+                    <% }); %>
                     
-                    <!-- 에디션 포스트 -->
-                    <div class="edition-post">
-                        <div class="edition-img-box"><img src="img/edition-banner-dragonball-z-2.png" alt=""></div>
-                        <div class="edition-info-box">
-                            <div class="edition-info-title">드래곤볼 Z 카카로트 (중국어(간체자), 한국어, 태국어, 중국어(번체자))</div>
-                            <div class="game-platform2">
-                                <div class="ps-icon">PS4</div>
-                                <div class="ps-icon">PS5</div>
-                            </div>
-
-
-                            <div class="edition-content-container">
-                                <ul class="edition-list">
-                                    <li>PS4™용 NBA 2K22</li>
-                                    <li>MyCAREER 스킬 부스트</li>
-                                    <li>예약 구매 콘텐츠 포함 내역:</li>
-                                    <li>게토레이 부스트</li>
-                                    <li>5,000 VC + 5,000 MyTEAM 포인트</li>
-                                    <li>Luka Doncic MyPLAYER 저지</li>
-                                    <li>MyTEAM 프로모션 팩 10개</li>
-                                </ul>
-                            </div>
-                            
-
-                            <div class="game-price-box">
-                                <div class="game-price">22,680원</div>
-                                <div class="game-cost">64,800원</div>
-                            </div>
-                            <div class="discount-info-box">
-                                <div class="dicount-rate">65% 할인</div>
-                                <div class="end-date">2021/8/18에 프로모션 종료</div>
-                            </div>
-
-                            <div class="h30"></div>
-                            <div class="cart-area">
-                                <button class="go-cart">장바구니에 담기</button>
-                                <button class="far fa-heart" type="button"></button>
-                            </div> 
-                        </div>
-                    </div>
-
-                    <!-- 에디션 포스트 -->
-                    <div class="edition-post">
-                        <div class="edition-img-box"><img src="img/edition-banner-dragonball-z-2.png" alt=""></div>
-                        <div class="edition-info-box">
-                            <div class="edition-info-title">드래곤볼 Z 카카로트 (중국어(간체자), 한국어, 태국어, 중국어(번체자))</div>
-                            <div class="game-platform2">
-                                <div class="ps-icon">PS4</div>
-                                <div class="ps-icon">PS5</div>
-                            </div>
-
-
-                            <div class="edition-content-container">
-                                <ul class="edition-list">
-                                    <li>PS4™용 NBA 2K22</li>
-                                    <li>MyCAREER 스킬 부스트</li>
-                                    <li>예약 구매 콘텐츠 포함 내역:</li>
-                                    <li>게토레이 부스트</li>
-                                    <li>5,000 VC + 5,000 MyTEAM 포인트</li>
-                                    <li>Luka Doncic MyPLAYER 저지</li>
-                                    <li>MyTEAM 프로모션 팩 10개</li>
-                                </ul>
-                            </div>
-                            
-
-                            <div class="game-price-box">
-                                <div class="game-price">22,680원</div>
-                                <div class="game-cost">64,800원</div>
-                            </div>
-                            <div class="discount-info-box">
-                                <div class="dicount-rate">65% 할인</div>
-                                <div class="end-date">2021/8/18에 프로모션 종료</div>
-                            </div>
-
-                            <div class="h30"></div>
-                            <div class="cart-area">
-                                <button class="go-cart">장바구니에 담기</button>
-                                <button class="far fa-heart" type="button"></button>
-                            </div> 
-                        </div>
-                    </div>
-
-                    <!-- 에디션 포스트 -->
-                    <div class="edition-post">
-                        <div class="edition-img-box"><img src="img/edition-banner-dragonball-z-2.png" alt=""></div>
-                        <div class="edition-info-box">
-                            <div class="edition-info-title">드래곤볼 Z 카카로트 (중국어(간체자), 한국어, 태국어, 중국어(번체자))</div>
-                            <div class="game-platform2">
-                                <div class="ps-icon">PS4</div>
-                                <div class="ps-icon">PS5</div>
-                            </div>
-
-
-                            <div class="edition-content-container">
-                                <ul class="edition-list">
-                                    <li>PS4™용 NBA 2K22</li>
-                                    <li>MyCAREER 스킬 부스트</li>
-                                    <li>예약 구매 콘텐츠 포함 내역:</li>
-                                    <li>게토레이 부스트</li>
-                                    <li>5,000 VC + 5,000 MyTEAM 포인트</li>
-                                    <li>Luka Doncic MyPLAYER 저지</li>
-                                    <li>MyTEAM 프로모션 팩 10개</li>
-                                </ul>
-                            </div>
-                            
-
-                            <div class="game-price-box">
-                                <div class="game-price">22,680원</div>
-                                <div class="game-cost">64,800원</div>
-                            </div>
-                            <div class="discount-info-box">
-                                <div class="dicount-rate">65% 할인</div>
-                                <div class="end-date">2021/8/18에 프로모션 종료</div>
-                            </div>
-
-                            <div class="h30"></div>
-                            <div class="cart-area">
-                                <button class="go-cart">장바구니에 담기</button>
-                                <button class="far fa-heart" type="button"></button>
-                            </div> 
-                        </div>
-                    </div>
-
-                    <!-- 에디션 포스트 -->
-                    <div class="edition-post">
-                        <div class="edition-img-box"><img src="img/edition-banner-dragonball-z-2.png" alt=""></div>
-                        <div class="edition-info-box">
-                            <div class="edition-info-title">드래곤볼 Z 카카로트 (중국어(간체자), 한국어, 태국어, 중국어(번체자))</div>
-                            <div class="game-platform2">
-                                <div class="ps-icon">PS4</div>
-                                <div class="ps-icon">PS5</div>
-                            </div>
-
-
-                            <div class="edition-content-container">
-                                <ul class="edition-list">
-                                    <li>PS4™용 NBA 2K22</li>
-                                    <li>MyCAREER 스킬 부스트</li>
-                                    <li>예약 구매 콘텐츠 포함 내역:</li>
-                                    <li>게토레이 부스트</li>
-                                    <li>5,000 VC + 5,000 MyTEAM 포인트</li>
-                                    <li>Luka Doncic MyPLAYER 저지</li>
-                                    <li>MyTEAM 프로모션 팩 10개</li>
-                                </ul>
-                            </div>
-                            
-
-                            <div class="game-price-box">
-                                <div class="game-price">22,680원</div>
-                                <div class="game-cost">64,800원</div>
-                            </div>
-                            <div class="discount-info-box">
-                                <div class="dicount-rate">65% 할인</div>
-                                <div class="end-date">2021/8/18에 프로모션 종료</div>
-                            </div>
-
-                            <div class="h30"></div>
-                            <div class="cart-area">
-                                <button class="go-cart">장바구니에 담기</button>
-                                <button class="far fa-heart" type="button"></button>
-                            </div> 
-                        </div>
-                    </div>
 
 
                 </div>
@@ -2466,8 +2348,7 @@
                             <div class="sc-item-img-area">
                                 <img src="img/mc-dragonballz1.png" alt="">
                                 <div class="platform-area">
-                                    <div class="ps-icon">PS4</div>
-                                    <div class="ps-icon">PS5</div>
+                                     
                                 </div>
                             </div>
                             <div class="sc-item-info-area">

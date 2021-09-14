@@ -5,7 +5,7 @@ var app = express()
 var db_config = require(__dirname + '/config/database.js');
 var conn = db_config.init();
 var bodyParser = require('body-parser');
-const { application } = require('express');
+const { application, query } = require('express');
 
 var session = require('express-session');
 
@@ -15,8 +15,26 @@ app.use(session({
     secret: "asdfasdfasdf",
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 600000}
+    cookie: { maxAge: 600000 }
 }));
+
+app.get('/profile/image/update', function(req, res) {
+    let sql = 'UPDATE user SET user_img = ? WHERE id = ?';
+    let params = [req.query.img_src, req.session.user.id];
+
+    conn.query(sql, params, function(err) {
+        if(err) console.log(err);
+        else {
+            console.log(req.session.user.id+'의 이미지 변경 성공');
+            console.log('전: '+JSON.stringify(req.session.user));
+            req.session.user.user_img = req.query.img_src;
+            console.log('후: '+JSON.stringify(req.session.user)); 
+            req.session.save();
+        }
+    })
+
+    res.send("request accept success - " + req.query.img_src);
+});
 
 app.get('/', function(req, res) {
     //req.session = req.session;
@@ -49,7 +67,11 @@ app.get('/playstation_Store_collections',function(req,res){
 });
 
 app.get('/playstation_Store_browse',function(req,res){
-    res.render('ps_browse.html');
+    sql = 'select * from game';
+    conn.query(sql, function(err, rows, fields){
+        if(err) console.log('브라우져 렌더링 실패' + err);
+        else res.render('ps_browse.ejs', {game : rows});
+    });
 });
 
 app.get('/playstation_Store_latest',function(req,res){
@@ -68,8 +90,179 @@ app.get('/playstation_Store_subscriptions',function(req,res){
     res.render('play_store_subscriptions.html');
 });
 
+
+// 숫자 콤마 찍기
+function comma(num) {
+    var len, point, str; 
+       
+    num = num + ""; 
+    point = num.length % 3 ;
+    len = num.length; 
+   
+    str = num.substring(0, point); 
+    while (point < len) { 
+        if (str != "") str += ","; 
+        str += num.substring(point, point + 3); 
+        point += 3; 
+    } 
+    return str;
+}
+
+// 할인가 구하기
+function discount_price(price, rate) {
+    return price * (100 - rate) / 100;
+}
+
+//할인 기간 포맷 바꿔주는 함수,, 다 만들고 위로 분리시켜야함
+function date_format(date) {
+    let date_y = date.getFullYear();
+    let date_m = date.getMonth();
+    let date_d = date.getDate();
+
+    return date_y + "/" + date_m + "/" + date_d + "에 프로모션 종료";
+}
+
+
 app.get('/playstation_Store_game_page',function(req,res){
-    res.render('game_page.html');
+    let game_id = req.param('id');
+    let publisher_name;
+
+    //게임 db 가져오기
+    sql = 'select * from game where id = '+game_id;
+    conn.query(sql, function(err, rows, fields){
+        if(err) console.log(err);
+        else {
+            //원가, 콤마 찍은 가격
+            price = rows[0].price;
+            price_c = comma(rows[0].price);
+
+            //게임 속성 배열로 정리하기
+            let go_arr = new Array();
+
+            if(rows[0].go_play_type != undefined) {
+                go_arr.push(rows[0].go_play_type);
+            }
+
+            if(rows[0].go_buy_type != undefined) {
+                go_arr.push(rows[0].go_buy_type);
+            }
+
+            if(rows[0].go_psplus_type != undefined) {
+                go_arr.push(rows[0].go_psplus_type);
+            }
+
+            if(rows[0].go_maxplayer != undefined) {
+                go_arr.push(rows[0].go_maxplayer);
+            }
+
+            if(rows[0].go_online_type != undefined) {
+                go_arr.push(rows[0].go_online_type);
+            }
+
+            //게임 퍼블리셔 가져오기
+            sql_f = 'select name from publisher where id = '+game_id;
+            conn.query(sql_f, function(err, result, fields) {
+                publisher_name = result[0].name;
+
+                //게임 할인율 가져오기
+                sql_discount = "select * from discount where game_id = "+game_id;
+                conn.query(sql_discount, function(err, result, fields){
+                    let discount;
+                    let discount_price_c;
+                    let discount_rate;
+                    let discount_date;
+                    let discount_end_date;
+
+                    if(result[0] != undefined) {
+                        discount = result[0];
+                        discount_price_c = comma(discount_price(price, discount.rate));
+                        discount_rate = discount.rate;
+                        discount_date = discount.end_date;
+                        
+                        let date_y = discount_date.getFullYear();
+                        let date_m = discount_date.getMonth();
+                        let date_d = discount_date.getDate();
+
+                        discount_end_date = date_y + "/" + date_m + "/" + date_d + "에 프로모션 종료";
+                    }
+                    // 게임의 플랫폼 정보 가져오기
+                    sql = 'select * from platform where game_id = '+game_id;
+                    conn.query(sql, function(err, result, fields){
+                        let device = result;
+
+                        // 에디션 정보, 플랫폼, 할인 가져오기
+                        sql = 'select edt.*, plf.device, dc.* from edition as edt left join platform as plf on edt.id = plf.edition_id left join discount as dc on edt.id = dc.edition_id where edt.game_id = '+ game_id;
+                        conn.query(sql, function(err, result, fields) {
+                            let edition = result;
+                            
+                            //에디션 콘텐츠를 넣어줄 배열
+                            let edition_contents = [];
+                            //콘텐츠 아이템이 존재할 경우 위 배열에 push함
+                            for(let i=0; i<edition.length ; i++) {
+                                edition_contents[i] = [];
+                                for(let j=0 ; j<4 ; j++) {
+                                    if(eval('edition['+i+'].contents'+(j+1)) != undefined) {
+                                        edition_contents[i].push(eval('edition['+i+'].contents'+(j+1)));
+                                    }
+                                }
+                            }
+
+
+                            //얘는 view에서 적용할 때 rate값이 있는 애들만 넣어줘야함 view에서 if rate 값 유효하면 적용시키고 아니면 원가만 출력 ㄱㄱ
+                            //에디션 할인 정리
+                            let e_discount = []; // 에디션 가격 정보를 담는 배열
+                            let e_discount_prcie = []; // 에디션 가격 중 할인이 적용된 가격
+                            let e_discount_date = [];
+                             // 아래는 각 순서대로 e_discount[i] 에 가격, 할인율, 종료일자가 담겨져 있음// view에서 쓰는 건 price랑 rate정도
+                            for(let i=0; i< edition.length; i++) {
+                                
+                                e_discount[i]= [];
+                                e_discount[i].push(edition[i].price);
+                                e_discount[i].push(edition[i].rate);
+                                e_discount[i].push(edition[i].end_date);
+
+                                e_discount_prcie[i] = comma(discount_price(edition[i].price, edition[i].rate));
+                            }
+
+                           
+                            
+                            // 에디션 들 날짜 그건데 이것도 위에거랑 같이 하나에 붙여야함
+                            for(let i=0; i< edition.length; i++) {
+                                e_discount_date.push(date_format(edition[i].end_date));
+                            }
+
+
+                                res.render('game_page.ejs', {
+                                    game : rows[0],
+                                    publisher : publisher_name,
+                                    price : price_c,
+                                    discount_price : discount_price_c,
+                                    discount_rate : discount_rate,
+                                    discount_end_date : discount_end_date, 
+                                    discount : discount,
+                                    go_arr : go_arr,
+                                    device : device,
+                                    //에디션 정보
+                                    edition : edition, 
+                                    edition_contents : edition_contents
+                                });
+                            });
+
+                        });
+
+
+                        
+                    });
+                    
+                });
+                
+            
+            
+           
+        }
+    });
+
+    
 });
 
 // mysql 테스트용 게시판
@@ -84,7 +277,7 @@ app.get('/playstation_Store_game_page',function(req,res){
 app.get('/write', function (req, res) {
     let login_info;
     login_info = req.session.user;
-    console.log(login_info.uesr_img);
+    console.log(JSON.stringify(req.session.user));
     res.render('write.ejs', {user_info : login_info});
 });
 
@@ -212,24 +405,15 @@ app.get('/signIn', function (req, res) {
     if (req.session.valid == false) {
         validation = false;
     }
-    res.render('sign_in.ejs', {validation : validation});
-    req.session.valid == true; // 다시 접근했을 때 초기화 시켜주기 위함
-});
-
-//회원가입 페이지
-app.get('/signUp', function (req, res) {
-    res.render('sign_up.ejs');
-});
-
-// 회원가입 처리
-app.post('/signUpAf', function(req, res) {
-    var body = req.body;
-    var sql = 'insert into user (login_id, login_pw, nickname) values (?, ?, ?)';
-    var queryparams = [body.login_id, body.login_pw, body.nickname];
-    console.log(queryparams);
-    conn.query(sql, queryparams, function(err) {
-        if(err) console.log('query is not excuted. update fail...\n' + err);
-        else res.redirect('/signIn');
+    
+    res.render('sign_in.ejs', {validation : validation, user_info : req.session});
+    req.session.destroy(function(err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        req.session;
+        
     });
 });
 
@@ -253,6 +437,60 @@ app.post('/signInAf', function(req, res) {
         
     });
 });
+
+//회원가입 페이지
+app.get('/signUp', function (req, res) {
+    req.session = req.session;
+    let overlap_ck = true;
+    if(req.session.overlap == false) {
+        overlap_ck = false;
+    }
+
+    res.render('sign_up.ejs', {overlap_ck : overlap_ck});
+    req.session.destroy(function(err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        req.session;
+        
+    });
+});
+
+// 회원가입 처리
+app.post('/signUpAf', function(req, res) {
+    var body = req.body;
+
+    let get_user_db_sql = 'select login_id, nickname from user where login_id = ? or nickname = ?';
+    let params = [body.login_id, body.nickname];
+    
+    conn.query(get_user_db_sql, params, function(err, rows, fields){
+        if(rows[0] != undefined) {
+            console.log('중복확인');
+            req.session.overlap = false;
+            res.redirect('/signUp');
+        } else {
+            var sql = 'insert into user (login_id, login_pw, nickname) values (?, ?, ?)';
+            var queryparams = [body.login_id, body.login_pw, body.nickname];
+            console.log(queryparams);
+            conn.query(sql, queryparams, function(err) {
+                if(err) console.log('query is not excuted. update fail...\n' + err);
+                else {
+                    req.session.new_id = body.login_id;
+                    req.session.new_pw = body.login_pw;
+                    console.log('새아이디'+req.session.new_id);
+                    console.log('새비번'+req.session.new_pw);
+                    req.session.overlap = true;
+                    res.redirect('/signIn');
+                }
+            });
+        }
+
+    });
+
+});
+
+
 
 //로그아웃 처리
 app.post('/logout', function(req, res) {
@@ -300,6 +538,7 @@ app.get('/list', function (req, res) {
         login_info = req.session.user;
         console.log(login_info);
     }
+    
     
 
     let sql = 'select count(*) as count from board';
@@ -380,7 +619,7 @@ app.get('/list', function (req, res) {
             }
             
             if(err) console.log('query is not excuted. select fail...\n' + err);
-            else res.render('list.ejs', {list : rows, pages : pages, post_time : post_time, user_info : login_info}); 
+            else res.render('list.ejs', {list : rows, pages : pages, post_time : post_time, user_info : login_info, n_page : page}); 
 
             
         });

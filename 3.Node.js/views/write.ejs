@@ -154,7 +154,7 @@
                     <label class="info-area-a" for="imageUpload">
                         <div id="imagePreview"><img src="/img/<%= user_info.user_img%>" alt=""></div>
                     </label>
-                    <!-- <input type="file" id="imageUpload" accept=".gif, .jpg, .png" name="author_img" class="input-img-c" value = "<%= user_info.user_img %>"> -->
+                    <input type="text" id="imageUpload" accept=".gif, .jpg, .png" name="author_img" class="input-img-c" value = "<%= user_info.user_img %>">
                     작성자 <input class="author-input" type="text" name='author' value="<%= user_info.nickname %>" readonly>
                     <!-- 비밀번호 <input type="text" name='post_pw'> -->
                     <input type="hidden" name="user_id" value="<%= user_info.id %>">
@@ -182,19 +182,19 @@
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous"></script>
     <script>
-       function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#imagePreview img').attr("src", e.target.result );
-                }
-            reader.readAsDataURL(input.files[0]);
-            }
-        }
+    //    function readURL(input) {
+    //     if (input.files && input.files[0]) {
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $('#imagePreview img').attr("src", e.target.result );
+    //             }
+    //         reader.readAsDataURL(input.files[0]);
+    //         }
+    //     }
 
-        $("#imageUpload").change(function() {
-            readURL(this);
-        });
+    //     $("#imageUpload").change(function() {
+    //         readURL(this);
+    //     });
 
 
 

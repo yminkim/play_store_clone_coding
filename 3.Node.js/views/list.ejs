@@ -160,6 +160,11 @@
             display: none;
         }
         
+        /* 버튼 색칠해주는 속성 */
+        .btn_bck {
+            background-color: cornflowerblue !important;
+            color: #fff !important;
+        }
     </style>
 </head>
 <body>
@@ -168,10 +173,11 @@
         <div class="login-info-area">
             <div class="login-info">접속:
                 <label class="info-area-a" for="imageUpload">
-                    <div id="imagePreview"><img src="/img/genre-1.png" alt=""></div>
+                    <div id="imagePreview"><img src="<% if(locals.user_info == null) { %>img/banners-2.png<%} else {%>/img/<%= user_info.user_img %><% } %>">
+                    </div>
                 </label>
                 <input type="file" id="imageUpload" accept=".gif, .jpg, .png" name="author_img" class="input-img-c" %>">
-                    <%= (locals.user_info) ? user_info.nickname : "GUEST" %>
+                    <div class="username"><%= (locals.user_info) ? user_info.nickname : "GUEST" %></div>
                 </div>
             <% if(locals.user_info == null) { %>
                 <a href="/signIn">로그인</a>
@@ -218,7 +224,7 @@
             <div class="page-area">
                 <a class="page-first" href="/list?pages=<%=1 %>"><<</a>
                 <% for(let i =0; i < pages; i++) { %>
-                    <a href="/list?pages=<%=i+1 %>"><%=i+1 %></a>
+                    <a class="page_button" href="/list?pages=<%=i+1 %>"><%=i+1 %></a>
                 <% }%>
                 <a class="page-end" href="/list?pages=<%=pages %>">>></a>
             </div>
@@ -255,21 +261,72 @@
         });
 
 
-        //프로필 사진 변경
-        function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#imagePreview img').attr("src", e.target.result );
-                }
-            reader.readAsDataURL(input.files[0]);
-            }
-        }
+        //프로필 사진 변경(개선전) >> 밑에 코드로 바꿈
+                    // function readURL(input) {
+                        
+                    //     if (input.files && input.files[0]) {
+                    //         var reader = new FileReader();
+                            
+                    //         reader.onload = function(e) {
+                    //             $('#imagePreview img').attr("src", e.target.result );
+                    //         }
 
+                    //         reader.readAsDataURL(input.files[0]);
+                    //     }
+
+                    //     //파일 명 따오기
+                        
+                    //         let file_url = $('#imagePreview img').attr("src");
+                    //         let img_src = file_url;
+                        
+                        
+                    //     $.ajax({
+                    //         url: window.location.protocol + "//" + window.location.host + '/profile/image/update', // protocol = http/https, host = www...
+                    //         type: 'get',
+                    //         data: {
+                    //             img_src: img_src,
+                    //         },
+                    //         dataType: 'text', // 응답 자료형 url에 요청 이후 응답의 형식지정
+                    //         success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
+                    //             // 성공 시 동작
+                    //             console.log(response);
+                    //         },
+                    //     });
+                    // }
+
+
+        //프로필 사진 변경(개선후)
         $("#imageUpload").change(function() {
-            readURL(this);
+            var filename = this.files[0].name;
+            $('#imagePreview img').attr("src", "/img/"+filename );
+            console.log(filename);
+            
+            $.ajax({
+                url: window.location.protocol + "//" + window.location.host + '/profile/image/update', // protocol = http/https, host = www...
+                type: 'get',
+                data: {
+                    img_src: filename,
+                },
+                dataType: 'text', // 응답 자료형 url에 요청 이후 응답의 형식지정
+                success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
+                    // 성공 시 동작
+                    console.log(response);
+                },
+            });
+
         });
 
+        //console.log("여기체크"+$('#imagePreview img').files());
+        let pp = '<%= n_page %>';
+        console.log(pp);
+
+        $('.page_button').each(function(){
+            if($(this).text() == pp) {
+                $(this).addClass('btn_bck');
+            }
+        });
+
+        
         
         
         

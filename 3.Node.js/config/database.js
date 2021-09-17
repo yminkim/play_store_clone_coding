@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 var db_info = {
     port: '3306',
-    host : '3.35.50.179',
+    host : '13.125.179.15',
     user : 'doping',
     password : 'Doping!1234',
     database : 'playstation'

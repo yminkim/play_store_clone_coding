@@ -105,6 +105,13 @@ function comma(num) {
         str += num.substring(point, point + 3); 
         point += 3; 
     } 
+    
+    if(str == "0") {
+        str = "무료";
+    } else {
+        str += '원';
+    }
+
     return str;
 }
 
@@ -116,7 +123,7 @@ function discount_price(price, rate) {
 //할인 기간 포맷 바꿔주는 함수,, 다 만들고 위로 분리시켜야함
 function date_format(date) {
     let date_y = date.getFullYear();
-    let date_m = date.getMonth();
+    let date_m = date.getMonth()+1;
     let date_d = date.getDate();
 
     return date_y + "/" + date_m + "/" + date_d + "에 프로모션 종료";
@@ -179,11 +186,7 @@ app.get('/playstation_Store_game_page',function(req,res){
                         discount_rate = discount.rate;
                         discount_date = discount.end_date;
                         
-                        let date_y = discount_date.getFullYear();
-                        let date_m = discount_date.getMonth();
-                        let date_d = discount_date.getDate();
-
-                        discount_end_date = date_y + "/" + date_m + "/" + date_d + "에 프로모션 종료";
+                        discount_end_date = date_format(discount_date);
                     }
                     // 게임의 플랫폼 정보 가져오기
                     sql = 'select * from platform where game_id = '+game_id;
@@ -191,12 +194,16 @@ app.get('/playstation_Store_game_page',function(req,res){
                         let device = result;
 
                         // 에디션 정보, 플랫폼, 할인 가져오기
-                        sql = 'select edt.*, plf.device, dc.* from edition as edt left join platform as plf on edt.id = plf.edition_id left join discount as dc on edt.id = dc.edition_id where edt.game_id = '+ game_id;
+                        sql = 'select edt.*, dc.* from edition as edt left join discount as dc on edt.id = dc.edition_id where edt.game_id = '+ game_id;
                         conn.query(sql, function(err, result, fields) {
                             let edition = result;
-                            
                             //에디션 콘텐츠를 넣어줄 배열
                             let edition_contents = [];
+                            //에디션 할인 가격 할인 관련 정보
+                            let e_discount = []; // 에디션 가격 정보를 담는 배열
+                            let e_discount_prcie = []; // 에디션 가격 중 할인이 적용된 가격
+                            let e_discount_date = []; //  에디션 할인 종료일자(바로위 data를 담는 배열)
+                            let e_price = [];
                             //콘텐츠 아이템이 존재할 경우 위 배열에 push함
                             for(let i=0; i<edition.length ; i++) {
                                 edition_contents[i] = [];
@@ -205,56 +212,109 @@ app.get('/playstation_Store_game_page',function(req,res){
                                         edition_contents[i].push(eval('edition['+i+'].contents'+(j+1)));
                                     }
                                 }
-                            }
+                                //에디션 원가 콤마
+                                e_price[i] = comma(edition[i].price);
 
-
-                            //얘는 view에서 적용할 때 rate값이 있는 애들만 넣어줘야함 view에서 if rate 값 유효하면 적용시키고 아니면 원가만 출력 ㄱㄱ
-                            //에디션 할인 정리
-                            let e_discount = []; // 에디션 가격 정보를 담는 배열
-                            let e_discount_prcie = []; // 에디션 가격 중 할인이 적용된 가격
-                            let e_discount_date = [];
-                             // 아래는 각 순서대로 e_discount[i] 에 가격, 할인율, 종료일자가 담겨져 있음// view에서 쓰는 건 price랑 rate정도
-                            for(let i=0; i< edition.length; i++) {
-                                
+                                //에디션 할인가 계산을 위한 식
                                 e_discount[i]= [];
                                 e_discount[i].push(edition[i].price);
                                 e_discount[i].push(edition[i].rate);
                                 e_discount[i].push(edition[i].end_date);
 
                                 e_discount_prcie[i] = comma(discount_price(edition[i].price, edition[i].rate));
+                                
+                                //에디션 할인 날짜 스트링 배열
+                                if(edition[i].end_date != undefined)
+                                    e_discount_date[i] = date_format(edition[i].end_date);
                             }
 
-                           
+                            //console.log('정가 릴레이: '+ e_price);
+                            //console.log('할인율 릴레이: '+ edition[0].rate + "/" + edition[1].rate + "/" + edition[2].rate);
+                            //console.log('할인가 릴레이: '+ e_discount_prcie);
+                            //console.log(e_discount_date);
                             
-                            // 에디션 들 날짜 그건데 이것도 위에거랑 같이 하나에 붙여야함
-                            for(let i=0; i< edition.length; i++) {
-                                e_discount_date.push(date_format(edition[i].end_date));
-                            }
+                            sql = 'SELECT ed.id, ed.game_id, pl.device FROM edition as ed left join platform as pl on ed.id = pl.edition_id where ed.game_id =' + game_id;
+                            conn.query(sql, function(err, result, fields) {
+                                let e_device = result;
+                                //let e_count = edition.length;
+                                let e_dvc_arr = [];
+                                
+                                let k = 0;
+                                for(let i=0; i<e_device.length; i++) {
+                                    let tmp = 'true';
+                                    if(i > 0) {
+
+                                        if(e_device[i].id != e_device[i-1].id) {
+                                            ++k;
+                                            
+                                        } else {
+                                            tmp = 'false';
+                                        }
+
+                                    }
+                                    if(tmp == 'true') {
+                                        e_dvc_arr[k] = [];
+                                    }
+                                   
 
 
-                                res.render('game_page.ejs', {
-                                    game : rows[0],
-                                    publisher : publisher_name,
-                                    price : price_c,
-                                    discount_price : discount_price_c,
-                                    discount_rate : discount_rate,
-                                    discount_end_date : discount_end_date, 
-                                    discount : discount,
-                                    go_arr : go_arr,
-                                    device : device,
-                                    //에디션 정보
-                                    edition : edition, 
-                                    edition_contents : edition_contents
+                                    //console.log('asdf'+k);
+                                    e_dvc_arr[k].push(e_device[i].device);
+                                }
+
+                                //console.log(e_dvc_arr);
+                                
+                                sql = 'select * from additional_content as ac left join discount as ds on ac.id = ds.additional_content_id where ac.game_id =' + game_id;
+                                conn.query(sql, function(err, result, fields){
+                                    let add_c = result;
+                                    
+                                    let add_c_dc_price_info = [];
+                                    let add_c_price_info = [];
+
+                                    for(let i=0 ; i<add_c.length; i++) {
+                                        add_c_price_info[i] = comma(add_c[i].price);
+                                        add_c_dc_price_info[i] = comma(discount_price(add_c[i].price, add_c[i].rate));
+                                    }
+                                    //console.log(add_c_price_info);
+                                    res.render('game_page.ejs', {
+                                        game : rows[0],
+                                        publisher : publisher_name,
+                                        price : price_c,
+                                        discount_price : discount_price_c,
+                                        discount_rate : discount_rate,
+                                        discount_end_date : discount_end_date, 
+                                        discount : discount,
+                                        go_arr : go_arr,
+                                        device : device,
+                                        //에디션 정보
+                                        edition : edition, 
+                                        edition_contents : edition_contents, // 에디션 아이템
+                                        e_price : e_price, // 에디션 가격 콤마
+                                        e_discount_prcie : e_discount_prcie, // 할인가 콤마
+                                        e_discount_date : e_discount_date, // 프로모션 스트링
+                                        e_dvc_arr : e_dvc_arr, // 에디션 디바이스 배열
+                                        //추가콘텐츠
+                                        add_c : add_c, // 추가콘텐츠
+                                        add_c_price_info : add_c_price_info,
+                                        add_c_dc_price_info : add_c_dc_price_info // 추가콘텐츠 할인 정보
+                                    });
                                 });
+
+                                
+
+
                             });
 
+                                
                         });
 
-
-                        
                     });
+
+
                     
                 });
+                
+            });
                 
             
             

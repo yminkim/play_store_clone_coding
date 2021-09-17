@@ -2243,12 +2243,12 @@
                     <!-- 할인율 여부에 따른 가격 표시 -->
                     <% if(locals.discount == null) { %>
                         <div class="game-price-box">
-                            <div class="game-price"><%= price %>원</div>
+                            <div class="game-price"><%= price %></div>
                         </div>
                     <% } else { %> 
                         <div class="game-price-box">
-                            <div class="game-price"><%= discount_price %>원</div>
-                            <div class="game-cost"><%= price %>원</div>
+                            <div class="game-price"><%= discount_price %></div>
+                            <div class="game-cost"><%= price %></div>
                         </div>
                     <% } %>
 
@@ -2283,174 +2283,105 @@
             </div>
 
             <div class="main-container">
-                <div class="edition-title">에디션</div>
-                <div class="edition-box">
-                    <% edition.forEach(function(value, index){ %>
-                        <!-- 에디션 포스트 -->
-                        <div class="edition-post">
-                            <div class="edition-img-box"><img src="<%= value.image %>" alt=""></div>
-                            <div class="edition-info-box">
-                                <div class="edition-info-title"><%= value.title %></div>
-                                <div class="game-platform2">
-                                    <div class="ps-icon">PS4</div>
-                                    <div class="ps-icon">PS5</div>
-                                </div>
-
-
-                                <div class="edition-content-container">
-                                    <ul class="edition-list">
-                                        <!-- 에디션 아이템 출력 -->
-                                        <% for(let i=0 ; i< edition_contents[index].length ; i++) { %>
-                                            <li><%= edition_contents[index][i] %></li>
+                <% if(edition != "") { %>
+                    <div class="edition-title">에디션</div>
+                    <div class="edition-box">
+                        <% edition.forEach(function(value, index){ %>
+                            <!-- 에디션 포스트 -->
+                            <div class="edition-post">
+                                <div class="edition-img-box"><img src="<%= value.image %>" alt=""></div>
+                                <div class="edition-info-box">
+                                    <div class="edition-info-title"><%= value.title %></div>
+                                    <div class="game-platform2">
+                                        <!-- 에디션 플랫폼 출력 -->
+                                        <% for(let i=0 ; i< e_dvc_arr[index].length ; i++) { %>
+                                            <% if(e_dvc_arr[index] != "") { %>
+                                                <div class="ps-icon"><%= e_dvc_arr[index][i] %></div>
+                                            <% } %>
                                         <% } %>
-                                        
-                                    </ul>
+                                    </div>
+
+
+                                    <div class="edition-content-container">
+                                        <ul class="edition-list">
+                                            <!-- 에디션 아이템 출력 -->
+                                            <% for(let i=0 ; i< edition_contents[index].length ; i++) { %>
+                                                <li><%= edition_contents[index][i] %></li>
+                                            <% } %>
+                                            
+                                        </ul>
+                                    </div>
+
+                                    <!-- 할인율 여부에 따른 가격 표시 -->
+                                    <% if(value.rate == null) { %>
+                                        <div class="game-price-box">
+                                            <div class="game-price"><%= e_price[index] %></div>
+                                        </div>
+                                    <% } else { %> 
+                                        <div class="game-price-box">
+                                            <div class="game-price"><%= e_discount_prcie[index] %></div>
+                                            <div class="game-cost"><%= e_price[index] %></div>
+                                        </div>
+                                    <% } %>
+
+                                    <!-- 할인율 여부에 따른 할인 정보 표시 -->
+                                    <% if(value.rate != null) { %>
+                                        <div class="discount-info-box">
+                                            <div class="dicount-rate"><%=value.rate %>% 할인</div>
+                                            <div class="end-date"><%= e_discount_date[index] %></div>
+                                        </div>
+                                    <% } %>
+
+                                    <div class="h30"></div>
+                                    <div class="cart-area">
+                                        <button class="go-cart">장바구니에 담기</button>
+                                        <button class="far fa-heart" type="button"></button>
+                                    </div> 
                                 </div>
-
-                                <!-- 할인율 여부에 따른 가격 표시 -->
-                                <% if(locals.discount == null) { %>
-                                    <div class="game-price-box">
-                                        <div class="game-price"><%= price %>원</div>
-                                    </div>
-                                <% } else { %> 
-                                    <div class="game-price-box">
-                                        <div class="game-price"><%= discount_price %>원</div>
-                                        <div class="game-cost"><%= price %>원</div>
-                                    </div>
-                                <% } %>
-
-                                <!-- 할인율 여부에 따른 할인 정보 표시 -->
-                                <% if(locals.discount != null) { %>
-                                    <div class="discount-info-box">
-                                        <div class="dicount-rate"><%=discount_rate %>% 할인</div>
-                                        <div class="end-date"><%= discount_end_date %></div>
-                                    </div>
-                                <% } %>
-
-                                <div class="h30"></div>
-                                <div class="cart-area">
-                                    <button class="go-cart">장바구니에 담기</button>
-                                    <button class="far fa-heart" type="button"></button>
-                                </div> 
                             </div>
-                        </div>
-                    <% }); %>
-                    
+                        <% }); %>
+                        
 
 
-                </div>
-
+                    </div>
+                <% } %>
                 <div class="more-contents-title">추가 콘텐츠</div>
                 <div class="more-contents-container">
-                    <!-- 포스트 -->
-                    <div class="sc-item-container">
-                        <a href="">
-                            <div class="sc-item-img-area">
-                                <img src="img/mc-dragonballz1.png" alt="">
-                                <div class="platform-area">
-                                     
+                    <!-- 추가 콘텐츠 -->
+                    <% add_c.forEach(function(value, index) { %>
+                        <!-- 포스트 -->
+                        <div class="sc-item-container">
+                            <a href="">
+                                <div class="sc-item-img-area">
+                                    <img src="<%= value.image %>" alt="">
+                                    <div class="platform-area">
+                                        <div class="ps-icon">PS4</div>
+                                        <div class="ps-icon">PS5</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="sc-item-info-area">
-                                <div class="contents-type">추가 콘텐츠</div>
-                                <div class="sc-item-title">dishonored (영어)</div>
-                                <div class="sale-box">
-                                    <div>-50%</div>
+                                <div class="sc-item-info-area">
+                                    <div class="contents-type"><%= value.type %></div>
+                                    <div class="sc-item-title"><%= value.title %></div>
+                                    <!-- 할인율 여부에 따른 가격 표시 -->
+                                    <% if(value.rate == null) { %>
+                                        <div class="price-boxes">
+                                            <div class="sc-item-price"><%= add_c_price_info[index] %></div>
+                                        </div>
+                                    <% } else { %> 
+                                        <div class="sale-box">
+                                            <div>-<%= value.rate %>%</div>
+                                        </div>
+                                        <div class="price-boxes">
+                                            <div class="sc-item-price"><%= add_c_dc_price_info[index] %></div>
+                                            <div class="won"><%= add_c_price_info[index] %></div>
+                                        </div>
+                                    <% } %>
                                 </div>
-                                <div class="price-boxes">
-                                    <div class="sc-item-price">14,400원</div>
-                                    <div class="won">28,800원</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    <% }) %>
 
-
-                    <!-- 포스트 -->
-                    <div class="sc-item-container">
-                        <a href="">
-                            <div class="sc-item-img-area">
-                                <img src="img/mc-dragonballz2.png" alt="">
-                                <div class="platform-area">
-                                    <div class="ps-icon">PS4</div>
-                                    <div class="ps-icon">PS5</div>
-                                </div>
-                            </div>
-                            <div class="sc-item-info-area">
-                                <div class="sc-item-title">dishonored (영어)</div>
-                                <div class="sc-item-price">14,000원</div>
-                            </div>
-                        </a>
-                    </div>
-
-
-                    <!-- 포스트 -->
-                    <div class="sc-item-container">
-                        <a href="">
-                            <div class="sc-item-img-area">
-                                <img src="img/mc-dragonballz3.png" alt="">
-                                <div class="platform-area">
-                                    <div class="ps-icon">PS4</div>
-                                    <div class="ps-icon">PS5</div>
-                                </div>
-                            </div>
-                            <div class="sc-item-info-area">
-                                <div class="sc-item-title">dishonored (영어)</div>
-                                <div class="sc-item-price">14,000원</div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- 포스트 -->
-                    <div class="sc-item-container">
-                        <a href="">
-                            <div class="sc-item-img-area">
-                                <img src="img/mc-dragonballz4.png" alt="">
-                                <div class="platform-area">
-                                    <div class="ps-icon">PS4</div>
-                                    <div class="ps-icon">PS5</div>
-                                </div>
-                            </div>
-                            <div class="sc-item-info-area">
-                                <div class="sc-item-title">dishonored (영어)</div>
-                                <div class="sc-item-price">14,000원</div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- 포스트 -->
-                    <div class="sc-item-container">
-                        <a href="">
-                            <div class="sc-item-img-area">
-                                <img src="img/mc-dragonballz5.png" alt="">
-                                <div class="platform-area">
-                                    <div class="ps-icon">PS4</div>
-                                    <div class="ps-icon">PS5</div>
-                                </div>
-                            </div>
-                            <div class="sc-item-info-area">
-                                <div class="sc-item-title">dishonored (영어)</div>
-                                <div class="sc-item-price">14,000원</div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- 포스트 -->
-                    <div class="sc-item-container">
-                        <a href="">
-                            <div class="sc-item-img-area">
-                                <img src="img/mc-dragonballz6.png" alt="">
-                                <div class="platform-area">
-                                    <div class="ps-icon">PS4</div>
-                                    <div class="ps-icon">PS5</div>
-                                </div>
-                            </div>
-                            <div class="sc-item-info-area">
-                                <div class="sc-item-title">dishonored (영어)</div>
-                                <div class="sc-item-price">14,000원</div>
-                            </div>
-                        </a>
-                    </div>
+                    
                 </div>
 
                 <div class="mc-more-view"><div class="view-btn">더 보기</div></div>

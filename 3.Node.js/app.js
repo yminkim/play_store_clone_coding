@@ -67,11 +67,27 @@ app.get('/playstation_Store_collections',function(req,res){
 });
 
 app.get('/playstation_Store_browse',function(req,res){
-    sql = 'select * from game';
+    let sql = "";
+    let sql_price_DESC = 'select id, title, price from game order by price DESC'; // 가격 내림차순
+
+    let test = req.query.sort_price_DESC;
+    if(test == 4) {
+        sql = sql_price_DESC;
+    } else {
+        sql = 'select * from game';
+    }
+    
+
+   
+
+
     conn.query(sql, function(err, rows, fields){
+        let list_count = rows.length;
         if(err) console.log('브라우져 렌더링 실패' + err);
-        else res.render('ps_browse.ejs', {game : rows});
+        else res.render('ps_browse.ejs', {game : rows, list_count : list_count});
     });
+    
+
 });
 
 app.get('/playstation_Store_latest',function(req,res){

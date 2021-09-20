@@ -2013,7 +2013,7 @@
                     <!-- 선택된 옵션 리스트 출력 -->
                     <div class="option-list-view-area"></div>
                     <div class="item-count-area">
-                        <div class="game-count">1771</div>
+                        <div class="game-count"><%= list_count %></div>
                         <div>items</div>
                         <div class="remove-op">필터 지우기</div>
                     </div>
@@ -2022,7 +2022,7 @@
                     <% game.forEach(function(value, index) { %>
                         <!-- 포스트 -->
                         <div class="sc-item-container">
-                            <a href="">
+                            <a href="http://127.0.0.1:3000/playstation_Store_game_page?id=<%= value.id %>">
                                 <div class="sc-item-img-area">
                                     <img src="<%=value.image %>" alt="">
                                 </div>
@@ -3029,6 +3029,27 @@
                     $('.slide-menu').removeClass('slide-menu-width');
                     openSlideMenu = 0;
                 }
+            });
+
+
+
+            // 정렬 옵션 선택
+            $('.sort-list-item-area').click(function(){
+                let on_clicked = 0;
+                if($(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text() == '가격(높은 순)') {
+                    on_clicked = 1;
+
+                    let sort_price_DESC = 4; // 임시 숫자임
+                    $.ajax({
+                        url : "/playstation_Store_browse",
+                        type : "get",
+                        data : {"sort_price_DESC" : sort_price_DESC },
+                        success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
+                        // 성공 시 동작
+                        console.log(response);
+                },
+                    });
+                } 
             });
 
 

@@ -2345,87 +2345,97 @@
 
                     </div>
                 <% } %>
-                <div class="more-contents-title">추가 콘텐츠</div>
-                <div class="more-contents-container">
-                    <!-- 추가 콘텐츠 -->
-                    <% add_c.forEach(function(value, index) { %>
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="<%= value.image %>" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS4</div>
-                                        <div class="ps-icon">PS5</div>
+
+                <% if(add_c != "") { %>
+                    <div class="more-contents-title">추가 콘텐츠</div>
+                    <div class="more-contents-container">
+                        <!-- 추가 콘텐츠 -->
+                        <% add_c.forEach(function(value, index) { %>
+                            <!-- 포스트 -->
+                            <div class="sc-item-container">
+                                <a href="">
+                                    <div class="sc-item-img-area">
+                                        <img src="<%= value.image %>" alt="">
+                                        <div class="platform-area">
+                                            <!-- 추가콘텐츠 플랫폼 출력 -->
+                                            <% for(let i=0 ; i< ac_dvc_arr[index].length ; i++) { %>
+                                                <% if(ac_dvc_arr[index] != "") { %>
+                                                    <div class="ps-icon"><%= ac_dvc_arr[index][i] %></div>
+                                                <% } %>
+                                            <% } %>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="contents-type"><%= value.type %></div>
-                                    <div class="sc-item-title"><%= value.title %></div>
-                                    <!-- 할인율 여부에 따른 가격 표시 -->
-                                    <% if(value.rate == null) { %>
-                                        <div class="price-boxes">
-                                            <div class="sc-item-price"><%= add_c_price_info[index] %></div>
-                                        </div>
-                                    <% } else { %> 
-                                        <div class="sale-box">
-                                            <div>-<%= value.rate %>%</div>
-                                        </div>
-                                        <div class="price-boxes">
-                                            <div class="sc-item-price"><%= add_c_dc_price_info[index] %></div>
-                                            <div class="won"><%= add_c_price_info[index] %></div>
-                                        </div>
-                                    <% } %>
-                                </div>
-                            </a>
-                        </div>
-                    <% }) %>
+                                    <div class="sc-item-info-area">
+                                        <div class="contents-type"><%= value.type %></div>
+                                        <div class="sc-item-title"><%= value.title %></div>
+                                        <!-- 할인율 여부에 따른 가격 표시 -->
+                                        <% if(value.rate == null) { %>
+                                            <div class="price-boxes">
+                                                <div class="sc-item-price"><%= add_c_price_info[index] %></div>
+                                            </div>
+                                        <% } else { %> 
+                                            <div class="sale-box">
+                                                <div>-<%= value.rate %>%</div>
+                                            </div>
+                                            <div class="price-boxes">
+                                                <div class="sc-item-price"><%= add_c_dc_price_info[index] %></div>
+                                                <div class="won"><%= add_c_price_info[index] %></div>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </a>
+                            </div>
+                        <% }) %>
 
-                    
-                </div>
+                        
+                    </div>
 
-                <div class="mc-more-view"><div class="view-btn">더 보기</div></div>
-
+                    <div class="mc-more-view"><div class="view-btn">더 보기</div></div>
+                <% } %>
 
         
                 <div class="edition-title">게임 및 법률 정보</div>
-                <div class="game-info-container2">
-                    ※본 아이템이 포함되어 있는 세트 상품도 있습니다. 중복구입이 되지 않도록 주의하여 주십시오.
-
-                    드래곤볼 Z 카카로트에서 오공과 Z 전사들의 이야기를 체험하라! 원작의 장대한 전투는 물론, 오공, 오반, 베지터와 다른 캐릭터들과 함께 싸우고, 낚시하고, 먹고, 훈련하며 드래곤볼 Z의 세계에서 살아가자. 스토리를 진행하며 새로운 지역을 탐험하고 모험하며, 드래곤볼 Z 세계의 여러 전사들과 강한 유대를 형성해보자.
-                    
-                    권리표기:
-                    ©BIRD STUDIO / SHUEISHA, TOEI ANIMATION
-                    ©BANDAI NAMCO Entertainment Inc.
-                </div>
+                <div class="game-info-container2"><%= game.information.replace(/\n/g, '<br>') %></div>
 
                 <div class="game-detail-info">
                     <div class="detail-box">
                         <ul>
-                            <li>
-                                <div class="detail-title">플랫폼:</div>
-                                <div class="detail-contents">PS4</div>
-                            </li>
-                            <li>
-                                <div class="detail-title">출시:</div>
-                                <div class="detail-contents">2016/10/21</div>
-                            </li>
-                            <li>
-                                <div class="detail-title">퍼블리셔:</div>
-                                <div class="detail-contents">Electronic Arts Inc.</div>
-                            </li>
-                            <li>
-                                <div class="detail-title">장르:</div>
-                                <div class="detail-contents">액션, 어드벤처, 롤플레잉 게임</div>
-                            </li>
-                            <li>
-                                <div class="detail-title">음성:</div>
-                                <div class="detail-contents">일본어</div>
-                            </li>
-                            <li>
-                                <div class="detail-title">화면 언어:</div>
-                                <div class="detail-contents">중국어 (간체자), 중국어 (번체자), 타이어, 한국어</div>
-                            </li>
+                            <% if(device_s != null) { %>
+                                <li>
+                                    <div class="detail-title">플랫폼:</div>
+                                    <div class="detail-contents"><%= device_s %></div>
+                                </li>
+                            <% } %>
+                            <% if(release_date != null) { %>
+                                <li>
+                                    <div class="detail-title">출시:</div>
+                                    <div class="detail-contents"><%= release_date %></div>
+                                </li>
+                            <% } %>
+                            <% if(publisher != null) { %>
+                                <li>
+                                    <div class="detail-title">퍼블리셔:</div>
+                                    <div class="detail-contents"><%= publisher %></div>
+                                </li>
+                            <% } %>
+                            <% if(genre != null) { %>
+                                <li>
+                                    <div class="detail-title">장르:</div>
+                                    <div class="detail-contents"><%= genre %></div>
+                                </li>
+                            <% } %>
+                            <% if(game.voice != null) { %>
+                                <li>
+                                    <div class="detail-title">음성:</div>
+                                    <div class="detail-contents"><%= game.voice %></div>
+                                </li>
+                            <% } %>
+                            <% if(game.display_language != null) { %>
+                                <li>
+                                    <div class="detail-title">화면 언어:</div>
+                                    <div class="detail-contents"><%= game.display_language %></div>
+                                </li>
+                            <% } %>
                         </ul>
                     </div>
                     <div class="detail-box">

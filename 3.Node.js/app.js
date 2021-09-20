@@ -126,7 +126,10 @@ function date_format(date) {
     let date_m = date.getMonth()+1;
     let date_d = date.getDate();
 
-    return date_y + "/" + date_m + "/" + date_d + "에 프로모션 종료";
+    
+        return date_y + "/" + date_m + "/" + date_d;
+        
+    
 }
 
 
@@ -166,6 +169,13 @@ app.get('/playstation_Store_game_page',function(req,res){
                 go_arr.push(rows[0].go_online_type);
             }
 
+
+            // [게임 세부 정보]
+            let release_date = date_format(rows[0].release_date);
+            
+            
+
+
             //게임 퍼블리셔 가져오기
             sql_f = 'select name from publisher where id = '+game_id;
             conn.query(sql_f, function(err, result, fields) {
@@ -186,12 +196,26 @@ app.get('/playstation_Store_game_page',function(req,res){
                         discount_rate = discount.rate;
                         discount_date = discount.end_date;
                         
-                        discount_end_date = date_format(discount_date);
+                        discount_end_date = date_format(discount_date)+ "에 프로모션 종료";
                     }
                     // 게임의 플랫폼 정보 가져오기
                     sql = 'select * from platform where game_id = '+game_id;
                     conn.query(sql, function(err, result, fields){
                         let device = result;
+                        // [게임 세부 정보]
+                        let device_s = "";
+                        if(device[0].device != undefined) {
+                            for(let i=0; i<device.length; i++) {
+                                if(i+1 == device.length) {
+                                    device_s += device[i].device;
+                                } else {
+                                    device_s += device[i].device+", ";
+                                }
+                            }
+                        } else {
+                            device_s = null;
+                        }
+                       
 
                         // 에디션 정보, 플랫폼, 할인 가져오기
                         sql = 'select edt.*, dc.* from edition as edt left join discount as dc on edt.id = dc.edition_id where edt.game_id = '+ game_id;
@@ -225,7 +249,7 @@ app.get('/playstation_Store_game_page',function(req,res){
                                 
                                 //에디션 할인 날짜 스트링 배열
                                 if(edition[i].end_date != undefined)
-                                    e_discount_date[i] = date_format(edition[i].end_date);
+                                    e_discount_date[i] = date_format(edition[i].end_date)+ "에 프로모션 종료";
                             }
 
                             //console.log('정가 릴레이: '+ e_price);
@@ -276,28 +300,89 @@ app.get('/playstation_Store_game_page',function(req,res){
                                         add_c_dc_price_info[i] = comma(discount_price(add_c[i].price, add_c[i].rate));
                                     }
                                     //console.log(add_c_price_info);
-                                    res.render('game_page.ejs', {
-                                        game : rows[0],
-                                        publisher : publisher_name,
-                                        price : price_c,
-                                        discount_price : discount_price_c,
-                                        discount_rate : discount_rate,
-                                        discount_end_date : discount_end_date, 
-                                        discount : discount,
-                                        go_arr : go_arr,
-                                        device : device,
-                                        //에디션 정보
-                                        edition : edition, 
-                                        edition_contents : edition_contents, // 에디션 아이템
-                                        e_price : e_price, // 에디션 가격 콤마
-                                        e_discount_prcie : e_discount_prcie, // 할인가 콤마
-                                        e_discount_date : e_discount_date, // 프로모션 스트링
-                                        e_dvc_arr : e_dvc_arr, // 에디션 디바이스 배열
-                                        //추가콘텐츠
-                                        add_c : add_c, // 추가콘텐츠
-                                        add_c_price_info : add_c_price_info,
-                                        add_c_dc_price_info : add_c_dc_price_info // 추가콘텐츠 할인 정보
+
+                                    // 추가콘텐츠 플랫폼 정보 가져오기
+                                    sql = 'select ac.*, plt.device from additional_content as ac left join platform as plt on ac.id = plt.additional_content_id where ac.game_id = ' + game_id;
+                                    conn.query(sql, function(err, result, fields){
+                                        let ac_device = result;
+                                        let ac_dvc_arr = [];
+                                        
+                                        let k = 0;
+                                        for(let i=0; i<ac_device.length; i++) {
+                                            let tmp = 'true';
+                                            if(i > 0) {
+
+                                                if(ac_device[i].id != ac_device[i-1].id) {
+                                                    ++k;
+                                                    
+                                                } else {
+                                                    tmp = 'false';
+                                                }
+
+                                            }
+                                            if(tmp == 'true') {
+                                                ac_dvc_arr[k] = [];
+                                            }
+                                        
+
+
+                                            //console.log(ac_device[i].id+' '+k);
+                                            ac_dvc_arr[k].push(ac_device[i].device);
+                                        }
+
+                                        //console.log(ac_dvc_arr);
+
+                                        // 게임 장르 가져오기
+                                        sql = 'SELECT * FROM playstation.game_genre where game_id = ' + game_id;
+                                        conn.query(sql, function(err, result){
+
+                                            game_gr = result;
+                                            let genre ="";
+                                            // 장르 이어 붙이는 작업
+                                            if(game_gr[0].genre != undefined) {
+                                                for(let i=0; i<game_gr.length; i++) {
+                                                    if(i+1 == game_gr.length) {
+                                                        genre += game_gr[i].genre;
+                                                    } else {
+                                                        genre += game_gr[i].genre+", ";
+                                                    }
+                                                }
+                                            } else {
+                                                genre = null;
+                                            }
+
+
+                                            res.render('game_page.ejs', {
+                                                game : rows[0],
+                                                publisher : publisher_name,
+                                                price : price_c,
+                                                discount_price : discount_price_c,
+                                                discount_rate : discount_rate,
+                                                discount_end_date : discount_end_date, 
+                                                discount : discount,
+                                                go_arr : go_arr,
+                                                device : device,
+                                                release_date : release_date, 
+                                                genre : genre,
+                                                device_s : device_s, 
+                                                //에디션 정보
+                                                edition : edition, 
+                                                edition_contents : edition_contents, // 에디션 아이템
+                                                e_price : e_price, // 에디션 가격 콤마
+                                                e_discount_prcie : e_discount_prcie, // 할인가 콤마
+                                                e_discount_date : e_discount_date, // 프로모션 스트링
+                                                e_dvc_arr : e_dvc_arr, // 에디션 디바이스 배열
+                                                //추가콘텐츠
+                                                add_c : add_c, // 추가콘텐츠
+                                                add_c_price_info : add_c_price_info,
+                                                add_c_dc_price_info : add_c_dc_price_info, // 추가콘텐츠 할인 정보
+                                                ac_dvc_arr : ac_dvc_arr // 추가콘텐츠 디바이스 배열
+                                                
+                                            });
+                                        });
+                                        
                                     });
+                                    
                                 });
 
                                 

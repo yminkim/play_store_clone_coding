@@ -1412,6 +1412,11 @@
                 .slide-menu {
                     display: flex;
                 }
+
+                /* 가격 옵션 디스플레이 */
+                .price_option_01 {
+                    display: none;
+                }
             }
 
         </style>
@@ -2062,7 +2067,7 @@
                     <!-- 정렬 옵션 리스트 -->
                     <div class="sort-list-item-container hide-op sortsort">
                         <!-- 옵션 아이템 -->
-                        <div class="sort-list-item-area">
+                        <!-- <div class="sort-list-item-area">
                             <div class="sort-list-item">
                                 <div class="sort-area-tie">
                                     <div class="sort-option-title">베스트셀러</div>
@@ -2071,10 +2076,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- 옵션 아이템 -->
-                        <div class="sort-list-item-area">
+                        <!-- <div class="sort-list-item-area">
                             <div class="sort-list-item">
                                 <div class="sort-area-tie">
                                     <div class="sort-option-title">최다 다운로드</div>
@@ -2083,10 +2088,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- 옵션 아이템 -->
-                        <div class="sort-list-item-area">
+                        <div class="sort-list-item-area sort_op">
                             <div class="sort-list-item">
                                 <div class="sort-area-tie">
                                     <div class="sort-option-title">이름(내림차순)</div>
@@ -2098,7 +2103,7 @@
                         </div>
 
                         <!-- 옵션 아이템 -->
-                        <div class="sort-list-item-area">
+                        <div class="sort-list-item-area sort_op">
                             <div class="sort-list-item">
                                 <div class="sort-area-tie">
                                     <div class="sort-option-title">이름(오름차순)</div>
@@ -2110,7 +2115,7 @@
                         </div>
 
                         <!-- 옵션 아이템 -->
-                        <div class="sort-list-item-area">
+                        <div class="sort-list-item-area sort_op">
                             <div class="sort-list-item">
                                 <div class="sort-area-tie">
                                     <div class="sort-option-title">출시일(오래된 순)</div>
@@ -2122,7 +2127,7 @@
                         </div>
 
                         <!-- 옵션 아이템 -->
-                        <div class="sort-list-item-area">
+                        <div class="sort-list-item-area sort_op">
                             <div class="sort-list-item">
                                 <div class="sort-area-tie">
                                     <div class="sort-option-title">출시일(새로운 순)</div>
@@ -2134,7 +2139,8 @@
                         </div>
 
                         <!-- 옵션 아이템 -->
-                        <div class="sort-list-item-area">
+                        
+                        <div class="sort-list-item-area sort_op">
                             <div class="sort-list-item">
                                 <div class="sort-area-tie">
                                     <div class="sort-option-title">가격(낮은 순)</div>
@@ -2144,9 +2150,9 @@
                                 </div>
                             </div>
                         </div>
-
+                           
                         <!-- 옵션 아이템 -->
-                        <div class="sort-list-item-area">
+                        <div class="sort-list-item-area sort_op">
                             <div class="sort-list-item">
                                 <div class="sort-area-tie">
                                     <div class="sort-option-title">가격(높은 순)</div>
@@ -2171,24 +2177,25 @@
                                 <div class="fas fa-chevron-down"></div>
                             </div>
                         </div>
+                        
                         <!-- 정렬 옵션 리스트 -->
                         <div class="price-sort-list-item-container hide-op">
-                            <div class="price-box-container">
+                            <div class="price-box-container sort_op">    
                                 <div class="price-box" data-value="0" data-id="옵션-무료" id="옵션-무료jjjj">무료</div>
                             </div>
-                            <div class="price-box-container">
+                            <div class="price-box-container sort_op">
                                 <div class="price-box" data-value="0" data-id="옵션-49">4,999원 이하</div>
                             </div>
-                            <div class="price-box-container">
+                            <div class="price-box-container sort_op">
                                 <div class="price-box" data-value="0" data-id="옵션-5099">5,000원 - 9,999원</div>
                             </div>
-                            <div class="price-box-container">
+                            <div class="price-box-container sort_op">
                                 <div class="price-box" data-value="0" data-id="옵션-100199">10,000원 - 19,999원</div>
                             </div>
-                            <div class="price-box-container">
+                            <div class="price-box-container sort_op">
                                 <div class="price-box" data-value="0" data-id="옵션-200499">20,000원 - 49,999원</div>
                             </div>
-                            <div class="price-box-container">
+                            <div class="price-box-container sort_op">
                                 <div class="price-box" data-value="0" data-id="옵션-500">50,000원 이상</div>
                             </div>
 
@@ -3032,24 +3039,57 @@
             });
 
 
+            
 
-            // 정렬 옵션 선택
-            $('.sort-list-item-area').click(function(){
-                let on_clicked = 0;
-                if($(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text() == '가격(높은 순)') {
-                    on_clicked = 1;
+           
+               
+             
+               let sort_option;
+               let sort_price_op = [];
+            $('.sort_op').click(function(){
+                
+                if($(this).children('.price-box').text() == '무료') {
+                    sort_price_op.push('무료');
+                }
 
-                    let sort_price_DESC = 4; // 임시 숫자임
-                    $.ajax({
-                        url : "/playstation_Store_browse",
-                        type : "get",
-                        data : {"sort_price_DESC" : sort_price_DESC },
-                        success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
+                //$(this).children('.price-box').data('id');
+
+                
+                //console.log($('.price-box-container').children('.price-box[data-value="1"]').length);
+                
+                // if($('.price_option_0').is(':checked') == true) {
+                //     console.log('찍힘');
+                // } else {
+                //     console.log('취소');
+                // }
+
+
+                for(let i=0; i<)
+
+                if($(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text() == '이름(내림차순)') {
+                    sort_option = 1;
+                } else if($(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text() == '이름(오름차순)') {
+                    sort_option = 2;
+                } else if($(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text() == '출시일(오래된 순)') {
+                    sort_option = 3;
+                } else if($(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text() == '출시일(새로운 순)') {
+                    sort_option = 4;
+                } else if($(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text() == '가격(낮은 순)') {
+                    sort_option = 5;
+                } else if($(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text() == '가격(높은 순)') {
+                    sort_option = 6;
+                }
+
+                $.ajax({
+                    url : "/playstation_Store_browse_ajax",
+                    type : "get",
+                    data : {"sort_option" : sort_option },
+                    success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
-                        console.log(response);
-                },
-                    });
-                } 
+                        //console.log(response);
+                        $('.post-middle-area').html(response);
+                    },
+                });
             });
 
 

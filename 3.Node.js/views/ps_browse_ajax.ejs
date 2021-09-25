@@ -1,0 +1,15 @@
+<div class="post-middle-area">
+    <% game.forEach(function(value, index) { %>
+        <!-- 포스트 -->
+        <div class="sc-item-container">
+            <a href="http://127.0.0.1:3000/playstation_Store_game_page?id=<%= value.id %>">
+                <div class="sc-item-img-area">
+                    <img src="<%=value.image %>" alt="">
+                </div>
+                <div class="sc-item-info-area">
+                    <div class="sc-item-title"><%= value.title %></div>
+                </div>
+            </a>
+        </div>
+    <% }); %>
+</div>

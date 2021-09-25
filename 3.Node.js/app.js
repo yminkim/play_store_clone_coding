@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 const { application, query } = require('express');
 
 var session = require('express-session');
+const { render } = require('ejs');
 
 // var req.session;
 
@@ -66,28 +67,60 @@ app.get('/playstation_Store_collections',function(req,res){
     res.render('play_store.html');
 });
 
+
 app.get('/playstation_Store_browse',function(req,res){
-    let sql = "";
-    let sql_price_DESC = 'select id, title, price from game order by price DESC'; // 가격 내림차순
-
-    let test = req.query.sort_price_DESC;
-    if(test == 4) {
-        sql = sql_price_DESC;
-    } else {
-        sql = 'select * from game';
-    }
-    
-
-   
-
+    let sql = 'select * from game';
 
     conn.query(sql, function(err, rows, fields){
         let list_count = rows.length;
         if(err) console.log('브라우져 렌더링 실패' + err);
-        else res.render('ps_browse.ejs', {game : rows, list_count : list_count});
+        else {
+            res.render('ps_browse.ejs', {game : rows, list_count : list_count});
+        }
     });
+});
+
+app.get('/playstation_Store_browse_ajax', function(req, res){
+    let sql = "";
+    let sort_op = ""; // 정렬 옵션
+    //let price_op = req.query.price_op;
+
+    let sort_num = req.query.sort_option; // 페이지에서 요청온 아이템 번호
+
+    sql = 'select * from game'; // 기본 정렬
+    if(sort_num == 1) {
+        sort_op = ' order by title DESC';
+    } else if(sort_num == 2) {
+        sort_op = ' order by title ASC';
+    } else if(sort_num == 3) {
+        sort_op = ' order by release_date ASC';
+    } else if(sort_num == 4) {
+        sort_op = ' order by release_date DESC';
+    } else if(sort_num == 5) {
+        sort_op = ' order by price ASC';
+    } else if(sort_num == 6) {
+        sort_op = ' order by price DESC';
+    }
+
+    // 가격 옵션
+    // if(옵션 != "")
+    // op1 = 바로 추가해버리던가 해야지
+
+
+
+
+    if(sort_op != "") {
+        sql += sort_op;
+    }
     
 
+    conn.query(sql, function(err, rows, fields){
+        let list_count = rows.length;
+        if(err) console.log('브라우져 렌더링 실패' + err);
+        else {
+            res.render('ps_browse_ajax.ejs', {game : rows, list_count : list_count});
+        }
+    });
 });
 
 app.get('/playstation_Store_latest',function(req,res){

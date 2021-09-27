@@ -2922,6 +2922,7 @@
             $(document).on("click", '.top-opbox', function(){
                 // 쿼리 수정
                 
+                //$('.game-count').text($('.sc-item-container').length);
                 let remove_index = sort_price_op.indexOf($(this).attr("id"));
                 sort_price_op.splice(remove_index, 1);
                 $.ajax({
@@ -2933,6 +2934,7 @@
                         // 성공 시 동작
                         //console.log(response);
                         $('.post-middle-area').html(response);
+                        $('.game-count').text($('.sc-item-container').length);
                     },
                 });
 
@@ -2995,6 +2997,7 @@
 
             //필터 지우기
             $('.remove-op').click(function(){
+                
                 // 쿼리 처리
                 sort_price_op = [];
                 $.ajax({
@@ -3006,6 +3009,7 @@
                         // 성공 시 동작
                         //console.log(response);
                         $('.post-middle-area').html(response);
+                        $('.game-count').text($('.sc-item-container').length);
                     },
                 });
 
@@ -3116,6 +3120,8 @@
                         // 성공 시 동작
                         //console.log(response);
                         $('.post-middle-area').html(response);
+                         // 서치된 아이템의 개수
+                        $('.game-count').text($('.sc-item-container').length);
                     },
                 });
             });

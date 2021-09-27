@@ -83,9 +83,10 @@ app.get('/playstation_Store_browse',function(req,res){
 app.get('/playstation_Store_browse_ajax', function(req, res){
     let sql = "";
     let sort_op = ""; // 정렬 옵션
-    //let price_op = req.query.price_op;
+    let price_sort_op="";
 
     let sort_num = req.query.sort_option; // 페이지에서 요청온 아이템 번호
+    let price_sort =  req.query.sort_price_op; // 일단은 가격 정렬 용 변수임
 
     sql = 'select * from game'; // 기본 정렬
     if(sort_num == 1) {
@@ -102,16 +103,28 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
         sort_op = ' order by price DESC';
     }
 
+
+    if(price_sort == 1) {
+        price_sort_op = " where price = 0";
+    } else if(price_sort == 2) {
+        price_sort_op = " where price <= 4999";
+    }
+
     // 가격 옵션
     // if(옵션 != "")
     // op1 = 바로 추가해버리던가 해야지
 
-
+    if(price_sort_op != "") {
+        sql += price_sort_op;
+    }
 
 
     if(sort_op != "") {
+        //sql += ' where';
         sql += sort_op;
     }
+
+    console.log('여기입니다'+ sql);
     
 
     conn.query(sql, function(err, rows, fields){

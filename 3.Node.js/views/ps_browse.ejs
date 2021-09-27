@@ -1303,7 +1303,7 @@
 
             @media screen and (max-width: 1700px) { /* 원래는 1920 */
                 .option-container {
-                    display: none;
+                    /* 일요일 작업 백업해야함 display: none; */
                 }
 
                 .post-container {
@@ -3045,12 +3045,24 @@
                
              
                let sort_option;
-               let sort_price_op = [];
+               let sort_price_op;
             $('.sort_op').click(function(){
                 
-                if($(this).children('.price-box').text() == '무료') {
-                    sort_price_op.push('무료');
+                if($(this).children('.price-box').text() == '무료'){
+                    sort_price_op = 1;
                 }
+                if($(this).children('.price-box').text() == '4,999원 이하'){
+                    sort_price_op = 2;
+                }
+
+
+                // if($(this).children('.price-box').text() == '무료' && $(this).children('.price-box').data('value') == 0) {
+                //     console.log('찍혔다.');
+                // } else {
+                //     console.log('풀렸다');
+                // }
+
+                
 
                 //$(this).children('.price-box').data('id');
 
@@ -3064,8 +3076,10 @@
                 // }
 
 
-                for(let i=0; i<)
+                // for(let i=0; i<)
 
+
+                //정렬 옵션 선택 시 변수 전달
                 if($(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text() == '이름(내림차순)') {
                     sort_option = 1;
                 } else if($(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').text() == '이름(오름차순)') {
@@ -3083,7 +3097,8 @@
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
                     type : "get",
-                    data : {"sort_option" : sort_option },
+                    data : {"sort_option" : sort_option,
+                            "sort_price_op" : sort_price_op },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);

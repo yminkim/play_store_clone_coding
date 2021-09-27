@@ -68,6 +68,7 @@ app.get('/playstation_Store_collections',function(req,res){
 });
 
 
+// 브라우즈 페이지 렌더링
 app.get('/playstation_Store_browse',function(req,res){
     let sql = 'select * from game';
 
@@ -80,14 +81,14 @@ app.get('/playstation_Store_browse',function(req,res){
     });
 });
 
+// 옵션 관련하여 ajax 처리
 app.get('/playstation_Store_browse_ajax', function(req, res){
     let sql = "";
     let sort_op = ""; // 정렬 옵션
-    let price_sort_op="";
+    let price_sort_op=""; // 가격 옵션 
 
     let sort_num = req.query.sort_option; // 페이지에서 요청온 아이템 번호
-    let price_sort =  req.query.sort_price_op; // 일단은 가격 정렬 용 변수임
-
+    
     sql = 'select * from game'; // 기본 정렬
     if(sort_num == 1) {
         sort_op = ' order by title DESC';
@@ -103,28 +104,43 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
         sort_op = ' order by price DESC';
     }
 
+    // 가격 정렬 옵션 정보를 담는 배열
+    let price_sort = [];
+    price_sort =  req.query.sort_price_op; 
+   // let prict_sort_len = price_sort.length;
+    // price 정렬 쿼리문 제작
+    if(price_sort != undefined) {
+        price_sort_op += ' where';
+        for(let i=0; i<price_sort.length; i++) {
+            if(price_sort[i] == '옵션-무료') {
+                price_sort_op += ' price = 0';
+            } else if(price_sort[i] == '옵션-49') {
+                price_sort_op +=' price <= 4999';
+            } else if(price_sort[i] == '옵션-5099') {
+                price_sort_op +=' price between 5000 and 9999';
+            } else if(price_sort[i] == '옵션-100199') {
+                price_sort_op +=' price between 10000 and 19999';
+            } else if(price_sort[i] == '옵션-200499') {
+                price_sort_op +=' price between 20000 and 49999';
+            } else if(price_sort[i] == '옵션-500') {
+                price_sort_op +=' price >= 50000';
+            }
 
-    if(price_sort == 1) {
-        price_sort_op = " where price = 0";
-    } else if(price_sort == 2) {
-        price_sort_op = " where price <= 4999";
+            // 마지막 요소 전까지는 or 을 붙여줌
+            if(i+1 != price_sort.length)
+                price_sort_op += ' or';
+        }
     }
-
-    // 가격 옵션
-    // if(옵션 != "")
-    // op1 = 바로 추가해버리던가 해야지
 
     if(price_sort_op != "") {
         sql += price_sort_op;
     }
 
-
     if(sort_op != "") {
-        //sql += ' where';
         sql += sort_op;
     }
 
-    console.log('여기입니다'+ sql);
+    console.log('여기입니다 | '+ sql); // 잘 조합되시나요?~
     
 
     conn.query(sql, function(err, rows, fields){

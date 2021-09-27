@@ -2920,6 +2920,23 @@
 
             //top-opbox 선택 시 옵션 선택 취소
             $(document).on("click", '.top-opbox', function(){
+                // 쿼리 수정
+                
+                let remove_index = sort_price_op.indexOf($(this).attr("id"));
+                sort_price_op.splice(remove_index, 1);
+                $.ajax({
+                    url : "/playstation_Store_browse_ajax",
+                    type : "get",
+                    data : {"sort_option" : sort_option,
+                            "sort_price_op" : sort_price_op },
+                    success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
+                        // 성공 시 동작
+                        //console.log(response);
+                        $('.post-middle-area').html(response);
+                    },
+                });
+
+                /////페이지 처리
                 $(this).remove();
                 let op_box_id = $(this).attr("id");
                 let price_box_container = $('.price-box[data-id='+op_box_id+']').parent('.price-box-container');
@@ -2978,6 +2995,21 @@
 
             //필터 지우기
             $('.remove-op').click(function(){
+                // 쿼리 처리
+                sort_price_op = [];
+                $.ajax({
+                    url : "/playstation_Store_browse_ajax",
+                    type : "get",
+                    data : {"sort_option" : sort_option,
+                            "sort_price_op" : sort_price_op },
+                    success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
+                        // 성공 시 동작
+                        //console.log(response);
+                        $('.post-middle-area').html(response);
+                    },
+                });
+
+
                // 상단 옵션 박스 제거
                 $('.top-opbox').remove();
 
@@ -3043,40 +3075,21 @@
 
            
                
-             
+            // 옵션 선택할 때 
                let sort_option;
-               let sort_price_op;
+               let sort_price_op = [];
             $('.sort_op').click(function(){
                 
-                if($(this).children('.price-box').text() == '무료'){
-                    sort_price_op = 1;
+                console.log($(this).children('.price-box').data('id') + ' : ' + $(this).children('.price-box').attr('data-value'));
+               //근데 이거는 옵션을 직접 누를 때만 해당됨. 필터지우기 이런걸로는 적용 안 되니 일단 참고
+                if($(this).children('.price-box').attr('data-value') == 1) {
+                    sort_price_op.push($(this).children('.price-box').data('id'));
+                } else if($(this).children('.price-box').attr('data-value') == 0) { // 옵션 제거된 상태 0일 때
+                    let remove_index = sort_price_op.indexOf($(this).children('.price-box').data('id'));
+                    sort_price_op.splice(remove_index, 1);
                 }
-                if($(this).children('.price-box').text() == '4,999원 이하'){
-                    sort_price_op = 2;
-                }
 
-
-                // if($(this).children('.price-box').text() == '무료' && $(this).children('.price-box').data('value') == 0) {
-                //     console.log('찍혔다.');
-                // } else {
-                //     console.log('풀렸다');
-                // }
-
-                
-
-                //$(this).children('.price-box').data('id');
-
-                
-                //console.log($('.price-box-container').children('.price-box[data-value="1"]').length);
-                
-                // if($('.price_option_0').is(':checked') == true) {
-                //     console.log('찍힘');
-                // } else {
-                //     console.log('취소');
-                // }
-
-
-                // for(let i=0; i<)
+                //console.log(sort_price_op);  배열 잘 만들어지나 확인
 
 
                 //정렬 옵션 선택 시 변수 전달

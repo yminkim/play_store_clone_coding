@@ -87,6 +87,7 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
     let sort_op = ""; // 정렬 옵션 쿼리 변수
     let price_sort_op=""; // 가격 옵션 쿼리 변수
     let genre_sort_op=""; // 장르 옵션 쿼리 변수
+    let device_sort_op = "" // 디바이스 옵션 쿼리 변수
     let query_where = "";
     // 가격 정렬 옵션 정보를 담는 배열
     let price_sort = [];
@@ -96,9 +97,13 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
     let genre_sort = [];
     genre_sort = req.query.sort_genre_op;
 
+    // 디바이스 정렬 옵션 정보를 담는 배열
+    let device_sort = [];
+    device_sort = req.query.sort_device_op;
+
 
     let sort_num = req.query.sort_option; // 페이지에서 요청온 아이템 번호
-    sql = 'select game.id, game.title, game.image, gg.game_id, gg.genre from game left join game_genre as gg on game.id = gg.game_id'; // 기본 정렬
+    sql = 'select game.id, game.title, game.image, gg.game_id, gg.genre, plt.device from game left join game_genre as gg on game.id = gg.game_id left join platform as plt on game.id = plt.game_id'; // 기본 정렬
 
     switch(sort_num) {
         case '1' :
@@ -129,6 +134,7 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
     // price 정렬 쿼리문 제작
     if(price_sort != undefined) {
         query_where = " where";
+        price_sort_op += ' (';
         for(let i=0; i<price_sort.length; i++) {
             
             switch(price_sort[i]) {
@@ -157,13 +163,16 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
             // 마지막 요소 전까지는 or 을 붙여줌
             if(i+1 != price_sort.length)
                 price_sort_op += ' or';
+            else {
+                price_sort_op += ' )';
+            }
         }
     }
 
     // 장르 정렬 
     if(genre_sort != undefined) {
         query_where = " where";
-        genre_sort_op = ' gg.genre in (';
+        genre_sort_op = ' (gg.genre in (';
         for(let i=0; i<genre_sort.length; i++) {
             
             switch(genre_sort[i]) {
@@ -199,7 +208,35 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
             if(i+1 != genre_sort.length)
                 genre_sort_op += ', ';
             else {
-                genre_sort_op += ')';
+                genre_sort_op += '))';
+            }
+        }
+    }
+
+
+    // 디바이스 옵션
+    console.log('sdf '+device_sort);
+    if(device_sort != undefined) {
+        query_where = " where";
+        device_sort_op = ' (';
+        for(let i=0; i<device_sort.length; i++) {
+            
+            switch(device_sort[i]) {
+                case '디바이스옵션-ps4' :
+                    device_sort_op += " plt.device = 'ps4'";
+                    break;
+                case '디바이스옵션-ps5' :
+                    device_sort_op += " plt.device = 'ps5'";
+                    break;
+                default :
+                    break;
+            }
+
+            // 마지막 요소 전까지는 or 을 붙여줌
+            if(i+1 != device_sort.length)
+                device_sort_op += ' or';
+            else {
+                device_sort_op += ')';
             }
         }
     }
@@ -207,28 +244,41 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
 
 
     // 최종 쿼리 조합
-
+    // 쿼리 붙일 때 조건 여부를 확인하여 조건이 있다면 where을 붙이고 시작
     if(query_where == " where") {
         sql += query_where;
     }
-
+    // 가격 조건이 비어있지 않다면 준비해둔 가격 옵션 쿼리를 이어서 붙임
     if(price_sort_op != "") {
         sql += price_sort_op;
     }
-
+    // 장르 조건이 비어있지 않다면 준비해둔 장르 옵션 쿼리를 이어서 붙임
     if(genre_sort_op != "") {
+        // 가격 옵션 뒤에 오기 때문에 가격 옵션이 비어있지 않다면 or을 붙임
         if(price_sort_op != "") {
-            sql += ' or';
+            sql += ' and';
         }
         sql += genre_sort_op;
     }
 
+    // 디바이스 조건이 비어있지 않다면 준비해둔 장르 옵션 쿼리를 이어서 붙임
+    if(device_sort_op != "") {
+        // 가격 옵션 뒤에 오기 때문에 가격 옵션이 비어있지 않다면 or을 붙임
+        if(price_sort_op != "" || genre_sort_op != "") {
+            sql += ' and';
+        }
+        sql += device_sort_op;
+    }
+
+
+
+    // 마지막으로 정렬 옵션이 있다면 쿼리를 이어서 붙임
     if(sort_op != "") {
         sql += sort_op;
     }
 
     console.log('여기입니다 | '+ sql); // 잘 조합되시나요?~
-    
+    console.log('여기 장르요 |'+device_sort_op);
     let game = [];
 
     conn.query(sql, function(err, rows, fields){

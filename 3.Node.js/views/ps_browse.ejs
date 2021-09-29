@@ -2330,13 +2330,13 @@
                         <!-- 정렬 옵션 리스트 -->
                         <div class="price-sort-list-item-container hide-op">
                             <div class="price-box-container">
-                                <div class="price-box platform-btn-area" data-value="0" data-id="옵션-ps4">
+                                <div class="price-box platform-btn-area device-op" data-value="0" data-id="디바이스옵션-ps4">
                                     <div class="platform-btn-img"><img src="img/option-plaform-ps4.png" alt=""></div>
                                     <div class="platform-btn-text">PS4</div>
                                 </div>
                             </div>
                             <div class="price-box-container">
-                                <div class="price-box platform-btn-area" data-value="0" data-id="옵션-ps5">
+                                <div class="price-box platform-btn-area device-op" data-value="0" data-id="디바이스옵션-ps5">
                                     <div class="platform-btn-img"><img src="img/option-plaform-ps5.png" alt=""></div>
                                     <div class="platform-btn-text">PS5</div>
                                 </div>
@@ -2938,10 +2938,14 @@
                     // 가격 옵션 취소
                     let remove_index = sort_price_op.indexOf($(this).attr("id"));
                     sort_price_op.splice(remove_index, 1);
-                } else { // 지금은 두개 밖에 없으니깐 else로 처리함
+                } else if($(this).attr("id").indexOf('장르옵션') == 0) {
                     // 장르 옵션 취소
                     let remove_index2 = sort_genre_op.indexOf($(this).attr("id"));
                     sort_genre_op.splice(remove_index2, 1);
+                } else if($(this).attr("id").indexOf('디바이스옵션') == 0) {
+                    // 디바이스 옵션 취소
+                    let remove_index3 = sort_device_op.indexOf($(this).attr("id"));
+                    sort_device_op.splice(remove_index3, 1);
                 }
                 
 
@@ -2953,7 +2957,8 @@
                     type : "get",
                     data : {"sort_option" : sort_option,
                             "sort_price_op" : sort_price_op,
-                            "sort_genre_op" : sort_genre_op },
+                            "sort_genre_op" : sort_genre_op,
+                            "sort_device_op" : sort_device_op },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
@@ -3025,13 +3030,15 @@
                 // 쿼리 처리
                 sort_price_op = []; // 가격 옵션 초기화
                 sort_genre_op = []; // 장르 옵션 초기화
+                sort_device_op = []; // 디바이스 옵션 초기화
 
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
                     type : "get",
                     data : {"sort_option" : sort_option,
                             "sort_price_op" : sort_price_op,
-                            "sort_genre_op" : sort_genre_op },
+                            "sort_genre_op" : sort_genre_op,
+                            "sort_device_op" : sort_device_op },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
@@ -3143,7 +3150,8 @@
                     type : "get",
                     data : {"sort_option" : sort_option,
                             "sort_price_op" : sort_price_op,
-                            "sort_genre_op" : sort_genre_op },
+                            "sort_genre_op" : sort_genre_op,
+                            "sort_device_op" : sort_device_op },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
@@ -3174,7 +3182,41 @@
                     type : "get",
                     data : {"sort_option" : sort_option,
                             "sort_price_op" : sort_price_op,
-                            "sort_genre_op" : sort_genre_op },
+                            "sort_genre_op" : sort_genre_op,
+                            "sort_device_op" : sort_device_op },
+                    success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
+                        // 성공 시 동작
+                        //console.log(response);
+                        $('.post-middle-area').html(response);
+                         // 서치된 아이템의 개수
+                        $('.game-count').text($('.sc-item-container').length);
+                    },
+                });
+
+                
+            });
+
+
+            // 디바이스 옵션 선택할 때
+            let sort_device_op = [];
+            $('.price-box-container').click(function(){
+                // $(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').attr('data-clicked')
+                if($(this).children('.device-op').attr('data-value') == 1) {
+                    sort_device_op.push($(this).children('.device-op').data('id'));
+                } else if($(this).children('.device-op').attr('data-value') == 0) {
+                    let remove_index = sort_device_op.indexOf($(this).children('.device-op').data('id'));
+                    sort_device_op.splice(remove_index, 1);
+                }
+
+                console.log(sort_device_op);
+
+                $.ajax({
+                    url : "/playstation_Store_browse_ajax",
+                    type : "get",
+                    data : {"sort_option" : sort_option,
+                            "sort_price_op" : sort_price_op,
+                            "sort_genre_op" : sort_genre_op, 
+                            "sort_device_op" : sort_device_op },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);

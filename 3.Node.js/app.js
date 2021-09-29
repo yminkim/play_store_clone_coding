@@ -84,46 +84,74 @@ app.get('/playstation_Store_browse',function(req,res){
 // 옵션 관련하여 ajax 처리
 app.get('/playstation_Store_browse_ajax', function(req, res){
     let sql = "";
-    let sort_op = ""; // 정렬 옵션
-    let price_sort_op=""; // 가격 옵션 
-
-    let sort_num = req.query.sort_option; // 페이지에서 요청온 아이템 번호
-    
-    sql = 'select * from game'; // 기본 정렬
-    if(sort_num == 1) {
-        sort_op = ' order by title DESC';
-    } else if(sort_num == 2) {
-        sort_op = ' order by title ASC';
-    } else if(sort_num == 3) {
-        sort_op = ' order by release_date ASC';
-    } else if(sort_num == 4) {
-        sort_op = ' order by release_date DESC';
-    } else if(sort_num == 5) {
-        sort_op = ' order by price ASC';
-    } else if(sort_num == 6) {
-        sort_op = ' order by price DESC';
-    }
-
+    let sort_op = ""; // 정렬 옵션 쿼리 변수
+    let price_sort_op=""; // 가격 옵션 쿼리 변수
+    let genre_sort_op=""; // 장르 옵션 쿼리 변수
+    let query_where = "";
     // 가격 정렬 옵션 정보를 담는 배열
     let price_sort = [];
     price_sort =  req.query.sort_price_op; 
+
+    // 장르 정렬 옵션 정보를 담는 배열
+    let genre_sort = [];
+    genre_sort = req.query.sort_genre_op;
+
+
+    let sort_num = req.query.sort_option; // 페이지에서 요청온 아이템 번호
+    sql = 'select game.id, game.title, game.image, gg.game_id, gg.genre from game left join game_genre as gg on game.id = gg.game_id'; // 기본 정렬
+
+    switch(sort_num) {
+        case '1' :
+            sort_op = ' order by title DESC';
+            break;
+        case '2' :
+            sort_op = ' order by title ASC';
+            break;
+        case '3' :
+            sort_op = ' order by release_date ASC';
+            break;
+        case '4' : 
+            sort_op = ' order by release_date DESC';
+            break;
+        case '5' :
+            sort_op = ' order by price ASC';
+            break;
+        case '6' :
+            sort_op = ' order by price DESC';
+            break;
+        default :
+            break;
+    }
+    
+
+    
    // let prict_sort_len = price_sort.length;
     // price 정렬 쿼리문 제작
     if(price_sort != undefined) {
-        price_sort_op += ' where';
+        query_where = " where";
         for(let i=0; i<price_sort.length; i++) {
-            if(price_sort[i] == '옵션-무료') {
-                price_sort_op += ' price = 0';
-            } else if(price_sort[i] == '옵션-49') {
-                price_sort_op +=' price <= 4999';
-            } else if(price_sort[i] == '옵션-5099') {
-                price_sort_op +=' price between 5000 and 9999';
-            } else if(price_sort[i] == '옵션-100199') {
-                price_sort_op +=' price between 10000 and 19999';
-            } else if(price_sort[i] == '옵션-200499') {
-                price_sort_op +=' price between 20000 and 49999';
-            } else if(price_sort[i] == '옵션-500') {
-                price_sort_op +=' price >= 50000';
+            
+            switch(price_sort[i]) {
+                case '가격옵션-무료' :
+                    price_sort_op += ' game.price = 0';
+                    break;
+                case '가격옵션-49' :
+                    price_sort_op +=' game.price <= 4999';
+                    break;
+                case '가격옵션-5099' :
+                    price_sort_op +=' game.price between 5000 and 9999';
+                    break;
+                case '가격옵션-100199' :
+                    price_sort_op +=' game.price between 10000 and 19999';
+                    break;
+                case '가격옵션-200499' :
+                    price_sort_op +=' game.price between 20000 and 49999';
+                    break;
+                case '가격옵션-500' :
+                    price_sort_op +=' game.price >= 50000';
+                    break;
+                default :
+                    break;
             }
 
             // 마지막 요소 전까지는 or 을 붙여줌
@@ -132,8 +160,67 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
         }
     }
 
+    // 장르 정렬 
+    if(genre_sort != undefined) {
+        query_where = " where";
+        genre_sort_op = ' gg.genre in (';
+        for(let i=0; i<genre_sort.length; i++) {
+            
+            switch(genre_sort[i]) {
+                case '장르옵션-액션' :
+                    genre_sort_op += "'액션'";
+                    break;
+                case '장르옵션-어드밴처' :
+                    genre_sort_op += "'어드벤처'";
+                    break;
+                case '장르옵션-공포' :
+                    genre_sort_op += "'공포'";
+                    break;
+                case '장르옵션-슈팅' :
+                    genre_sort_op += "'슈팅'";
+                    break;
+                case '장르옵션-롤플레잉게임' :
+                    genre_sort_op += "'롤플레잉 게임'";
+                    break;
+                case '장르옵션-드라이빙레이싱' :
+                    genre_sort_op += "'드라이빙/레이싱'";
+                    break;
+                case '장르옵션-스포츠' :
+                    genre_sort_op += "'스포츠'";
+                    break;
+                case '장르옵션-유니크' :
+                    genre_sort_op += "'유니크'";
+                    break;
+                default :
+                    break;
+            }
+
+            // 마지막 요소 전까지는 or 을 붙여줌
+            if(i+1 != genre_sort.length)
+                genre_sort_op += ', ';
+            else {
+                genre_sort_op += ')';
+            }
+        }
+    }
+
+
+
+    // 최종 쿼리 조합
+
+    if(query_where == " where") {
+        sql += query_where;
+    }
+
     if(price_sort_op != "") {
         sql += price_sort_op;
+    }
+
+    if(genre_sort_op != "") {
+        if(price_sort_op != "") {
+            sql += ' or';
+        }
+        sql += genre_sort_op;
     }
 
     if(sort_op != "") {
@@ -142,12 +229,27 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
 
     console.log('여기입니다 | '+ sql); // 잘 조합되시나요?~
     
+    let game = [];
 
     conn.query(sql, function(err, rows, fields){
         let list_count = rows.length;
+        
         if(err) console.log('브라우져 렌더링 실패' + err);
         else {
-            res.render('ps_browse_ajax.ejs', {game : rows, list_count : list_count});
+
+            //중복되는 튜플 제외하고 배열에 넣어주는 구간
+            for(let i=0; i<rows.length; i++) {
+                if(rows.length != (i+1)) { // 마지막 행 이전 적용
+                    if(rows[i].id != rows[i+1].id) { // 현재 행과 다음행의 id값이 같으면 추가해주지 않음
+                        game.push(rows[i]);
+                    }
+                } else { // 마지막 행 도달 시 배열에 추가
+                    game.push(rows[i]);
+                }
+                
+            }
+
+            res.render('ps_browse_ajax.ejs', {game : game, list_count : list_count});
         }
     });
 });

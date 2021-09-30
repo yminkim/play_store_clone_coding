@@ -87,7 +87,9 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
     let sort_op = ""; // 정렬 옵션 쿼리 변수
     let price_sort_op=""; // 가격 옵션 쿼리 변수
     let genre_sort_op=""; // 장르 옵션 쿼리 변수
-    let device_sort_op = "" // 디바이스 옵션 쿼리 변수
+    let device_sort_op = ""; // 디바이스 옵션 쿼리 변수
+    let release_sort_op = ""; // 기간 옵션
+    let vr_sort_op = ""; // vr옵션
     let query_where = "";
     // 가격 정렬 옵션 정보를 담는 배열
     let price_sort = [];
@@ -101,6 +103,13 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
     let device_sort = [];
     device_sort = req.query.sort_device_op;
 
+    // 기간 정렬 옵션 정보를 담는 배열
+    let release_sort = [];
+    release_sort = req.query.sort_release_op;
+
+    // vr 정렬 옵션 정보를 담는 배열
+    let vr_sort = [];
+    vr_sort = req.query.sort_vr_op;
 
     let sort_num = req.query.sort_option; // 페이지에서 요청온 아이템 번호
     sql = 'select game.id, game.title, game.image, gg.game_id, gg.genre, plt.device from game left join game_genre as gg on game.id = gg.game_id left join platform as plt on game.id = plt.game_id'; // 기본 정렬
@@ -213,9 +222,9 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
         }
     }
 
+    
 
     // 디바이스 옵션
-    console.log('sdf '+device_sort);
     if(device_sort != undefined) {
         query_where = " where";
         device_sort_op = ' (';
@@ -240,6 +249,61 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
             }
         }
     }
+
+    /// 기간 옵션
+    if(release_sort != undefined) {
+        query_where = " where";
+        release_sort_op = " (";
+        for(let i=0; i < release_sort.length; i++) {
+            switch(release_sort[i]) {
+                case '릴리즈옵션-신규출시' :
+                    release_sort_op += " (game.release_date between date_sub(now(), interval 2 month) and now())";
+                    break;
+                case '릴리즈옵션-곧제공예정' :
+                    release_sort_op += " release_date > now()";
+                    break;
+                default : 
+                    break;
+            }
+
+            // 마지막 요소 전까지는 or 을 붙여줌
+            if(i+1 != release_sort.length)
+                release_sort_op += ' or';
+            else {
+                release_sort_op += ')';
+            }
+        }
+    }
+
+
+    /// vr 옵션
+    if(vr_sort != undefined) {
+        query_where = " where";
+        vr_sort_op = " (game.go_vr_type in (";
+        for(let i=0; i < vr_sort.length; i++) {
+            switch(vr_sort[i]) {
+                case 'vr옵션-vr없음' :
+                    vr_sort_op += " 'VR 없음'";
+                    break;
+                case 'vr옵션-vr필수' :
+                    vr_sort_op += " 'VR 필수'";
+                    break;
+                case 'vr옵션-vr선택사항' :
+                    vr_sort_op += " 'VR 선택 사항'";
+                    break;
+                default : 
+                    break;
+            }
+
+            // 마지막 요소 전까지는 or 을 붙여줌
+            if(i+1 != vr_sort.length)
+                vr_sort_op += ', ';
+            else {
+                vr_sort_op += '))';
+            }
+        }
+    }
+
 
 
 
@@ -270,6 +334,22 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
         sql += device_sort_op;
     }
 
+    // 기간 정렬
+    if(release_sort_op != "") {
+        if(price_sort_op != "" || genre_sort_op != "" || device_sort_op != "") {
+            sql += ' and';
+        }
+        sql += release_sort_op;
+    }
+
+
+    // vr 정렬
+    if(vr_sort_op != "") {
+        if(price_sort_op != "" || genre_sort_op != "" || device_sort_op != "" || release_sort_op != "") {
+            sql += ' and';
+        }
+        sql += vr_sort_op;
+    }
 
 
     // 마지막으로 정렬 옵션이 있다면 쿼리를 이어서 붙임
@@ -278,7 +358,6 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
     }
 
     console.log('여기입니다 | '+ sql); // 잘 조합되시나요?~
-    console.log('여기 장르요 |'+device_sort_op);
     let game = [];
 
     conn.query(sql, function(err, rows, fields){

@@ -478,6 +478,10 @@ app.get('/playstation_Store_game_page',function(req,res){
                 go_arr.push(rows[0].go_online_type);
             }
 
+            if(rows[0].go_vr_type != undefined) {
+                go_arr.push(rows[0].go_vr_type);
+            }
+
 
             // [게임 세부 정보]
             let release_date = date_format(rows[0].release_date);

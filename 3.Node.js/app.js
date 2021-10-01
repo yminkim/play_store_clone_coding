@@ -384,7 +384,22 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
 });
 
 app.get('/playstation_Store_latest',function(req,res){
-    res.render('play_store_latest.html');
+    let sql = "SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id order by game.release_date desc limit 11";
+    conn.query(sql, function(err, rows, fields) {
+        // 가격 포맷
+        let game_price = [];
+        let game_dc_price = [];
+        for(let i=0; i< rows.length; i++) {
+            game_price[i] = comma(rows[i].price);
+            
+            game_dc_price[i] = comma(discount_price(rows[i].price, rows[i].rate));
+            
+        }
+        
+        console.log('가격: ' + game_price);
+        console.log('할인 가격: ' + game_dc_price);
+        res.render('play_store_latest.ejs', {game : rows, price : game_price, dc_price : game_dc_price});
+    });
 });
 
 app.get('/playstation_Store_deals',function(req,res){

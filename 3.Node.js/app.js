@@ -396,9 +396,61 @@ app.get('/playstation_Store_latest',function(req,res){
             
         }
         
-        console.log('가격: ' + game_price);
-        console.log('할인 가격: ' + game_dc_price);
-        res.render('play_store_latest.ejs', {game : rows, price : game_price, dc_price : game_dc_price});
+        //console.log('가격: ' + game_price);
+        //console.log('할인 가격: ' + game_dc_price);
+
+        sql = 'select game.id, game.title, pl.device from game left join platform as pl on game.id = pl.game_id order by game.release_date desc';
+        conn.query(sql, function(err, result, fields){
+            let game_pl = result;
+            let game_pl_arr = [];
+            let k =0;
+
+            for(let i=0; i<game_pl.length; i++) {
+                let tmp = 'true';
+                if(i > 0) {
+                    if(game_pl[i].id != game_pl[i-1].id){
+                        ++k;
+                    } else {
+                        tmp = 'false';
+                    }
+                }
+
+                if(tmp == 'true') {
+                    game_pl_arr[k] = [];
+                }
+                game_pl_arr[k].push(game_pl[i].device);
+
+            }
+            ///////////////////////////////////////////////////////////////////////////////////
+            sql = 'SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id order by game.price desc limit 11';
+            conn.query(sql, function(err, result, fields) {
+                // 가격 포맷
+                let game2 = result;
+                let game2_price = [];
+                let game2_dc_price = [];
+                for(let i=0; i< result.length; i++) {
+                    game2_price[i] = comma(result[i].price);
+                    
+                    game2_dc_price[i] = comma(discount_price(result[i].price, result[i].rate));
+                    
+                }
+
+                res.render('play_store_latest.ejs', {game : rows, 
+                    price : game_price, 
+                    dc_price : game_dc_price, 
+                    game_pl_arr : game_pl_arr, 
+                    game2_dc_price : game2_dc_price, 
+                    game2 :  game2,
+                    price2 : game2_price, 
+                    dc_price2 : game2_dc_price
+                });
+            });
+    
+
+        
+            
+        });
+        
     });
 });
 

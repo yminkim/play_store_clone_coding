@@ -1940,207 +1940,50 @@
                 <div class="move-btn-r move-btn fas fa-chevron-right"></div>
                 <div class="scroll-menu-container">
                     <div class="scroll-top-area">
-                        <div class="scroll-topic">전체 상품</div>
+                        <div class="scroll-topic">프로모션</div>
                         <div class="scroll-all-view">
                             <a href="">모두 보기</a>
                         </div>
                     </div>
                     
                     <div class="scroll-body-area">
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="img/sc-dishored.png" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS4</div>
-                                        <div class="ps-icon">PS5</div>
+                        <% dc_item.forEach(function(value, index){ %>
+                            <!-- 포스트 -->
+                            <div class="sc-item-container">
+                                <a href="http://127.0.0.1:3000/playstation_Store_game_page?id=<%= value.id %>">
+                                    <div class="sc-item-img-area">
+                                        <img src="<%= value.image %>" alt="">
+                                        <div class="platform-area">
+                                            <% for(let i=0; i < dc_item_pl_arr[index].length; i++) { %>
+                                                <div class="ps-icon"><%= dc_item_pl_arr[index][i] %></div>
+                                            <% } %>
+                                            
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title">dishonored (영어)</div>
-                                    <div class="sc-item-price">14,000원</div>
-                                </div>
-                            </a>
-                        </div>
+                                    <div class="sc-item-info-area">
+                                        <div class="sc-item-title"><%= value.title %></div>
 
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="img/sc-dishored2.png" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS5</div>
-                                    </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title">dishonored2</div>
-                                    <div class="sc-item-price">34,800원</div>
-                                </div>
-                            </a>
-                        </div>
 
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="img/sc-test.png" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS4</div>
-                                        <div class="ps-icon">PS5</div>
+                                        <% if(value.rate == null) { %>
+                                            
+                                            <div class="sc-item-price"><%= dc_item_price[index] %></div>
+                                        <% } else { %>
+                                            <div class="sale-box">
+                                                <div>-<%= value.rate %>%</div>
+                                            </div>
+                                            <div class="price-boxes">
+                                                <div class="sc-item-price"><%= dc_item_dc_price[index] %></div>
+                                                <div class="won"><%= dc_item_price[index] %></div>
+                                            </div>
+                                        <% } %>
                                     </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title">무료게임</div>
-                                    <div class="sale-box">
-                                        <div>-100%</div>
-                                    </div>
-                                    <div class="price-boxes">
-                                        <div class="sc-item-price">무료</div>
-                                        <div class="won">12,800원</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
 
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="img/sc-test.png" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS4</div>
-                                        <div class="ps-icon">PS5</div>
-                                    </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
-                                    <div class="sale-box">
-                                        <div>-50%</div>
-                                    </div>
-                                    <div class="sc-item-price">00,000원</div>
-                                </div>
-                            </a>
-                        </div>
 
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="img/sc-test.png" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS4</div>
-                                        <div class="ps-icon">PS5</div>
-                                    </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
-                                    <div class="sc-item-price">00,000원</div>
-                                </div>
-                            </a>
-                        </div>
 
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="img/sc-test.png" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS4</div>
-                                        <div class="ps-icon">PS5</div>
-                                    </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
-                                    <div class="sc-item-price">00,000원</div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="img/sc-test.png" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS4</div>
-                                        <div class="ps-icon">PS5</div>
-                                    </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
-                                    <div class="sc-item-price">00,000원</div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="img/sc-test.png" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS4</div>
-                                        <div class="ps-icon">PS5</div>
-                                    </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
-                                    <div class="sc-item-price">00,000원</div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="img/sc-test.png" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS4</div>
-                                        <div class="ps-icon">PS5</div>
-                                    </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
-                                    <div class="sc-item-price">00,000원</div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="img/sc-test.png" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS4</div>
-                                        <div class="ps-icon">PS5</div>
-                                    </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
-                                    <div class="sc-item-price">00,000원</div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="">
-                                <div class="sc-item-img-area">
-                                    <img src="img/sc-test.png" alt="">
-                                    <div class="platform-area">
-                                        <div class="ps-icon">PS4</div>
-                                        <div class="ps-icon">PS5</div>
-                                    </div>
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title">Lorem ipsum, dolor sit amet consectetur adipisisdfsdfcing elit.dddm?</div>
-                                    <div class="sc-item-price">00,000원</div>
-                                </div>
-                            </a>
-                        </div>
+                            
+                        <% }); %>
 
                         <!-- 포스트 마지막 - 모두보기 -->
                         <div class="sc-item-container">

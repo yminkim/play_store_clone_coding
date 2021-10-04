@@ -2230,8 +2230,9 @@
                                     <div class="sc-item-img-area">
                                         <img src="<%= value.image %>" alt="">
                                         <div class="platform-area">
-                                            
-                                            
+                                            <% for(let i=0; i < game2_pl_arr[index].length; i++) { %>
+                                                <div class="ps-icon"><%= game2_pl_arr[index][i] %></div>
+                                            <% } %>
                                         </div>
                                     </div>
                                     <div class="sc-item-info-area">

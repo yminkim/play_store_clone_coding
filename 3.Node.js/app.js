@@ -383,44 +383,67 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
     });
 });
 
+// 스크롤 리스트 가격 배열 만들어주는 함수
+function price_arr_f (rows) {
+    let price_arr = [];
+    for(let i=0; i< rows.length; i++) {
+        price_arr[i] = comma(rows[i].price);
+    }
+    return price_arr;
+}
+// 스크롤 리스트 할인가격 배열 만들어주는 함수
+function dc_price_arr_f (rows) {
+    let dc_price_arr = [];
+    for(let i=0; i< rows.length; i++) {
+        dc_price_arr[i] = comma(discount_price(rows[i].price, rows[i].rate));
+        
+    }
+    
+    return dc_price_arr;
+}
+
+// 스크롤 리스트 디바이스 배열 만들어주는 함수
+function device_arr(rows) {
+    let device_arr = [];
+    let k=0;
+    for(let i=0; i<rows.length; i++) {
+        let tmp = 'true';
+        if(i > 0) {
+            if(rows[i].id != rows[i-1].id){
+                ++k;
+            } else {
+                tmp = 'false';
+            }
+        }
+
+        if(tmp == 'true') {
+            device_arr[k] = [];
+        }
+        device_arr[k].push(rows[i].device);
+
+    }
+
+    return device_arr;
+
+}
+
 app.get('/playstation_Store_latest',function(req,res){
     let sql = "SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id order by game.release_date desc limit 11";
     conn.query(sql, function(err, rows, fields) {
         // 가격 포맷
         let game_price = [];
         let game_dc_price = [];
-        for(let i=0; i< rows.length; i++) {
-            game_price[i] = comma(rows[i].price);
-            
-            game_dc_price[i] = comma(discount_price(rows[i].price, rows[i].rate));
-            
-        }
+        // 가격 배열 
+        game_price = price_arr_f(rows);
+        game_dc_price = dc_price_arr_f(rows);
         
-        //console.log('가격: ' + game_price);
-        //console.log('할인 가격: ' + game_dc_price);
-
         sql = 'select game.id, game.title, pl.device from game left join platform as pl on game.id = pl.game_id order by game.release_date desc';
         conn.query(sql, function(err, result, fields){
             let game_pl = result;
             let game_pl_arr = [];
-            let k =0;
 
-            for(let i=0; i<game_pl.length; i++) {
-                let tmp = 'true';
-                if(i > 0) {
-                    if(game_pl[i].id != game_pl[i-1].id){
-                        ++k;
-                    } else {
-                        tmp = 'false';
-                    }
-                }
+            game_pl_arr = device_arr(game_pl);
 
-                if(tmp == 'true') {
-                    game_pl_arr[k] = [];
-                }
-                game_pl_arr[k].push(game_pl[i].device);
-
-            }
             ///////////////////////////////////////////////////////////////////////////////////
             sql = 'SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id order by game.price desc limit 11';
             conn.query(sql, function(err, result, fields) {
@@ -428,22 +451,34 @@ app.get('/playstation_Store_latest',function(req,res){
                 let game2 = result;
                 let game2_price = [];
                 let game2_dc_price = [];
-                for(let i=0; i< result.length; i++) {
-                    game2_price[i] = comma(result[i].price);
-                    
-                    game2_dc_price[i] = comma(discount_price(result[i].price, result[i].rate));
-                    
-                }
+                
 
-                res.render('play_store_latest.ejs', {game : rows, 
-                    price : game_price, 
-                    dc_price : game_dc_price, 
-                    game_pl_arr : game_pl_arr, 
-                    game2_dc_price : game2_dc_price, 
-                    game2 :  game2,
-                    price2 : game2_price, 
-                    dc_price2 : game2_dc_price
+                game2_price = price_arr_f(game2);
+                game2_dc_price = dc_price_arr_f(game2);
+
+                
+
+
+                sql = 'select game.id, game.title, pl.device from game left join platform as pl on game.id = pl.game_id order by game.price desc';
+                conn.query(sql, function(err, result_pl, fields){
+                    let game2_pl = result_pl;
+                    let game2_pl_arr= [];
+                    game2_pl_arr = device_arr(game2_pl);
+                    
+                    res.render('play_store_latest.ejs', {
+                        game : rows, 
+                        price : game_price, 
+                        dc_price : game_dc_price, 
+                        game_pl_arr : game_pl_arr, 
+                        game2_dc_price : game2_dc_price, 
+                        // 비싼 가격 순
+                        game2 :  game2,
+                        price2 : game2_price, 
+                        dc_price2 : game2_dc_price,
+                        game2_pl_arr :  game2_pl_arr
+                    });
                 });
+                
             });
     
 
@@ -455,11 +490,67 @@ app.get('/playstation_Store_latest',function(req,res){
 });
 
 app.get('/playstation_Store_deals',function(req,res){
-    res.render('play_store_deals.html');
+    // 할인이 적용된 상품만 가져오기
+    sql = 'SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id where dis.rate is not null order by game.price desc limit 11';
+    conn.query(sql, function(err, rows){
+        dc_item = rows;
+
+        // 가격 포맷
+        let dc_item_price = [];
+        let dc_item_dc_price = [];
+        // 가격 배열 
+        dc_item_price = price_arr_f(dc_item);
+        dc_item_dc_price = dc_price_arr_f(dc_item);
+
+        
+        sql = 'select game.id, game.title, pl.device from game left join platform as pl on game.id = pl.game_id left join discount as dis on dis.game_id = game.id where dis.rate is not null order by game.price desc';
+        conn.query(sql, function(err, rows, fields){
+            let dc_item_pl = rows;
+            let dc_item_pl_arr= [];
+            dc_item_pl_arr = device_arr(dc_item_pl);
+
+            res.render('play_store_deals.ejs', {
+                dc_item : dc_item,
+                dc_item_price : dc_item_price,
+                dc_item_dc_price : dc_item_dc_price,
+                dc_item_pl_arr : dc_item_pl_arr
+            });
+        });
+
+        
+    });
+
+    
 });
 
 app.get('/playstation_Store_ps5',function(req,res){
-    res.render('play_store_ps5.html');
+    let sql = 'SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id where game.release_date > now() order by game.release_date desc limit 11';
+    conn.query(sql, function(err, rows, fields){
+        soon_game = rows;
+
+        // 가격 포맷
+        let soon_game_price = [];
+        let soon_game_dc_price = [];
+        // 가격 배열 
+        soon_game_price = price_arr_f(soon_game);
+        soon_game_dc_price = dc_price_arr_f(soon_game);
+
+        sql = 'select game.id, game.title, pl.device from game left join platform as pl on game.id = pl.game_id where game.release_date > now() order by game.price desc';
+        conn.query(sql, function(err, rows, fields){
+            let soon_game_pl = rows;
+            let soon_game_pl_arr= [];
+            soon_game_pl_arr = device_arr(soon_game_pl);
+
+            res.render('play_store_ps5.ejs', {
+                soon_game : soon_game,
+                soon_game_price : soon_game_price,
+                soon_game_dc_price : soon_game_dc_price,
+                soon_game_pl_arr : soon_game_pl_arr
+            });
+        });
+        
+    });
+    
 });
 
 app.get('/playstation_Store_subscriptions',function(req,res){

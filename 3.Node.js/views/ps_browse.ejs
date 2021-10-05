@@ -873,7 +873,7 @@
             }
             
 
-            .checked-number a {
+            .checked-number {
                 background-color: rgb(0, 106, 206) !important;
                 color: #fff !important;
             }
@@ -1971,12 +1971,12 @@
             </div>
             <div class="category-list-area">
                 <ul>
-                    <li><a href="http://3.35.50.179:3000/playstation_Store_latest"><div class="category-list-name">최신 콘텐츠</div></a></li>
-                    <li><a href="http://3.35.50.179:3000/playstation_Store_collections"><div class="category-list-name">카테고리</div></a></li>
-                    <li><a href="http://3.35.50.179:3000/playstation_Store_deals"><div class="category-list-name">프로모션</div></a></li>
-                    <li><a href="http://3.35.50.179:3000/playstation_Store_ps5"><div class="category-list-name">PS5</div></a></li>
-                    <li><a href="http://3.35.50.179:3000/playstation_Store_subscriptions"><div class="category-list-name">구독 서비스</div></a></li>
-                    <li><a href="http://3.35.50.179:3000/playstation_Store_browse"><div class="category-list-name category-category">둘러보기</div></a></li>
+                    <li><a href="http://127.0.0.1:3000/playstation_Store_latest"><div class="category-list-name">최신 콘텐츠</div></a></li>
+                        <li><a href="http://127.0.0.1:3000/playstation_Store_collections"><div class="category-list-name">카테고리</div></a></li>
+                        <li><a href="http://127.0.0.1:3000/playstation_Store_deals"><div class="category-list-name ">프로모션</div></a></li>
+                        <li><a href="http://127.0.0.1:3000/playstation_Store_ps5"><div class="category-list-name">PS5</div></a></li>
+                        <li><a href="http://127.0.0.1:3000/playstation_Store_subscriptions"><div class="category-list-name">구독 서비스</div></a></li>
+                        <li><a href="http://127.0.0.1:3000/playstation_Store_browse"><div class="category-list-name category-category">둘러보기</div></a></li>
                 </ul>
             </div>
 
@@ -2042,11 +2042,11 @@
                     <div class="post-bottom">
                         <div class="left-move-btn fas fa-chevron-left stop-point"></div>
                         <div class="page-number-area">
-                            <div class="h-border num-a checked-number"><a href="">1</a></div>
-                            <div class="h-border num-a"><a href="">2</a></div>
-                            <div class="h-border num-a"><a href="">3</a></div>
-                            <div class="h-border num-a"><a href="">4</a></div>
-                            <div class="h-border num-a"><a href="">5</a></div>
+                            <% for(let i=0; i<3; i++) { %>
+                                <div class="h-border num-a"><%= i+1 %></div>
+                            <% } %>
+                                
+                           
                         </div>
                         <div class="right-move-btn fas fa-chevron-right h-border next-point"></div>
                     </div>
@@ -2670,14 +2670,49 @@
                 
             });
 
+            
+            
 
             //페이지 버튼 선택
+            
+
+
             let page_num = 1;
             $('.num-a').click(function(){
                 
-                $('.num-a').removeClass('checked-number');
-                $(this).addClass('checked-number');
-                page_num = $(this).text();
+               
+                
+                
+
+                page_num = parseInt($(this).text())-1;
+                $.ajax({
+                    url : "/playstation_Store_browse_ajax",
+                    type : "get",
+                    data : {"sort_option" : sort_option,
+                            "sort_price_op" : sort_price_op,
+                            "sort_genre_op" : sort_genre_op, 
+                            "sort_device_op" : sort_device_op,
+                            "sort_release_op" : sort_release_op,
+                            "sort_vr_op" : sort_vr_op,
+                            "page_num" : page_num },
+                    success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
+                        // 성공 시 동작
+                        //console.log(response);
+                        $('.post-middle-area').html(response);
+                         // 서치된 아이템의 개수
+                        $('.game-count').text($('.sc-item-container').length);
+
+                        let pp = '<%= page_n %>';
+                        $('.num-a').each(function(){
+                            if($(this).text() == pp){
+                                $('.num-a').removeClass('checked-number');
+                                $(this).addClass('checked-number');
+                            }
+                        });
+                    },
+                });
+
+
             });
             
             // page 넘버로 좌우 버튼 활성화 처리 하면 됨.
@@ -2956,7 +2991,8 @@
                     sort_vr_op.splice(remove_index5, 1);
                 }
 
-                
+                //page_num =1 로 초기화
+                page_num = 1;
 
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
@@ -2966,7 +3002,8 @@
                             "sort_genre_op" : sort_genre_op,
                             "sort_device_op" : sort_device_op,
                             "sort_release_op" : sort_release_op,
-                            "sort_vr_op" : sort_vr_op  },
+                            "sort_vr_op" : sort_vr_op,
+                            "page_num" : page_num  },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
@@ -3041,7 +3078,8 @@
                 sort_device_op = []; // 디바이스 옵션 초기화
                 sort_release_op = []; // 기간 옵션 초기화
                 sort_vr_op = []; // vr 옵션 초기화
-                
+                //page_num =1 로 초기화
+                page_num = 1;
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
                     type : "get",
@@ -3050,7 +3088,8 @@
                             "sort_genre_op" : sort_genre_op,
                             "sort_device_op" : sort_device_op,
                             "sort_release_op" : sort_release_op,
-                            "sort_vr_op" : sort_vr_op  },
+                            "sort_vr_op" : sort_vr_op,
+                            "page_num" : page_num  },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
@@ -3159,7 +3198,8 @@
                 } 
                 
             
-
+                //page_num =1 로 초기화
+                page_num = 1;
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
                     type : "get",
@@ -3168,7 +3208,8 @@
                             "sort_genre_op" : sort_genre_op,
                             "sort_device_op" : sort_device_op,
                             "sort_release_op" : sort_release_op,
-                            "sort_vr_op" : sort_vr_op  },
+                            "sort_vr_op" : sort_vr_op,
+                            "page_num" : page_num  },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
@@ -3193,7 +3234,8 @@
                 }
 
                 console.log(sort_genre_op);
-
+                //page_num =1 로 초기화
+                page_num = 1;
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
                     type : "get",
@@ -3202,7 +3244,8 @@
                             "sort_genre_op" : sort_genre_op,
                             "sort_device_op" : sort_device_op,
                             "sort_release_op" : sort_release_op,
-                            "sort_vr_op" : sort_vr_op  },
+                            "sort_vr_op" : sort_vr_op,
+                            "page_num" : page_num  },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
@@ -3228,7 +3271,8 @@
                 }
 
                 console.log(sort_device_op);
-
+                //page_num =1 로 초기화
+                page_num = 1;
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
                     type : "get",
@@ -3237,7 +3281,8 @@
                             "sort_genre_op" : sort_genre_op, 
                             "sort_device_op" : sort_device_op,
                             "sort_release_op" : sort_release_op,
-                            "sort_vr_op" : sort_vr_op  },
+                            "sort_vr_op" : sort_vr_op,
+                            "page_num" : page_num  },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
@@ -3259,7 +3304,8 @@
                     let remove_index = sort_device_op.indexOf($(this).children('.sort-list-item').children('.sort-area-tie').children('.sort-option-title').data('id'));
                     sort_release_op.splice(remove_index, 1);
                 }
-
+                //page_num =1 로 초기화
+                page_num = 1;
                 console.log(sort_release_op);
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
@@ -3269,7 +3315,8 @@
                             "sort_genre_op" : sort_genre_op, 
                             "sort_device_op" : sort_device_op,
                             "sort_release_op" : sort_release_op,
-                            "sort_vr_op" : sort_vr_op  },
+                            "sort_vr_op" : sort_vr_op,
+                            "page_num" : page_num  },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
@@ -3293,6 +3340,8 @@
                     sort_vr_op.splice(remove_index, 1);
                 }
 
+                //page_num =1 로 초기화
+                page_num = 1;
                 console.log(sort_vr_op);
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
@@ -3302,7 +3351,8 @@
                             "sort_genre_op" : sort_genre_op, 
                             "sort_device_op" : sort_device_op,
                             "sort_release_op" : sort_release_op,
-                            "sort_vr_op" : sort_vr_op },
+                            "sort_vr_op" : sort_vr_op,
+                            "page_num" : page_num },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);

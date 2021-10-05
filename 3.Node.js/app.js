@@ -64,19 +64,84 @@ app.listen(3000, function() {
 });
 
 app.get('/playstation_Store_collections',function(req,res){
-    res.render('play_store.html');
+    // 기본 무료게임 정보 가져오기
+    let sql = 'SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id where game.price = 0 order by game.price desc limit 11';
+
+    conn.query(sql, function(err, rows, fields){
+        let basic_free_game = rows;
+        // 가격 포맷
+        let basic_free_game_price = [];
+        let basic_free_game_dc_price = [];
+        // 가격 배열 
+        basic_free_game_price = price_arf(basic_free_game);
+        basic_free_game_dc_price = dc_price_arr_f(basic_free_game);
+        
+        // 기본 무료게임 플랫폼 정보 가져오기
+        sql = 'select game.id, game.title, pl.device from game left join platform as pl on game.id = pl.game_id where game.price = 0 order by game.price desc';
+        conn.query(sql, function(err, rows){
+            let bf_game_pl = rows;
+            let bf_game_pl_arr= [];
+            bf_game_pl_arr = device_arr(bf_game_pl);
+
+            //// 신규 게임
+            let sql = "SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id order by game.release_date desc limit 11";
+            conn.query(sql, function(err, rows, fields) {
+                let game = rows;
+                // 가격 포맷
+                let game_price = [];
+                let game_dc_price = [];
+                // 가격 배열 
+                game_price = price_arr_f(game);
+                game_dc_price = dc_price_arr_f(game);
+                
+                sql = 'select game.id, game.title, pl.device from game left join platform as pl on game.id = pl.game_id order by game.release_date desc';
+                conn.query(sql, function(err, result, fields){
+                    let game_pl = result;
+                    let game_pl_arr = [];
+        
+                    game_pl_arr = device_arr(game_pl);
+
+
+                    res.render('play_store.ejs', {
+                        // 기본 무료게임 정보
+                        basic_free_game : basic_free_game,
+                        basic_free_game_price : basic_free_game_price,
+                        basic_free_game_dc_price : basic_free_game_dc_price,
+                        bf_game_pl_arr : bf_game_pl_arr,
+                        // 신규 겜
+                        game : game, 
+                        game_price : game_price,
+                        game_dc_price : game_dc_price,
+                        game_pl_arr : game_pl_arr
+
+                    });
+                });
+            });
+
+            
+
+        });
+
+    });
+    
+
+
+   
 });
 
 
 // 브라우즈 페이지 렌더링
 app.get('/playstation_Store_browse',function(req,res){
-    let sql = 'select * from game';
+    let sql = 'select * from game limit 5 offset 0';
 
     conn.query(sql, function(err, rows, fields){
         let list_count = rows.length;
         if(err) console.log('브라우져 렌더링 실패' + err);
         else {
-            res.render('ps_browse.ejs', {game : rows, list_count : list_count});
+            let total = rows.length;
+            let page_count = Math.ceil(total/5);
+            let input_page_n = 1;
+            res.render('ps_browse.ejs', {game : rows, list_count : list_count, page_n : input_page_n, page_count : page_count});
         }
     });
 });
@@ -357,7 +422,7 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
         sql += sort_op;
     }
 
-    console.log('여기입니다 | '+ sql); // 잘 조합되시나요?~
+    //console.log('여기입니다 | '+ sql); // 잘 조합되시나요?~
     let game = [];
 
     conn.query(sql, function(err, rows, fields){
@@ -378,7 +443,25 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
                 
             }
 
-            res.render('ps_browse_ajax.ejs', {game : game, list_count : list_count});
+            // 페이지 네이션
+            
+            let input_page_n = parseInt(req.query.page_num);
+            let game_view = [];
+
+            let item_limit = 5;
+            let start_row = input_page_n; // 0 1 2 3 페이지
+
+            let s = game.slice(start_row*item_limit, start_row*item_limit+item_limit);
+            
+            for(let i=0 ;i< item_limit; i++) {
+                game_view[i] = s[i];
+            }
+
+            // 페이지 수
+            let page_count = Math.ceil(game.length/item_limit);
+            
+            input_page_n +=1;
+            res.render('ps_browse_ajax.ejs', {game : game_view, list_count : list_count, page_n : input_page_n, page_count : page_count});
         }
     });
 });
@@ -554,7 +637,70 @@ app.get('/playstation_Store_ps5',function(req,res){
 });
 
 app.get('/playstation_Store_subscriptions',function(req,res){
-    res.render('play_store_subscriptions.html');
+    // 온라인 게임 정보 가져오기
+    let sql = "SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id where game.go_online_type = '온라인 플레이 선택 사항' order by game.price desc limit 11";
+    conn.query(sql, function(err, rows){
+        let ps_game = rows;
+
+        // 가격 포맷
+        let ps_game_price = [];
+        let ps_game_dc_price = [];
+        // 가격 배열 
+        ps_game_price = price_arr_f(ps_game);
+        ps_game_dc_price = dc_price_arr_f(ps_game);
+
+        // 온라인 게임 정보 중 플랫폼 정보 가져오기
+        sql = "select game.id, game.title, pl.device from game left join platform as pl on game.id = pl.game_id where game.go_online_type = '온라인 플레이 선택 사항' order by game.price desc";
+        conn.query(sql, function(err, rows){
+            let ps_game_pl = rows;
+            let ps_game_pl_arr= [];
+            ps_game_pl_arr = device_arr(ps_game_pl);
+
+            // ea 게임 가져오기
+            sql = "SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate, pb.name FROM game left join discount as dis on game.id = dis.game_id left join publisher as pb on pb.game_id = game.id where pb.name = 'Electronic Arts Inc.' order by game.release_date desc limit 11";
+            conn.query(sql, function(err, rows){
+                let ea_game = rows;
+
+                // 가격 포맷
+                let ea_game_price = [];
+                let ea_game_dc_price = [];
+                // 가격 배열 
+                ea_game_price = price_arr_f(ea_game);
+                ea_game_dc_price = dc_price_arr_f(ea_game);
+
+                // ea게임 플랫폼 정보 가져오기
+                sql = "select game.id, game.title, pl.device from game left join platform as pl on game.id = pl.game_id left join publisher as pb on pb.game_id = game.id where pb.name = 'Electronic Arts Inc.' order by game.price desc";
+                conn.query(sql, function(err, rows){
+                    let ea_game_pl = rows;
+                    let ea_game_pl_arr= [];
+                    ea_game_pl_arr = device_arr(ea_game_pl);
+
+                    res.render('play_store_subscriptions.ejs', {
+                        // 온라인 게임
+                        ps_game : ps_game,
+                        ps_game_price : ps_game_price,
+                        ps_game_dc_price : ps_game_dc_price,
+                        ps_game_pl_arr : ps_game_pl_arr,
+
+                        // ea 게임 정보
+                        ea_game : ea_game,
+                        ea_game_price : ea_game_price,
+                        ea_game_dc_price : ea_game_dc_price,
+                        ea_game_pl_arr : ea_game_pl_arr
+                    });
+                });
+                    
+
+            });
+
+            
+        });
+    });
+
+    
+
+
+    
 });
 
 

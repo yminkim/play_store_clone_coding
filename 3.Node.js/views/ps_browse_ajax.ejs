@@ -1,6 +1,6 @@
 <div class="post-middle-area">
     <% for(let i=0 ;i< game.length; i++) { %>
-        
+        <% if(game[i] != null) { %>
             <!-- 포스트 -->
             <div class="sc-item-container">
                 <a href="http://127.0.0.1:3000/playstation_Store_game_page?id=<%= game[i].id %>">
@@ -12,6 +12,6 @@
                     </div>
                 </a>
             </div>
-        
+        <% } %>
     <% } %>
 </div>

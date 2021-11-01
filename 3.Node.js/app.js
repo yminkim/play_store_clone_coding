@@ -73,7 +73,7 @@ app.get('/playstation_Store_collections',function(req,res){
         let basic_free_game_price = [];
         let basic_free_game_dc_price = [];
         // 가격 배열 
-        basic_free_game_price = price_arf(basic_free_game);
+        basic_free_game_price = price_arr_f(basic_free_game);
         basic_free_game_dc_price = dc_price_arr_f(basic_free_game);
         
         // 기본 무료게임 플랫폼 정보 가져오기
@@ -131,19 +131,31 @@ app.get('/playstation_Store_collections',function(req,res){
 
 
 // 브라우즈 페이지 렌더링
-app.get('/playstation_Store_browse',function(req,res){
-    let sql = 'select * from game limit 5 offset 0';
 
-    conn.query(sql, function(err, rows, fields){
+app.get('/playstation_Store_browse',function(req,res){
+    let sql = 'select * from game';
+    conn.query(sql, function(err, rows){
+        let page_count2 = rows.length;
+
+
+        let sql = 'select * from game limit 5 offset 0';
+        conn.query(sql, function(err, rows, fields){
+            
+        
         let list_count = rows.length;
         if(err) console.log('브라우져 렌더링 실패' + err);
         else {
             let total = rows.length;
             let page_count = Math.ceil(total/5);
+            let r_page_count = Math.ceil(page_count2/5);
             let input_page_n = 1;
-            res.render('ps_browse.ejs', {game : rows, list_count : list_count, page_n : input_page_n, page_count : page_count});
+            console.log('페이지 수 '+r_page_count+page_count);
+            res.render('ps_browse.ejs', {game : rows, list_count : list_count, page_count : page_count, input_page_n:input_page_n, r_page_count : r_page_count});
         }
     });
+    });
+
+    
 });
 
 // 옵션 관련하여 ajax 처리
@@ -446,6 +458,7 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
             // 페이지 네이션
             
             let input_page_n = parseInt(req.query.page_num);
+            //console.log("페이지 뭐 찍혔냐 "+input_page_n);
             let game_view = [];
 
             let item_limit = 5;
@@ -459,9 +472,11 @@ app.get('/playstation_Store_browse_ajax', function(req, res){
 
             // 페이지 수
             let page_count = Math.ceil(game.length/item_limit);
+
+            
             
             input_page_n +=1;
-            res.render('ps_browse_ajax.ejs', {game : game_view, list_count : list_count, page_n : input_page_n, page_count : page_count});
+            res.render('ps_browse_ajax.ejs', {game : game_view, list_count : list_count,  page_count : page_count, input_page_n : input_page_n});
         }
     });
 });

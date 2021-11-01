@@ -808,6 +808,7 @@
 
             .post-bottom-area {
                 margin: 100px auto;
+                
             }
 
             .post-bottom .fas, .page-number-area div {
@@ -824,6 +825,7 @@
 
             .post-bottom {
                 display: flex;
+                justify-content: center;
             }
             
             .page-number-area {
@@ -867,10 +869,10 @@
                 color: rgb(216, 216, 216);
             }
 
-            .next-point {
+            /* .next-point {
                 background-color: rgb(0, 106, 206) !important;
                 color: #fff !important;
-            }
+            } */
             
 
             .checked-number {
@@ -2023,32 +2025,34 @@
                         <div class="remove-op">필터 지우기</div>
                     </div>
                 </div>
-                <div class="post-middle-area">
-                    <% game.forEach(function(value, index) { %>
-                        <!-- 포스트 -->
-                        <div class="sc-item-container">
-                            <a href="http://127.0.0.1:3000/playstation_Store_game_page?id=<%= value.id %>">
-                                <div class="sc-item-img-area">
-                                    <img src="<%=value.image %>" alt="">
-                                </div>
-                                <div class="sc-item-info-area">
-                                    <div class="sc-item-title"><%= value.title %></div>
-                                </div>
-                            </a>
+                <div class="asdf">
+                    <div class="post-middle-area">
+                        <% game.forEach(function(value, index) { %>
+                            <!-- 포스트 -->
+                            <div class="sc-item-container">
+                                <a href="http://127.0.0.1:3000/playstation_Store_game_page?id=<%= value.id %>">
+                                    <div class="sc-item-img-area">
+                                        <img src="<%=value.image %>" alt="">
+                                    </div>
+                                    <div class="sc-item-info-area">
+                                        <div class="sc-item-title"><%= value.title %></div>
+                                    </div>
+                                </a>
+                            </div>
+                        <% }); %>
+                    </div>
+                    <div class="post-bottom-area">
+                        <div class="post-bottom">
+                            <div class="left-move-btn fas fa-chevron-left stop-point"></div>
+                            <div class="page-number-area">
+                                <% for(let i=0; i<r_page_count; i++) { %>
+                                    <div class="h-border num-a"><%= i+1 %></div>
+                                <% } %>
+                                    
+                            
+                            </div>
+                            <div class="right-move-btn fas fa-chevron-right h-border next-point stop-point"></div>
                         </div>
-                    <% }); %>
-                </div>
-                <div class="post-bottom-area">
-                    <div class="post-bottom">
-                        <div class="left-move-btn fas fa-chevron-left stop-point"></div>
-                        <div class="page-number-area">
-                            <% for(let i=0; i<3; i++) { %>
-                                <div class="h-border num-a"><%= i+1 %></div>
-                            <% } %>
-                                
-                           
-                        </div>
-                        <div class="right-move-btn fas fa-chevron-right h-border next-point"></div>
                     </div>
                 </div>
             </div>
@@ -2671,18 +2675,20 @@
             });
 
             
+
+
+            // 페이지 선택 전 
+            let pp = 1;
+            $('.num-a').each(function(){
+                if($(this).text() == pp){
+                    $(this).addClass('checked-number');
+                }
+            });
             
 
             //페이지 버튼 선택
-            
-
-
-            let page_num = 1;
-            $('.num-a').click(function(){
-                
-               
-                
-                
+            let page_num = 0;
+            $(document).on("click", ".num-a", function() {
 
                 page_num = parseInt($(this).text())-1;
                 $.ajax({
@@ -2697,12 +2703,14 @@
                             "page_num" : page_num },
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
-                        //console.log(response);
-                        $('.post-middle-area').html(response);
+                        console.log(response);
+                        $('.asdf').html(response);
                          // 서치된 아이템의 개수
                         $('.game-count').text($('.sc-item-container').length);
 
-                        let pp = '<%= page_n %>';
+                        
+
+                        let pp = $('.ajax-selected-page-number').val();
                         $('.num-a').each(function(){
                             if($(this).text() == pp){
                                 $('.num-a').removeClass('checked-number');
@@ -2992,7 +3000,7 @@
                 }
 
                 //page_num =1 로 초기화
-                page_num = 1;
+                page_num = 0;
 
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
@@ -3007,8 +3015,16 @@
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
-                        $('.post-middle-area').html(response);
+                        $('.asdf').html(response);
                         $('.game-count').text($('.sc-item-container').length);
+
+                        let pp = $('.ajax-selected-page-number').val();
+                        $('.num-a').each(function(){
+                            if($(this).text() == pp){
+                                $('.num-a').removeClass('checked-number');
+                                $(this).addClass('checked-number');
+                            }
+                        });
                     },
                 });
 
@@ -3079,7 +3095,7 @@
                 sort_release_op = []; // 기간 옵션 초기화
                 sort_vr_op = []; // vr 옵션 초기화
                 //page_num =1 로 초기화
-                page_num = 1;
+                page_num = 0;
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
                     type : "get",
@@ -3093,8 +3109,16 @@
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
-                        $('.post-middle-area').html(response);
+                        $('.asdf').html(response);
                         $('.game-count').text($('.sc-item-container').length);
+
+                        let pp = $('.ajax-selected-page-number').val();
+                        $('.num-a').each(function(){
+                            if($(this).text() == pp){
+                                $('.num-a').removeClass('checked-number');
+                                $(this).addClass('checked-number');
+                            }
+                        });
                     },
                 });
 
@@ -3199,7 +3223,7 @@
                 
             
                 //page_num =1 로 초기화
-                page_num = 1;
+                page_num = 0;
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
                     type : "get",
@@ -3213,9 +3237,18 @@
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
-                        $('.post-middle-area').html(response);
+                        $('.asdf').html(response);
                          // 서치된 아이템의 개수
                         $('.game-count').text($('.sc-item-container').length);
+
+                        let pp = $('.ajax-selected-page-number').val();
+                        $('.num-a').each(function(){
+                            if($(this).text() == pp){
+                                $('.num-a').removeClass('checked-number');
+                                $(this).addClass('checked-number');
+                            }
+                        });
+                        
                     },
                 });
             });
@@ -3235,7 +3268,7 @@
 
                 console.log(sort_genre_op);
                 //page_num =1 로 초기화
-                page_num = 1;
+                page_num = 0;
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
                     type : "get",
@@ -3249,9 +3282,18 @@
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
-                        $('.post-middle-area').html(response);
+                        $('.asdf').html(response);
                          // 서치된 아이템의 개수
                         $('.game-count').text($('.sc-item-container').length);
+
+
+                        let pp = $('.ajax-selected-page-number').val();
+                        $('.num-a').each(function(){
+                            if($(this).text() == pp){
+                                $('.num-a').removeClass('checked-number');
+                                $(this).addClass('checked-number');
+                            }
+                        });
                     },
                 });
 
@@ -3272,7 +3314,7 @@
 
                 console.log(sort_device_op);
                 //page_num =1 로 초기화
-                page_num = 1;
+                page_num = 0;
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
                     type : "get",
@@ -3286,9 +3328,17 @@
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
-                        $('.post-middle-area').html(response);
+                        $('.asdf').html(response);
                          // 서치된 아이템의 개수
                         $('.game-count').text($('.sc-item-container').length);
+
+                        let pp = $('.ajax-selected-page-number').val();
+                        $('.num-a').each(function(){
+                            if($(this).text() == pp){
+                                $('.num-a').removeClass('checked-number');
+                                $(this).addClass('checked-number');
+                            }
+                        });
                     },
                 });
 
@@ -3305,7 +3355,7 @@
                     sort_release_op.splice(remove_index, 1);
                 }
                 //page_num =1 로 초기화
-                page_num = 1;
+                page_num = 0;
                 console.log(sort_release_op);
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
@@ -3320,9 +3370,17 @@
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
-                        $('.post-middle-area').html(response);
+                        $('.asdf').html(response);
                          // 서치된 아이템의 개수
                         $('.game-count').text($('.sc-item-container').length);
+
+                        let pp = $('.ajax-selected-page-number').val();
+                        $('.num-a').each(function(){
+                            if($(this).text() == pp){
+                                $('.num-a').removeClass('checked-number');
+                                $(this).addClass('checked-number');
+                            }
+                        });
                     },
                 });
 
@@ -3341,7 +3399,7 @@
                 }
 
                 //page_num =1 로 초기화
-                page_num = 1;
+                page_num = 0;
                 console.log(sort_vr_op);
                 $.ajax({
                     url : "/playstation_Store_browse_ajax",
@@ -3356,9 +3414,17 @@
                     success: function(response) { // 요청 수행에 성공하면, status code 200 function 내용 수행
                         // 성공 시 동작
                         //console.log(response);
-                        $('.post-middle-area').html(response);
+                        $('.asdf').html(response);
                          // 서치된 아이템의 개수
                         $('.game-count').text($('.sc-item-container').length);
+
+                        let pp = $('.ajax-selected-page-number').val();
+                        $('.num-a').each(function(){
+                            if($(this).text() == pp){
+                                $('.num-a').removeClass('checked-number');
+                                $(this).addClass('checked-number');
+                            }
+                        });
                     },
                 });
 

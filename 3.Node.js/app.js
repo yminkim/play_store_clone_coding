@@ -59,8 +59,8 @@ app.set('view engine', 'html');
 db_config.connect(conn);
 
 // 3000 포트로 서버 오픈
-app.listen(3000, function() {
-    console.log("start! express server on port 3000")
+app.listen(80, '0.0.0.0', function() {
+    console.log("start! express server on port 80")
 });
 
 app.get('/playstation_Store_collections',function(req,res){

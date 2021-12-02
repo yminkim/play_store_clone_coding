@@ -19,6 +19,7 @@ app.use(session({
     cookie: { maxAge: 600000 }
 }));
 
+
 app.get('/profile/image/update', function(req, res) {
     let sql = 'UPDATE user SET user_img = ? WHERE id = ?';
     let params = [req.query.img_src, req.session.user.id];
@@ -63,7 +64,7 @@ app.listen(80, '0.0.0.0', function() {
     console.log("start! express server on port 80")
 });
 
-app.get('/playstation_Store_collections',function(req,res){
+app.get('/playstation_store_collections',function(req,res){
     // 기본 무료게임 정보 가져오기
     let sql = 'SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id where game.price = 0 order by game.price desc limit 11';
 
@@ -132,7 +133,7 @@ app.get('/playstation_Store_collections',function(req,res){
 
 // 브라우즈 페이지 렌더링
 
-app.get('/playstation_Store_browse',function(req,res){
+app.get('/playstation_store_browse',function(req,res){
     let sql = 'select * from game';
     conn.query(sql, function(err, rows){
         let page_count2 = rows.length;
@@ -159,7 +160,7 @@ app.get('/playstation_Store_browse',function(req,res){
 });
 
 // 옵션 관련하여 ajax 처리
-app.get('/playstation_Store_browse_ajax', function(req, res){
+app.get('/playstation_store_browse_ajax', function(req, res){
     let sql = "";
     let sort_op = ""; // 정렬 옵션 쿼리 변수
     let price_sort_op=""; // 가격 옵션 쿼리 변수
@@ -525,7 +526,7 @@ function device_arr(rows) {
 
 }
 
-app.get('/playstation_Store_latest',function(req,res){
+app.get('/playstation_store_latest',function(req,res){
     let sql = "SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id order by game.release_date desc limit 11";
     conn.query(sql, function(err, rows, fields) {
         // 가격 포맷
@@ -587,7 +588,7 @@ app.get('/playstation_Store_latest',function(req,res){
     });
 });
 
-app.get('/playstation_Store_deals',function(req,res){
+app.get('/playstation_store_deals',function(req,res){
     // 할인이 적용된 상품만 가져오기
     sql = 'SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id where dis.rate is not null order by game.price desc limit 11';
     conn.query(sql, function(err, rows){
@@ -621,7 +622,7 @@ app.get('/playstation_Store_deals',function(req,res){
     
 });
 
-app.get('/playstation_Store_ps5',function(req,res){
+app.get('/playstation_store_ps5',function(req,res){
     let sql = 'SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id where game.release_date > now() order by game.release_date desc limit 11';
     conn.query(sql, function(err, rows, fields){
         soon_game = rows;
@@ -651,7 +652,7 @@ app.get('/playstation_Store_ps5',function(req,res){
     
 });
 
-app.get('/playstation_Store_subscriptions',function(req,res){
+app.get('/playstation_store_subscriptions',function(req,res){
     // 온라인 게임 정보 가져오기
     let sql = "SELECT game.id, game.title, game.image, game.price, game.release_date, dis.rate FROM game left join discount as dis on game.id = dis.game_id where game.go_online_type = '온라인 플레이 선택 사항' order by game.price desc limit 11";
     conn.query(sql, function(err, rows){
@@ -761,7 +762,7 @@ function date_format(date) {
 }
 
 
-app.get('/playstation_Store_game_page',function(req,res){
+app.get('/playstation_store_game_page',function(req,res){
     let game_id = req.param('id');
     let publisher_name;
 
@@ -1401,4 +1402,32 @@ app.get('/list', function (req, res) {
             
         });
     });
+});
+
+
+
+//////////////////// 다른 포폴 ///////////////
+
+app.get('/nexton', function(req, res){
+    res.render('nexton.html');
+});
+
+app.get('/doping_music', function(req, res){
+    res.render('doping_music.html');
+});
+
+app.get('/doping_artist', function(req, res){
+    res.render('doping_artist.html');
+});
+
+app.get('/doping_album', function(req, res){
+    res.render('doping_album.html');
+});
+
+app.get('/doping_browse', function(req, res){
+    res.render('doping_browse.html');
+});
+
+app.get('/doping_artist_browse', function(req, res){
+    res.render('doping_artist_browse.html');
 });
